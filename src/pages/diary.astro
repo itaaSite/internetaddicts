@@ -4,7 +4,16 @@ import { getEntry } from "astro:content"
 import Layout from "../layout/Layout.astro"
 const diary = await getCollection("diary")
 
-const currentDiary = diary.at(1)
+const currentDiary = diary.at(0)
+const diaryDate = new Date(currentDiary.data.when)
+
+const dateOptions: object = {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+}
+const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions)
+
 const entry = await getEntry("diary", currentDiary.slug)
 // 3. Redirect if the entry does not exist
 if (entry === undefined) {
@@ -23,7 +32,10 @@ const { Content } = await entry.render();
     <main
       class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"
     >
-      <h1>{currentDiary.when}</h1>
+      <h1>Ежедневник АИЗ</h1>
+      <h3>{formattedDate}</h3>
+
+      <h4>{currentDiary.data.title}</h4>
       <Content />
     </main>
   </main>

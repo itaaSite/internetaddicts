@@ -13,6 +13,7 @@ const groupsCollection = defineCollection({
 
 const diaryCollection = defineCollection({
   schema: z.object({
+    title: z.string().optional(),
     when: z.string(),
   }),
 })
