@@ -31,11 +31,9 @@ const dateOptions: object = {
 const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions)
 
 const entry = await getEntry("diary", currentDiary.slug)
-// 3. Redirect if the entry does not exist
 if (entry === undefined) {
   return Astro.redirect("/404")
 }
-// 4. (Optional) Render the entry to HTML in the template
 const { Content } = await entry.render();
 
 ---
