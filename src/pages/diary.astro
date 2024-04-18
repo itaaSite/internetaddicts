@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content"
+import { getEntry } from "astro:content"
+import Layout from "../layout/Layout.astro"
+const diary = await getCollection("diary")
+
+const currentDiary = diary.at(1)
+const entry = await getEntry("diary", currentDiary.slug)
+// 3. Redirect if the entry does not exist
+if (entry === undefined) {
+  return Astro.redirect("/404")
+}
+// 4. (Optional) Render the entry to HTML in the template
+const { Content } = await entry.render();
+
+---
+
+<Layout
+	title="Ежедневник"
+	desc="Ежедневник АИЗ"
+>
+  <main class="p-5">
+    <main
+      class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"
+    >
+      <h1>{currentDiary.when}</h1>
+      <Content />
+    </main>
+  </main>
+</Layout>

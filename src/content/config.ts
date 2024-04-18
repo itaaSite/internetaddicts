@@ -11,6 +11,12 @@ const groupsCollection = defineCollection({
   }),
 })
 
+const diaryCollection = defineCollection({
+  schema: z.object({
+    when: z.string(),
+  }),
+})
+
 const spikers = defineCollection({
 	schema: z.object({
 		title: z.string(),
@@ -51,4 +57,5 @@ export const collections = {
 	story: storyCollection,
 	pages: pagesCollections,
 	spikers: spikers,
+  diary: diaryCollection,
 }
