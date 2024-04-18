@@ -8,9 +8,8 @@ const currentDiary = diary.at(0)
 const diaryDate = new Date(currentDiary.data.when)
 
 const dateOptions: object = {
-	year: "numeric",
-	month: "long",
 	day: "numeric",
+	month: "long",
 }
 const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions)
 
