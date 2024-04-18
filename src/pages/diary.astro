@@ -6,13 +6,13 @@ const diary = await getCollection("diary")
 
 const sortedDiary = diary.sort((a, b) =>
 							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
-					)
+					).reverse()
 const currentDate = new Date()
 const currentDay = currentDate.getDay() + 5
 
 const diary1 = sortedDiary.find( (a) =>
     // TODO: когда ежедневник станет больше, переделать на проверку с месяцем
-    new Date(a.data.when).getDay() == currentDay
+    new Date(a.data.when).getDay() === currentDay
 )
 var currentDiary
 if (diary1 === undefined) {
@@ -49,9 +49,11 @@ const { Content } = await entry.render();
       class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"
     >
       <h1>Ежедневник АИЗ</h1>
-      <h4>{formattedDate}</h4>
+      <h3>{formattedDate}</h3>
 
-      <h3>{currentDiary.data.title}</h3>
+      <h4>{currentDiary.data.title}</h4>
+      {currentDay}
+      {new Date(currentDiary.data.when).getDay()}
       <Content />
     </main>
   </main>
