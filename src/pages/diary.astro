@@ -14,13 +14,15 @@ const diary1 = sortedDiary.find( (a) =>
     // TODO: когда ежедневник станет больше, переделать на проверку с месяцем
     new Date(a.data.when).getDate() === currentDay
 )
-var currentDiary
-if (diary1 === undefined) {
+
+//TODO: поправить
+var currentDiary = sortedDiary.at(1)
+/*if (diary1 === undefined) {
   // TODO
   currentDiary = sortedDiary.at(0)
 } else {
   currentDiary = diary1
-}
+}*/
 
 const diaryDate = new Date(currentDiary.data.when)
 
