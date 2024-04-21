@@ -18,11 +18,21 @@ const dayOrder = {
 	Спонтанно: 8,
 }
 
+const someDate = '2023-04-25'
+
 function sortGroupsByDay(groups) {
-	return groups.sort((a, b) => {
+	return groups
+	.sort((a, b) => {
+		const t1 = someDate + a.data.dateTime
+		const t2 = someDate + b.data.dateTime
+		return new Date(t2).getMilliseconds() - new Date(t1).getMilliseconds()
+	})
+	.sort((a, b) => {
 		return dayOrder[a.data.when] - dayOrder[b.data.when]
 	})
 }
+
+
 ---
 
 <Layout
