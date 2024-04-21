@@ -8,8 +8,8 @@ export const prerender = false;
 const plusParam = Number(Astro.url.searchParams.get("plus") || '0');
 const minusParam = Number(Astro.url.searchParams.get("minus") || '0');
 
-const plusLink = "\"/diary?plus=" + (plusParam + 1) + "\""
-const minusLink = "\"/diary?minus=" + (minusParam + 1) + "\""
+const plusLink = "?plus=" + (plusParam + 1) 
+const minusLink = "/diary?minus=" + (minusParam + 1) 
 
 const diary = await getCollection("diary")
 
