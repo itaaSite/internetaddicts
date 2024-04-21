@@ -8,8 +8,20 @@ export const prerender = false;
 const plusParam = Number(Astro.url.searchParams.get("plus") || '0');
 const minusParam = Number(Astro.url.searchParams.get("minus") || '0');
 
-const plusLink = "?plus=" + (plusParam + 1) 
-const minusLink = "/diary?minus=" + (minusParam + 1) 
+const currentParam = plusParam - minusParam
+
+let plusLink
+if (minusParam === 0) {
+  plusLink = "?plus=" + (currentParam + 1) 
+} else {
+  plusLink = "?minus=" + (minusParam - 1) 
+}
+let minusLink
+if (plusParam > 0) {
+  minusLink = "?plus=" + (plusLink - 1) 
+} else {
+  minusLink = "?minus=" + (minusLink + 1) 
+}
 
 const diary = await getCollection("diary")
 
@@ -18,7 +30,7 @@ const sortedDiary = diary.sort((a, b) =>
 					).reverse()
 
 const currentDate = new Date()
-const currentDay = currentDate.getDate() + Number(plusParam) - Number(minusParam)
+const currentDay = currentDate.getDate() + currentParam
 
 const diary1 = sortedDiary.find( (a) =>
     // TODO: когда ежедневник станет больше, переделать на проверку с месяцем
