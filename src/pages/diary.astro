@@ -3,22 +3,19 @@ import { getCollection } from "astro:content"
 import { getEntry } from "astro:content"
 import Layout from "../layout/Layout.astro"
 
-const url = new URL(request.url)
-  const params = new URLSearchParams(url.search)
+export const prerender = false;
 
-const plusParam = Number(Astro.url.searchParams.get('plus'));
-const minusParam = Number(Astro.url.searchParams.get('minus'));
+const plusParam = Number(Astro.url.searchParams.get("plus") || '0');
+const minusParam = Number(Astro.url.searchParams.get("minus") || '0');
 
-const plusLink = "/diary?plus=" + (plusParam + 1)
-const minusLink = "/diary?minus=" + (minusParam + 1)
+const plusLink = "\"/diary?plus=" + (plusParam + 1) + "\""
+const minusLink = "\"/diary?minus=" + (minusParam + 1) + "\""
 
 const diary = await getCollection("diary")
 
 const sortedDiary = diary.sort((a, b) =>
 							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
 					).reverse()
-
-export const prerender = false;
 
 const currentDate = new Date()
 const currentDay = currentDate.getDate() + Number(plusParam) - Number(minusParam)
