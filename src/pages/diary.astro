@@ -2,6 +2,9 @@
 import { getCollection } from "astro:content"
 import { getEntry } from "astro:content"
 import Layout from "../layout/Layout.astro"
+
+export const prerender = false;
+
 const diary = await getCollection("diary")
 
 const sortedDiary = diary.sort((a, b) =>
@@ -51,6 +54,7 @@ const { Content } = await entry.render();
       <h1>Ежедневник АИЗ</h1>
       <h3>{formattedDate}</h3>
       <h4>{currentDiary.data.title}</h4>
+      <h4>{currentDate.toString()}</h4>
       <Content />
     </main>
   </main>
