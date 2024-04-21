@@ -3,29 +3,34 @@ import { getCollection } from "astro:content"
 import { getEntry } from "astro:content"
 import Layout from "../layout/Layout.astro"
 
-export const prerender = false;
+const plusParam = Astro.url.searchParams.get('plus')! || '0';
+const minusParam = Astro.url.searchParams.get('minus')! || '0';
 
 const diary = await getCollection("diary")
 
 const sortedDiary = diary.sort((a, b) =>
 							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
 					).reverse()
+
+export const prerender = false;
+
 const currentDate = new Date()
-const currentDay = currentDate.getDate()
+const currentDay = currentDate.getDate() + Number(plusParam) - Number(minusParam)
 
 const diary1 = sortedDiary.find( (a) =>
     // TODO: когда ежедневник станет больше, переделать на проверку с месяцем
     new Date(a.data.when).getDate() === currentDay
 )
 
+let currentDiary
+
 //TODO: поправить
-var currentDiary = sortedDiary.at(3)
-/*if (diary1 === undefined) {
+if (diary1 === undefined) {
   // TODO
   currentDiary = sortedDiary.at(0)
 } else {
   currentDiary = diary1
-}*/
+}
 
 const diaryDate = new Date(currentDiary.data.when)
 
@@ -48,13 +53,23 @@ const { Content } = await entry.render();
 	desc="Ежедневник АИЗ"
 >
   <main class="p-5">
+    <aside class="mx-auto max-w-[780px] mb-10">
+      <a
+        href="/diary?minus={minusParam + 1}"
+        class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+        >Предыдуший</a>
+      <a
+        href="/diary?minus={plusParam + 1}"
+        class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+        >Следующий</a>
+    </aside>
     <main
       class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"
     >
       <h1>Ежедневник АИЗ</h1>
       <h3>{formattedDate}</h3>
       <h4>{currentDiary.data.title}</h4>
-      <h4>{currentDate.toString()}</h4>
+      <h4>{currentDay}</h4>
       <Content />
     </main>
   </main>
