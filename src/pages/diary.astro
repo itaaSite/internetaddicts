@@ -3,8 +3,14 @@ import { getCollection } from "astro:content"
 import { getEntry } from "astro:content"
 import Layout from "../layout/Layout.astro"
 
-const plusParam = Astro.url.searchParams.get('plus')! || '0';
-const minusParam = Astro.url.searchParams.get('minus')! || '0';
+const url = new URL(request.url)
+  const params = new URLSearchParams(url.search)
+
+const plusParam = Number(Astro.url.searchParams.get('plus'));
+const minusParam = Number(Astro.url.searchParams.get('minus'));
+
+const plusLink = "/diary?plus=" + (plusParam + 1)
+const minusLink = "/diary?minus=" + (minusParam + 1)
 
 const diary = await getCollection("diary")
 
@@ -55,11 +61,11 @@ const { Content } = await entry.render();
   <main class="p-5">
     <aside class="mx-auto max-w-[780px] mb-10">
       <a
-        href="/diary?minus={minusParam + 1}"
+        href={minusLink}
         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
         >Предыдуший</a>
       <a
-        href="/diary?minus={plusParam + 1}"
+        href={plusLink}
         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
         >Следующий</a>
     </aside>
