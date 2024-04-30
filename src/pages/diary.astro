@@ -30,21 +30,25 @@ const sortedDiary = diary.sort((a, b) =>
 					).reverse()
 
 const currentDate = new Date()
-const currentDay = currentDate.getDate() + currentParam
+const currentDay = currentDate.getDate() 
+const currentMonth = currentDate.getMonth()
 
-const diary1 = sortedDiary.find( (a) =>
-    // TODO: когда ежедневник станет больше, переделать на проверку с месяцем
-    new Date(a.data.when).getDate() === currentDay
+const todayIndex = sortedDiary.findIndex( (a) => {
+    const diaryDate = new Date(a.data.when)
+    diaryDate.getDate() === currentDay && diaryDate.getMonth() == currentMonth
+  } 
 )
+
+
 
 let currentDiary
 
-//TODO: поправить
-if (diary1 === undefined) {
+const realIndex = todayIndex + currentParam
+if (realIndex < 0 || realIndex >= sortedDiary.length) {
   // TODO
   currentDiary = sortedDiary.at(0)
 } else {
-  currentDiary = diary1
+  currentDiary = sortedDiary.at(realIndex)
 }
 
 const diaryDate = new Date(currentDiary.data.when)
