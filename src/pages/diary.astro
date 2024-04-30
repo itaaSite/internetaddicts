@@ -33,13 +33,9 @@ const currentDate = new Date()
 const currentDay = currentDate.getDate() 
 const currentMonth = currentDate.getMonth()
 
-const todayIndex = sortedDiary.findIndex( (a) => {
-    const diaryDate = new Date(a.data.when)
-    diaryDate.getDate() === currentDay && diaryDate.getMonth() == currentMonth
-  } 
+const todayIndex = sortedDiary.findIndex( (a) => 
+    (new Date(a.data.when).getDate() === currentDay) && (new Date(a.data.when).getMonth() == currentMonth) 
 )
-
-
 
 let currentDiary
 
@@ -76,11 +72,11 @@ const { Content } = await entry.render();
       <a
         href={minusLink}
         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-        >⬅ Предыдущий</a>
+        >Предыдущий</a>
       <a
         href={plusLink}
         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-        >Следующий ➡️</a>
+        >Следующий</a>
     </aside>
     <main
       class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"
@@ -88,6 +84,8 @@ const { Content } = await entry.render();
       <h1>Ежедневник АИЗ</h1>
       <h3>{formattedDate}</h3>
       <h4>{currentDiary.data.title}</h4>
+      <h4>{currentMonth}</h4>
+      <h4>{realIndex}</h4>
       <Content />
     </main>
   </main>
