@@ -30,7 +30,8 @@ img {
 }
 
 p {
- hyphens: auto;
+ hyphens: none;
+ text-align: justify; /* Добавлено выравнивание по ширине */
 }
 
 q {

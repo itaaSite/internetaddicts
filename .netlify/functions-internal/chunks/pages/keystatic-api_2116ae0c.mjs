@@ -188,7 +188,6 @@ const config = config$1({
         }),
         date: fields.text({
           label: "Время",
-          defaultValue: "20:00",
           description: "Время публикации"
         }),
         type: fields.text({

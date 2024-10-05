@@ -24,18 +24,30 @@ if (plusParam > 0) {
 }
 
 const diary = await getCollection("diary")
-
-const sortedDiary = diary.sort((a, b) =>
-							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
-					).reverse()
-
 const currentDate = new Date()
 const currentDay = currentDate.getDate() 
 const currentMonth = currentDate.getMonth()
 
-const todayIndex = sortedDiary.findIndex( (a) => 
+/* const sortedDiary = diary.sort((a, b) =>
+							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
+					).reverse()
+*/
+
+const sortedDiary = diary.sort((a, b) => {
+  const dateA = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(a.data.when));
+  const dateB = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(b.data.when));
+  return dateB.getTime() - dateA.getTime();
+}).reverse();
+
+/* const todayIndex = sortedDiary.findIndex( (a) => 
     (new Date(a.data.when).getDate() === currentDay) && (new Date(a.data.when).getMonth() == currentMonth) 
-)
+) 
+*/    
+
+const todayIndex = sortedDiary.findIndex((a) => {
+  const diaryDay = Number(a.data.when);  
+  return diaryDay === currentDay && currentMonth === currentDate.getMonth();
+});
 
 let currentDiary
 
@@ -47,12 +59,15 @@ if (realIndex < 0 || realIndex >= sortedDiary.length) {
   currentDiary = sortedDiary.at(realIndex)
 }
 
-const diaryDate = new Date(currentDiary.data.when)
+//const diaryDate = new Date(currentDiary.data.when)
+const diaryDay = Number(currentDiary.data.when);  
+const diaryDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), diaryDay);
 
 const dateOptions: object = {
 	day: "numeric",
 	month: "long",
 }
+
 const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions)
 
 const entry = await getEntry("diary", currentDiary.slug)

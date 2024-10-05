@@ -6,7 +6,7 @@ const id = "chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj.md";
 						const _internal = {
 							type: 'content',
 							filePath: "/Users/samgold/Desktop/Проекты/itaa/src/content/notes/chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj.md",
-							rawData: "\ntitle: \"Что делать, если ваш друг, или член семьи, интернет зависимый?\"\ndescription: \"Во-первых, никто не несет ответственности за чье-либо компульсивное использование Интернета и технологий. Как гласит лозунг Ал-Анона: «Я не вызвал это, я не могу контролировать это, и я не могу вылечить это».\"\n\npubDate: \"08.14.22\"\n\nimg: \"https://gorabbit.ru/wp-content/uploads/2019/10/А-что-скажут-люди-2048x1365.jpg\"\nlayout: \"../../layout/Post.astro\"",
+							rawData: "\ntitle: \"Что делать, если ваш друг, или член семьи, интернет-зависимый?\"\ndescription: \"Во-первых, никто не несет ответственности за чье-либо компульсивное использование Интернета и технологий. Как гласит лозунг Ал-Анона: «Я не вызвал это, я не могу контролировать это, и я не могу вылечить это».\"\n\npubDate: \"08.14.22\"\n\nimg: \"https://gorabbit.ru/wp-content/uploads/2019/10/А-что-скажут-люди-2048x1365.jpg\"\nlayout: \"../../layout/Post.astro\"",
 						};
 
 export { _internal, body, collection, data, id, slug };

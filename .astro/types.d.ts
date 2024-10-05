@@ -193,66 +193,250 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"groups": {
-"net-nazvaniya-1.mdoc": {
-	id: "net-nazvaniya-1.mdoc";
-  slug: "net-nazvaniya-1";
+		"diary": {
+"diary_04_19.mdoc": {
+	id: "diary_04_19.mdoc";
+  slug: "diary_04_19";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_20.mdoc": {
+	id: "diary_04_20.mdoc";
+  slug: "diary_04_20";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_21.mdoc": {
+	id: "diary_04_21.mdoc";
+  slug: "diary_04_21";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_22.mdoc": {
+	id: "diary_04_22.mdoc";
+  slug: "diary_04_22";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_23.mdoc": {
+	id: "diary_04_23.mdoc";
+  slug: "diary_04_23";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_24.mdoc": {
+	id: "diary_04_24.mdoc";
+  slug: "diary_04_24";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_25.mdoc": {
+	id: "diary_04_25.mdoc";
+  slug: "diary_04_25";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_26.mdoc": {
+	id: "diary_04_26.mdoc";
+  slug: "diary_04_26";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_27.mdoc": {
+	id: "diary_04_27.mdoc";
+  slug: "diary_04_27";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_28.mdoc": {
+	id: "diary_04_28.mdoc";
+  slug: "diary_04_28";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_29.mdoc": {
+	id: "diary_04_29.mdoc";
+  slug: "diary_04_29";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_04_30.mdoc": {
+	id: "diary_04_30.mdoc";
+  slug: "diary_04_30";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_01.mdoc": {
+	id: "diary_05_01.mdoc";
+  slug: "diary_05_01";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_02.mdoc": {
+	id: "diary_05_02.mdoc";
+  slug: "diary_05_02";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_03.mdoc": {
+	id: "diary_05_03.mdoc";
+  slug: "diary_05_03";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_04.mdoc": {
+	id: "diary_05_04.mdoc";
+  slug: "diary_05_04";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_05.mdoc": {
+	id: "diary_05_05.mdoc";
+  slug: "diary_05_05";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_06.mdoc": {
+	id: "diary_05_06.mdoc";
+  slug: "diary_05_06";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_07.mdoc": {
+	id: "diary_05_07.mdoc";
+  slug: "diary_05_07";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_08.mdoc": {
+	id: "diary_05_08.mdoc";
+  slug: "diary_05_08";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_09.mdoc": {
+	id: "diary_05_09.mdoc";
+  slug: "diary_05_09";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_10.mdoc": {
+	id: "diary_05_10.mdoc";
+  slug: "diary_05_10";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_11.mdoc": {
+	id: "diary_05_11.mdoc";
+  slug: "diary_05_11";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+};
+"groups": {
+"aiz_group_1_10.mdoc": {
+	id: "aiz_group_1_10.mdoc";
+  slug: "aiz_group_1_10";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"net-nazvaniya-2.mdoc": {
-	id: "net-nazvaniya-2.mdoc";
-  slug: "net-nazvaniya-2";
+"aiz_group_1_19.mdoc": {
+	id: "aiz_group_1_19.mdoc";
+  slug: "aiz_group_1_19";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"net-nazvaniya-3.mdoc": {
-	id: "net-nazvaniya-3.mdoc";
-  slug: "net-nazvaniya-3";
+"aiz_group_2_12.mdoc": {
+	id: "aiz_group_2_12.mdoc";
+  slug: "aiz_group_2_12";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"net-nazvaniya-4.mdoc": {
-	id: "net-nazvaniya-4.mdoc";
-  slug: "net-nazvaniya-4";
+"aiz_group_2_18.mdoc": {
+	id: "aiz_group_2_18.mdoc";
+  slug: "aiz_group_2_18";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"net-nazvaniya-5.mdoc": {
-	id: "net-nazvaniya-5.mdoc";
-  slug: "net-nazvaniya-5";
+"aiz_group_3_12.mdoc": {
+	id: "aiz_group_3_12.mdoc";
+  slug: "aiz_group_3_12";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"net-nazvaniya.mdoc": {
-	id: "net-nazvaniya.mdoc";
-  slug: "net-nazvaniya";
+"aiz_group_3_19.mdoc": {
+	id: "aiz_group_3_19.mdoc";
+  slug: "aiz_group_3_19";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"svoboda-dlya-vseh.mdoc": {
-	id: "svoboda-dlya-vseh.mdoc";
-  slug: "svoboda-dlya-vseh";
+"aiz_group_4_18.mdoc": {
+	id: "aiz_group_4_18.mdoc";
+  slug: "aiz_group_4_18";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"utro-aiz.mdoc": {
-	id: "utro-aiz.mdoc";
-  slug: "utro-aiz";
+"aiz_group_4_20.mdoc": {
+	id: "aiz_group_4_20.mdoc";
+  slug: "aiz_group_4_20";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
-"zhivoj-internet.mdoc": {
-	id: "zhivoj-internet.mdoc";
-  slug: "zhivoj-internet";
+"aiz_group_5_10.mdoc": {
+	id: "aiz_group_5_10.mdoc";
+  slug: "aiz_group_5_10";
+  body: string;
+  collection: "groups";
+  data: InferEntrySchema<"groups">
+} & { render(): Render[".mdoc"] };
+"aiz_group_5_20.mdoc": {
+	id: "aiz_group_5_20.mdoc";
+  slug: "aiz_group_5_20";
+  body: string;
+  collection: "groups";
+  data: InferEntrySchema<"groups">
+} & { render(): Render[".mdoc"] };
+"aiz_group_6_18_live.mdoc": {
+	id: "aiz_group_6_18_live.mdoc";
+  slug: "aiz_group_6_18_live";
+  body: string;
+  collection: "groups";
+  data: InferEntrySchema<"groups">
+} & { render(): Render[".mdoc"] };
+"aiz_group_for_man.mdoc": {
+	id: "aiz_group_for_man.mdoc";
+  slug: "aiz_group_for_man";
   body: string;
   collection: "groups";
   data: InferEntrySchema<"groups">
@@ -289,9 +473,44 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"a-working-program.mdoc": {
+	id: "a-working-program.mdoc";
+  slug: "a-working-program";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"addict-symptoms.mdoc": {
+	id: "addict-symptoms.mdoc";
+  slug: "addict-symptoms";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"becoming-fit-to-dream.mdoc": {
+	id: "becoming-fit-to-dream.mdoc";
+  slug: "becoming-fit-to-dream";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 "chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj.mdoc": {
 	id: "chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj.mdoc";
   slug: "chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"detox_list.mdoc": {
+	id: "detox_list.mdoc";
+  slug: "detox_list";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"format_dvustoronney_molitvy.mdoc": {
+	id: "format_dvustoronney_molitvy.mdoc";
+  slug: "format_dvustoronney_molitvy";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -387,9 +606,23 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"recovery_is_possible.mdoc": {
+	id: "recovery_is_possible.mdoc";
+  slug: "recovery_is_possible";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 "sluzhenie-eto-vyrazhenie-nashej-blagodarnosti-sodruzhestvu.mdoc": {
 	id: "sluzhenie-eto-vyrazhenie-nashej-blagodarnosti-sodruzhestvu.mdoc";
   slug: "sluzhenie-eto-vyrazhenie-nashej-blagodarnosti-sodruzhestvu";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"sovety-kak-zit-trezvym-v-aiz.mdoc": {
+	id: "sovety-kak-zit-trezvym-v-aiz.mdoc";
+  slug: "sovety-kak-zit-trezvym-v-aiz";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -403,6 +636,13 @@ declare module 'astro:content' {
 } & { render(): Render[".mdoc"] };
 };
 "spikers": {
+"1-step-reading-BBAA.mdoc": {
+	id: "1-step-reading-BBAA.mdoc";
+  slug: "1-step-reading-bbaa";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
 "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom.mdoc": {
 	id: "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom.mdoc";
   slug: "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom";
@@ -410,37 +650,30 @@ declare module 'astro:content' {
   collection: "spikers";
   data: InferEntrySchema<"spikers">
 } & { render(): Render[".mdoc"] };
-"aiz-anonimnye-internet-zavisimye-demyan-spikerskaya.mdoc": {
-	id: "aiz-anonimnye-internet-zavisimye-demyan-spikerskaya.mdoc";
-  slug: "aiz-anonimnye-internet-zavisimye-demyan-spikerskaya";
+"daniil-instruments.mdoc": {
+	id: "daniil-instruments.mdoc";
+  slug: "daniil-instruments";
   body: string;
   collection: "spikers";
   data: InferEntrySchema<"spikers">
 } & { render(): Render[".mdoc"] };
-"aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-5-tradicziya-i-prodvizheniya.mdoc": {
-	id: "aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-5-tradicziya-i-prodvizheniya.mdoc";
-  slug: "aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-5-tradicziya-i-prodvizheniya";
+"demyan-granitsy.mdoc": {
+	id: "demyan-granitsy.mdoc";
+  slug: "demyan-granitsy";
   body: string;
   collection: "spikers";
   data: InferEntrySchema<"spikers">
 } & { render(): Render[".mdoc"] };
-"aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-pro-nezavisimost-grupp-4-tradicziya.mdoc": {
-	id: "aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-pro-nezavisimost-grupp-4-tradicziya.mdoc";
-  slug: "aiz-anonimnye-internet-zavisimye-kamil-spikerskaya-pro-nezavisimost-grupp-4-tradicziya";
+"demyan-sluzhenie.mdoc": {
+	id: "demyan-sluzhenie.mdoc";
+  slug: "demyan-sluzhenie";
   body: string;
   collection: "spikers";
   data: InferEntrySchema<"spikers">
 } & { render(): Render[".mdoc"] };
-"aiz-anonimnye-internet-zavisimye-sergej-spikerskaya-opyt-programmy.mdoc": {
-	id: "aiz-anonimnye-internet-zavisimye-sergej-spikerskaya-opyt-programmy.mdoc";
-  slug: "aiz-anonimnye-internet-zavisimye-sergej-spikerskaya-opyt-programmy";
-  body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
-} & { render(): Render[".mdoc"] };
-"aiz-itaa-spikerskaya-evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc": {
-	id: "aiz-itaa-spikerskaya-evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc";
-  slug: "aiz-itaa-spikerskaya-evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet";
+"demyan-spikerskaya.mdoc": {
+	id: "demyan-spikerskaya.mdoc";
+  slug: "demyan-spikerskaya";
   body: string;
   collection: "spikers";
   data: InferEntrySchema<"spikers">
@@ -448,6 +681,153 @@ declare module 'astro:content' {
 "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya.mdoc": {
 	id: "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya.mdoc";
   slug: "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"evgenii-traditsyy.mdoc": {
+	id: "evgenii-traditsyy.mdoc";
+  slug: "evgenii-traditsyy";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc": {
+	id: "evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc";
+  slug: "evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"interview.mdoc": {
+	id: "interview.mdoc";
+  slug: "interview";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"katya-progress.mdoc": {
+	id: "katya-progress.mdoc";
+  slug: "katya-progress";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"nastya-chairperson.mdoc": {
+	id: "nastya-chairperson.mdoc";
+  slug: "nastya-chairperson";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"salima.mdoc": {
+	id: "salima.mdoc";
+  slug: "salima";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"seminar-granitsy-1.mdoc": {
+	id: "seminar-granitsy-1.mdoc";
+  slug: "seminar-granitsy-1";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"seminar-granitsy-2.mdoc": {
+	id: "seminar-granitsy-2.mdoc";
+  slug: "seminar-granitsy-2";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"seminar.mdoc": {
+	id: "seminar.mdoc";
+  slug: "seminar";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"sergej-spikerskaya-opyt-programmy.mdoc": {
+	id: "sergej-spikerskaya-opyt-programmy.mdoc";
+  slug: "sergej-spikerskaya-opyt-programmy";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"sergey-granitsy.mdoc": {
+	id: "sergey-granitsy.mdoc";
+  slug: "sergey-granitsy";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"sergey-opyt.mdoc": {
+	id: "sergey-opyt.mdoc";
+  slug: "sergey-opyt";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"spikerskaya-dina.mdoc": {
+	id: "spikerskaya-dina.mdoc";
+  slug: "spikerskaya-dina";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"spikerskaya-marat.mdoc": {
+	id: "spikerskaya-marat.mdoc";
+  slug: "spikerskaya-marat";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"spikerskaya-stasa.mdoc": {
+	id: "spikerskaya-stasa.mdoc";
+  slug: "spikerskaya-stasa";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"spikerskaya-tomas.mdoc": {
+	id: "spikerskaya-tomas.mdoc";
+  slug: "spikerskaya-tomas";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"stas-2-traditsiya.mdoc": {
+	id: "stas-2-traditsiya.mdoc";
+  slug: "stas-2-traditsiya";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"stas-history.mdoc": {
+	id: "stas-history.mdoc";
+  slug: "stas-history";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"stas-sluzhenie.mdoc": {
+	id: "stas-sluzhenie.mdoc";
+  slug: "stas-sluzhenie";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"tatiana-otkrytiya.mdoc": {
+	id: "tatiana-otkrytiya.mdoc";
+  slug: "tatiana-otkrytiya";
+  body: string;
+  collection: "spikers";
+  data: InferEntrySchema<"spikers">
+} & { render(): Render[".mdoc"] };
+"tatiana-spikerskaya.mdoc": {
+	id: "tatiana-spikerskaya.mdoc";
+  slug: "tatiana-spikerskaya";
   body: string;
   collection: "spikers";
   data: InferEntrySchema<"spikers">
@@ -468,16 +848,16 @@ declare module 'astro:content' {
   collection: "story";
   data: InferEntrySchema<"story">
 } & { render(): Render[".mdoc"] };
-"kamil.mdoc": {
-	id: "kamil.mdoc";
-  slug: "kamil";
+"vasilij.mdoc": {
+	id: "vasilij.mdoc";
+  slug: "vasilij";
   body: string;
   collection: "story";
   data: InferEntrySchema<"story">
 } & { render(): Render[".mdoc"] };
-"vasilij.mdoc": {
-	id: "vasilij.mdoc";
-  slug: "vasilij";
+"vlad.mdoc": {
+	id: "vlad.mdoc";
+  slug: "vlad";
   body: string;
   collection: "story";
   data: InferEntrySchema<"story">

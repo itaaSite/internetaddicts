@@ -124,7 +124,6 @@ export default config({
 				}),
 				dateTime: fields.text({
 					label: "Время",
-					defaultValue: "20:00",
 					description: "Время проведения собрания по МСК +3",
 				}),
 				type: fields.text({
