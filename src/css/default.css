@@ -25,6 +25,10 @@ li:where(body) {
  list-style: none;
 }
 
+a:hover {
+    color: #01c976ef; /* Цвет текста при наведении (зелёный) */
+  }
+
 img {
  vertical-align: top;
 }

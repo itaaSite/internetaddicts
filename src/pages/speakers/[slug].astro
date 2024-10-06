@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import Post from '../../layout/Post.astro'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('spikers')
+  const posts = await getCollection('speakers')
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -18,9 +18,9 @@ const { Content } = await post.render()
 <Post title={post.data.title}>
   <aside class="mx-auto max-w-[780px] mb-10">
     <a
-      href="/stories"
+      href="/speakers"
       class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-      >⬅ Назад к историям</a
+      >&#8592; {/* ← Левая стрелка */} Назад к спикерским</a
     >
   </aside>
   <main

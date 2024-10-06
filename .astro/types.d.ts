@@ -442,13 +442,13 @@ declare module 'astro:content' {
   data: InferEntrySchema<"groups">
 } & { render(): Render[".mdoc"] };
 };
-"pages": {
-"testovaya-stranicza.mdoc": {
-	id: "testovaya-stranicza.mdoc";
-  slug: "testovaya-stranicza";
+"news": {
+"new-live-group-msk.mdoc": {
+	id: "new-live-group-msk.mdoc";
+  slug: "new-live-group-msk";
   body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
+  collection: "news";
+  data: InferEntrySchema<"news">
 } & { render(): Render[".mdoc"] };
 };
 "posts": {
@@ -459,37 +459,9 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
-"12step-netlify-app.mdoc": {
-	id: "12step-netlify-app.mdoc";
-  slug: "12step-netlify-app";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"12steps-group-aiz.mdoc": {
-	id: "12steps-group-aiz.mdoc";
-  slug: "12steps-group-aiz";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"a-working-program.mdoc": {
-	id: "a-working-program.mdoc";
-  slug: "a-working-program";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
 "addict-symptoms.mdoc": {
 	id: "addict-symptoms.mdoc";
   slug: "addict-symptoms";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"becoming-fit-to-dream.mdoc": {
-	id: "becoming-fit-to-dream.mdoc";
-  slug: "becoming-fit-to-dream";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -525,13 +497,6 @@ declare module 'astro:content' {
 "internet-zavisimost-i-12-shagov.mdoc": {
 	id: "internet-zavisimost-i-12-shagov.mdoc";
   slug: "internet-zavisimost-i-12-shagov";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"kak-otklyuchit-you-tube-shorts.mdoc": {
-	id: "kak-otklyuchit-you-tube-shorts.mdoc";
-  slug: "kak-otklyuchit-you-tube-shorts";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -578,13 +543,6 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
-"online-cowork.mdoc": {
-	id: "online-cowork.mdoc";
-  slug: "online-cowork";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
 "ponyatie-trezvosti-ili-chistoty-v-aiz-est-li-eti-ponyatiya-zdes.mdoc": {
 	id: "ponyatie-trezvosti-ili-chistoty-v-aiz-est-li-eti-ponyatiya-zdes.mdoc";
   slug: "ponyatie-trezvosti-ili-chistoty-v-aiz-est-li-eti-ponyatiya-zdes";
@@ -595,20 +553,6 @@ declare module 'astro:content' {
 "princzipy-12-shagov-v-nashih-delah.mdoc": {
 	id: "princzipy-12-shagov-v-nashih-delah.mdoc";
   slug: "princzipy-12-shagov-v-nashih-delah";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"proekt-dlya-12-shagov.mdoc": {
-	id: "proekt-dlya-12-shagov.mdoc";
-  slug: "proekt-dlya-12-shagov";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"recovery_is_possible.mdoc": {
-	id: "recovery_is_possible.mdoc";
-  slug: "recovery_is_possible";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -627,213 +571,220 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
-"vse-chto-est-v-aiz.mdoc": {
-	id: "vse-chto-est-v-aiz.mdoc";
-  slug: "vse-chto-est-v-aiz";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
 };
-"spikers": {
+"speakers": {
 "1-step-reading-BBAA.mdoc": {
 	id: "1-step-reading-BBAA.mdoc";
   slug: "1-step-reading-bbaa";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom.mdoc": {
 	id: "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom.mdoc";
   slug: "12-tradiczij-dlya-iz-po-illyustracziyam-primerami-i-opytom";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "daniil-instruments.mdoc": {
 	id: "daniil-instruments.mdoc";
   slug: "daniil-instruments";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "demyan-granitsy.mdoc": {
 	id: "demyan-granitsy.mdoc";
   slug: "demyan-granitsy";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "demyan-sluzhenie.mdoc": {
 	id: "demyan-sluzhenie.mdoc";
   slug: "demyan-sluzhenie";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "demyan-spikerskaya.mdoc": {
 	id: "demyan-spikerskaya.mdoc";
   slug: "demyan-spikerskaya";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya.mdoc": {
 	id: "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya.mdoc";
   slug: "evelina-r-spikerskaya-tema-sluzhenie-neotemlemaya-chast-vyzdorovleniya";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "evgenii-traditsyy.mdoc": {
 	id: "evgenii-traditsyy.mdoc";
   slug: "evgenii-traditsyy";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc": {
 	id: "evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet.mdoc";
   slug: "evgenij-n-g-cheboksary-tema-kak-ya-izbavilsya-ot-internet";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "interview.mdoc": {
 	id: "interview.mdoc";
   slug: "interview";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "katya-progress.mdoc": {
 	id: "katya-progress.mdoc";
   slug: "katya-progress";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "nastya-chairperson.mdoc": {
 	id: "nastya-chairperson.mdoc";
   slug: "nastya-chairperson";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "salima.mdoc": {
 	id: "salima.mdoc";
   slug: "salima";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "seminar-granitsy-1.mdoc": {
 	id: "seminar-granitsy-1.mdoc";
   slug: "seminar-granitsy-1";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "seminar-granitsy-2.mdoc": {
 	id: "seminar-granitsy-2.mdoc";
   slug: "seminar-granitsy-2";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "seminar.mdoc": {
 	id: "seminar.mdoc";
   slug: "seminar";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "sergej-spikerskaya-opyt-programmy.mdoc": {
 	id: "sergej-spikerskaya-opyt-programmy.mdoc";
   slug: "sergej-spikerskaya-opyt-programmy";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "sergey-granitsy.mdoc": {
 	id: "sergey-granitsy.mdoc";
   slug: "sergey-granitsy";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "sergey-opyt.mdoc": {
 	id: "sergey-opyt.mdoc";
   slug: "sergey-opyt";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "spikerskaya-dina.mdoc": {
 	id: "spikerskaya-dina.mdoc";
   slug: "spikerskaya-dina";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "spikerskaya-marat.mdoc": {
 	id: "spikerskaya-marat.mdoc";
   slug: "spikerskaya-marat";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "spikerskaya-stasa.mdoc": {
 	id: "spikerskaya-stasa.mdoc";
   slug: "spikerskaya-stasa";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "spikerskaya-tomas.mdoc": {
 	id: "spikerskaya-tomas.mdoc";
   slug: "spikerskaya-tomas";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "stas-2-traditsiya.mdoc": {
 	id: "stas-2-traditsiya.mdoc";
   slug: "stas-2-traditsiya";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "stas-history.mdoc": {
 	id: "stas-history.mdoc";
   slug: "stas-history";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "stas-sluzhenie.mdoc": {
 	id: "stas-sluzhenie.mdoc";
   slug: "stas-sluzhenie";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "tatiana-otkrytiya.mdoc": {
 	id: "tatiana-otkrytiya.mdoc";
   slug: "tatiana-otkrytiya";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 "tatiana-spikerskaya.mdoc": {
 	id: "tatiana-spikerskaya.mdoc";
   slug: "tatiana-spikerskaya";
   body: string;
-  collection: "spikers";
-  data: InferEntrySchema<"spikers">
+  collection: "speakers";
+  data: InferEntrySchema<"speakers">
 } & { render(): Render[".mdoc"] };
 };
 "story": {
+"a-working-program.mdoc": {
+	id: "a-working-program.mdoc";
+  slug: "a-working-program";
+  body: string;
+  collection: "story";
+  data: InferEntrySchema<"story">
+} & { render(): Render[".mdoc"] };
+"becoming-fit-to-dream.mdoc": {
+	id: "becoming-fit-to-dream.mdoc";
+  slug: "becoming-fit-to-dream";
+  body: string;
+  collection: "story";
+  data: InferEntrySchema<"story">
+} & { render(): Render[".mdoc"] };
 "daniil.mdoc": {
 	id: "daniil.mdoc";
   slug: "daniil";
@@ -844,6 +795,13 @@ declare module 'astro:content' {
 "demyan.mdoc": {
 	id: "demyan.mdoc";
   slug: "demyan";
+  body: string;
+  collection: "story";
+  data: InferEntrySchema<"story">
+} & { render(): Render[".mdoc"] };
+"recovery_is_possible.mdoc": {
+	id: "recovery_is_possible.mdoc";
+  slug: "recovery_is_possible";
   body: string;
   collection: "story";
   data: InferEntrySchema<"story">

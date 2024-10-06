@@ -2,7 +2,7 @@
 import { YouTube } from '@astro-community/astro-embed-youtube'
 import { getCollection } from 'astro:content'
 import Layout from "../layout/Layout.astro"
-const spikers = await getCollection("spikers")
+const speakers = await getCollection("speakers")
 ---
 
 <Layout
@@ -12,14 +12,14 @@ const spikers = await getCollection("spikers")
 	<div class="container">
 		<section class="mt-2">
 			<div class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-				{ spikers &&
-					spikers
+				{ speakers &&
+					speakers
 						.sort(
 							(a, b) =>
 								new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 						)
 						.map(post => (
-							<a href={`/spikers/${post.slug}`} class="hover-top">
+							<a href={`/speakers/${post.slug}`} class="hover-top">
 								<article class="bg-white p-5 rounded-2xl prose max-w-none">
               <YouTube id={post.data.idYB} />
 									<h3>{post.data.title}</h3>

@@ -32,7 +32,6 @@ function sortGroupsByDay(groups) {
 	})
 }
 
-
 ---
 
 <Layout
@@ -40,7 +39,7 @@ function sortGroupsByDay(groups) {
 	desc={`Время встреч для анонимных интернет-зависимых. Собраний (${groupsCounter})`}
 >
 	<h4 class="text-2xl text-gray-700 font-medium">
-		🌐 Онлайн группы ({groups.filter(f => f.data.type === "Онлайн").length})
+		Онлайн-группы ({groups.filter(f => f.data.type === "Онлайн").length})
 	</h4>
 
 	<div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -51,24 +50,16 @@ function sortGroupsByDay(groups) {
 						<div class="flex flex-col gap-3">
 							<div class="flex items-center justify-between gap-2 flex-wrap">
 								<h4 class="font-bold text-lg">{group.data.title}</h4>
-
-								<span class="bg-green-100 ring-1 ring-green-200 px-2 py-1 rounded-md">
-									🌐 {group.data.type}
-								</span>
 							</div>
-						
-							<time class="font-medium" datetime={group.data.dateTime}>
-								⌚<span class="underline underline-offset-4">{group.data.dateTime}</span>
-							</time>
-					
-							<p>
-								Группа проходит: <b>{group.data.when}</b>
+	
+							<p class="font-medium">
+								<span class="underline underline-offset-4">{group.data.when}</span> <span class="underline underline-offset-4">{group.data.dateTime}</span>
 							</p>
 							<p set:html={marked(group.body)} />
 
 							<a
 								href={group.data.link}
-								class="text-center py-1 px-2 rounded-md bg-blue-500 text-white hover:bg-blue-700"
+								class="text-center py-1 px-2 ring-1 ring-green-200 rounded-md bg-green-400 text-white hover:bg-gray-300"
 							>
 								Войти в чат
 							</a>
@@ -78,7 +69,7 @@ function sortGroupsByDay(groups) {
 		}
 	</div>
 	<h4 class="text-2xl text-gray-700 font-medium">
-		🌤 Живые группы ({groups.filter(f => f.data.type === "Живая").length})
+		Живые группы ({groups.filter(f => f.data.type === "Живая").length})
 	</h4>
 	<div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3 gap-5">
 		{
@@ -88,22 +79,16 @@ function sortGroupsByDay(groups) {
 						<div class="flex flex-col gap-3">
 							<div class="flex items-center justify-between gap-2 flex-wrap">
 								<h4 class="font-bold text-lg">{group.data.title}</h4>
-
-								<span class="bg-sky-100 ring-1 ring-sky-200 px-2 py-1 rounded-md">
-									🌤 {group.data.type}
-								</span>
 							</div>
-							<time class="font-medium" datetime={group.data.dateTime}>
-								⌚<span class="underline underline-offset-4">{group.data.dateTime}</span>
-							</time>
-							<p>
-								Группа проходит: <b>{group.data.when}</b>
+							
+							<p class="font-medium">
+								<span class="underline underline-offset-4">{group.data.when}</span> <span class="underline underline-offset-4">{group.data.dateTime}</span>
 							</p>
 							<p set:html={marked(group.body)} />
 
 							<a
 								href={group.data.link}
-								class="text-center py-1 px-2 rounded-md bg-blue-500 text-white hover:bg-blue-700"
+								class="text-center py-1 px-2 ring-1 ring-green-200 rounded-md bg-green-400 text-white hover:bg-gray-300"
 							>
 								Войти в чат
 							</a>

@@ -6,7 +6,9 @@ import Logo from './Logo.astro'
 const posts = (await getCollection('posts')).length
 const story = (await getCollection('story')).length
 const groups = (await getCollection('groups')).length
-const spikers = (await getCollection('spikers')).length
+const speakers = (await getCollection('speakers')).length
+const news = (await getCollection('news')).length
+
 ---
 
 <header class="py-5 bg-white">
@@ -15,12 +17,13 @@ const spikers = (await getCollection('spikers')).length
   >
     <Logo />
     <nav class="flex gap-2 flex-wrap items-center">
-      <Link href="/">🏠 Главная</Link>
-      <Link href="/groups">🤝 Собрания ({groups})</Link>
-      <Link href="/diary">📖 Ежедневник</Link>
-      <Link href="/posts">📝 Статьи ({posts})</Link>
-      <Link href="/stories">💚 Истории ({story})</Link>
-      <Link href="/speaker">⭐ Спикерские ({spikers})</Link>
+      <Link href="/" style={{ fontWeight: 'bold' }}>Главная</Link>
+      <Link href="/groups" style={{ fontWeight: 'bold' }}>Собрания ({groups})</Link>
+      <Link href="/diary" style={{ fontWeight: 'bold' }}>Ежедневник</Link>
+      <Link href="/posts" style={{ fontWeight: 'bold' }}>Статьи ({posts})</Link>
+      <Link href="/stories" style={{ fontWeight: 'bold' }}>Истории ({story})</Link>
+      <Link href="/speakers" style={{ fontWeight: 'bold' }}>Спикерские ({speakers})</Link>
+      <Link href="/news" style={{ fontWeight: 'bold' }}>Новости ({news})</Link>
     </nav>
   </div>
 </header>

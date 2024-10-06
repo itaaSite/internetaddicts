@@ -18,7 +18,7 @@ const diaryCollection = defineCollection({
   }),
 })
 
-const spikers = defineCollection({
+const speakers = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		pubDate: z.string(),
@@ -52,11 +52,20 @@ const storyCollection = defineCollection({
   }),
 })
 
+const newsCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.string(),
+  }),
+})
+
 export const collections = {
 	groups: groupsCollection,
 	posts: postsCollection,
 	story: storyCollection,
 	pages: pagesCollections,
-	spikers: spikers,
+	speakers: speakers,
   diary: diaryCollection,
+  news: newsCollection,
 }

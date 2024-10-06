@@ -47,3 +47,12 @@
  transform: translateY(-3px);
  transition: transform 0.2s linear;
 }
+
+svg {
+    fill: #66C0F4; /* Серый цвет по умолчанию */
+    transition: fill 0.3s ease;
+  }
+  
+  svg:hover {
+    fill: #0088CC; /* Цвет при наведении */
+  }
