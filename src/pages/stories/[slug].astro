@@ -14,7 +14,7 @@ const post = Astro.props
 const { Content } = await post.render()
 ---
 
-<Post title={post.data.title}>
+<Post title={post.data.title} description={post.data.description}>
   <aside class="mx-auto max-w-[780px] mb-10">
     <a
       href="/stories"

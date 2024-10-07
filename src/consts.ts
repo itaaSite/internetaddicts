@@ -7,7 +7,8 @@ export const BASE_FILES = "https://t.me/all_12steps";
 export const TELEGRAM = "https://t.me/aiz_itta";
 export const VK = "https://vk.com/aiz_itta";
 export const TIKTOK = "https://t.me/aiz_itta";
-export const YOUTUBE = "https://www.youtube.com/channel/UC6X1MOn_So7iD2JEHkN-YHQ";
+export const YOUTUBE =
+  "https://www.youtube.com/channel/UC6X1MOn_So7iD2JEHkN-YHQ";
 
 export const COPYRIGHT = "Анонимные Интернет-Зависимые";
 export const RKO = "https://t.me/+WMn0QssSLHsyYzcy";

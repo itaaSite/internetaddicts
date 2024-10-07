@@ -1,38 +1,58 @@
-import { d as createComponent, r as renderTemplate, i as renderUniqueStylesheet, j as renderScriptElement, u as unescapeHTML, k as createHeadAndContent, g as renderComponent, t as isHTMLString, c as createAstro } from './astro_321cb245.mjs';
-import 'clsx';
-import Markdoc$1 from '@markdoc/markdoc';
-import Slugger from 'github-slugger';
-import { $ as $$Image } from './pages/generic_00af1ab3.mjs';
+import {
+  d as createComponent,
+  r as renderTemplate,
+  i as renderUniqueStylesheet,
+  j as renderScriptElement,
+  u as unescapeHTML,
+  k as createHeadAndContent,
+  g as renderComponent,
+  t as isHTMLString,
+  c as createAstro,
+} from "./astro_321cb245.mjs";
+import "clsx";
+import Markdoc$1 from "@markdoc/markdoc";
+import Slugger from "github-slugger";
+import { $ as $$Image } from "./pages/generic_00af1ab3.mjs";
 
 const ComponentNode = createComponent({
   factory(result, { treeNode }) {
-    if (treeNode.type === "text")
-      return renderTemplate`${treeNode.content}`;
+    if (treeNode.type === "text") return renderTemplate`${treeNode.content}`;
     const slots = {
-      default: () => renderTemplate`${treeNode.children.map(
-        (child) => renderComponent(result, "ComponentNode", ComponentNode, { treeNode: child })
-      )}`
+      default: () =>
+        renderTemplate`${treeNode.children.map((child) =>
+          renderComponent(result, "ComponentNode", ComponentNode, {
+            treeNode: child,
+          }),
+        )}`,
     };
     if (treeNode.type === "component") {
-      let styles = "", links = "", scripts = "";
+      let styles = "",
+        links = "",
+        scripts = "";
       if (Array.isArray(treeNode.collectedStyles)) {
-        styles = treeNode.collectedStyles.map(
-          (style) => renderUniqueStylesheet(result, {
-            type: "inline",
-            content: style
-          })
-        ).join("");
+        styles = treeNode.collectedStyles
+          .map((style) =>
+            renderUniqueStylesheet(result, {
+              type: "inline",
+              content: style,
+            }),
+          )
+          .join("");
       }
       if (Array.isArray(treeNode.collectedLinks)) {
-        links = treeNode.collectedLinks.map((link) => {
-          return renderUniqueStylesheet(result, {
-            type: "external",
-            src: link[0] === "/" ? link : "/" + link
-          });
-        }).join("");
+        links = treeNode.collectedLinks
+          .map((link) => {
+            return renderUniqueStylesheet(result, {
+              type: "external",
+              src: link[0] === "/" ? link : "/" + link,
+            });
+          })
+          .join("");
       }
       if (Array.isArray(treeNode.collectedScripts)) {
-        scripts = treeNode.collectedScripts.map((script) => renderScriptElement(script)).join("");
+        scripts = treeNode.collectedScripts
+          .map((script) => renderScriptElement(script))
+          .join("");
       }
       const head = unescapeHTML(styles + links + scripts);
       let headAndContent = createHeadAndContent(
@@ -42,30 +62,42 @@ const ComponentNode = createComponent({
           treeNode.component.name,
           treeNode.component,
           treeNode.props,
-          slots
-        )}`
+          slots,
+        )}`,
       );
       const propagators = result._metadata.propagators || result.propagators;
       propagators.add({
         init() {
           return headAndContent;
-        }
+        },
       });
       return headAndContent;
     }
-    return renderComponent(result, treeNode.tag, treeNode.tag, treeNode.attributes, slots);
+    return renderComponent(
+      result,
+      treeNode.tag,
+      treeNode.tag,
+      treeNode.attributes,
+      slots,
+    );
   },
-  propagation: "self"
+  propagation: "self",
 });
 async function createTreeNode(node) {
   if (isHTMLString(node)) {
     return { type: "text", content: node };
   } else if (typeof node === "string" || typeof node === "number") {
     return { type: "text", content: String(node) };
-  } else if (node === null || typeof node !== "object" || !Markdoc$1.Tag.isTag(node)) {
+  } else if (
+    node === null ||
+    typeof node !== "object" ||
+    !Markdoc$1.Tag.isTag(node)
+  ) {
     return { type: "text", content: "" };
   }
-  const children = await Promise.all(node.children.map((child) => createTreeNode(child)));
+  const children = await Promise.all(
+    node.children.map((child) => createTreeNode(child)),
+  );
   if (typeof node.name === "function") {
     const component = node.name;
     const props = node.attributes;
@@ -73,7 +105,7 @@ async function createTreeNode(node) {
       type: "component",
       component,
       props,
-      children
+      children,
     };
   } else if (isPropagatedAssetsModule(node.name)) {
     const { collectedStyles, collectedLinks, collectedScripts } = node.name;
@@ -86,31 +118,39 @@ async function createTreeNode(node) {
       collectedLinks,
       collectedScripts,
       props,
-      children
+      children,
     };
   } else {
     return {
       type: "element",
       tag: node.name,
       attributes: node.attributes,
-      children
+      children,
     };
   }
 }
 function isPropagatedAssetsModule(module) {
-  return typeof module === "object" && module != null && "__astroPropagation" in module;
+  return (
+    typeof module === "object" &&
+    module != null &&
+    "__astroPropagation" in module
+  );
 }
 
 const $$Astro = createAstro();
-const $$Renderer = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
-  Astro2.self = $$Renderer;
-  //! astro-head-inject
-  const { stringifiedAst, config } = Astro2.props;
-  const ast = Markdoc$1.Ast.fromJSON(stringifiedAst);
-  const content = Markdoc$1.transform(ast, config);
-  return renderTemplate`${Array.isArray(content) ? content.map(async (c) => renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { "treeNode": await createTreeNode(c) })}`) : renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { "treeNode": await createTreeNode(content) })}`}`;
-}, "/Users/samgold/Desktop/\u041F\u0440\u043E\u0435\u043A\u0442\u044B/itaa/node_modules/@astrojs/markdoc/components/Renderer.astro", void 0);
+const $$Renderer = createComponent(
+  async ($$result, $$props, $$slots) => {
+    const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+    Astro2.self = $$Renderer;
+    //! astro-head-inject
+    const { stringifiedAst, config } = Astro2.props;
+    const ast = Markdoc$1.Ast.fromJSON(stringifiedAst);
+    const content = Markdoc$1.transform(ast, config);
+    return renderTemplate`${Array.isArray(content) ? content.map(async (c) => renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(c) })}`) : renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(content) })}`}`;
+  },
+  "/Users/samgold/Desktop/\u041F\u0440\u043E\u0435\u043A\u0442\u044B/itaa/node_modules/@astrojs/markdoc/components/Renderer.astro",
+  void 0,
+);
 
 class MarkdocError extends Error {
   loc;
@@ -120,10 +160,16 @@ class MarkdocError extends Error {
   type = "MarkdocError";
   constructor(props, ...params) {
     super(...params);
-    const { title = "MarkdocError", message, stack, location, hint, frame } = props;
+    const {
+      title = "MarkdocError",
+      message,
+      stack,
+      location,
+      hint,
+      frame,
+    } = props;
     this.title = title;
-    if (message)
-      this.message = message;
+    if (message) this.message = message;
     this.stack = stack ? stack : this.stack;
     this.loc = location;
     this.hint = hint;
@@ -137,44 +183,45 @@ function getSlug(attributes, children, headingSlugger) {
   }
   const textContent = attributes.content ?? getTextContent(children);
   let slug = headingSlugger.slug(textContent);
-  if (slug.endsWith("-"))
-    slug = slug.slice(0, -1);
+  if (slug.endsWith("-")) slug = slug.slice(0, -1);
   return slug;
 }
 const heading = {
   children: ["inline"],
   attributes: {
     id: { type: String },
-    level: { type: Number, required: true, default: 1 }
+    level: { type: Number, required: true, default: 1 },
   },
   transform(node, config) {
     const { level, ...attributes } = node.transformAttributes(config);
     const children = node.transformChildren(config);
     if (!config.ctx?.headingSlugger) {
       throw new MarkdocError({
-        message: "Unexpected problem adding heading IDs to Markdoc file. Did you modify the `ctx.headingSlugger` property in your Markdoc config?"
+        message:
+          "Unexpected problem adding heading IDs to Markdoc file. Did you modify the `ctx.headingSlugger` property in your Markdoc config?",
       });
     }
     const slug = getSlug(attributes, children, config.ctx.headingSlugger);
     const render = config.nodes?.heading?.render ?? `h${level}`;
-    const tagProps = (
+    const tagProps =
       // For components, pass down `level` as a prop,
       // alongside `__collectHeading` for our `headings` collector.
       // Avoid accidentally rendering `level` as an HTML attribute otherwise!
-      typeof render === "string" ? { ...attributes, id: slug } : { ...attributes, id: slug, __collectHeading: true, level }
-    );
+      typeof render === "string"
+        ? { ...attributes, id: slug }
+        : { ...attributes, id: slug, __collectHeading: true, level };
     return new Markdoc$1.Tag(render, tagProps, children);
-  }
+  },
 };
 function setupHeadingConfig() {
   const headingSlugger = new Slugger();
   return {
     ctx: {
-      headingSlugger
+      headingSlugger,
     },
     nodes: {
-      heading
-    }
+      heading,
+    },
   };
 }
 
@@ -212,21 +259,19 @@ function parseInlineStyles(style, options) {
   if (typeof style !== "string") {
     throw new TypeError("First argument must be a string");
   }
-  if (!style)
-    return [];
+  if (!style) return [];
   options = options || {};
   let lineno = 1;
   let column = 1;
   function updatePosition(str) {
     let lines = str.match(NEWLINE_REGEX);
-    if (lines)
-      lineno += lines.length;
+    if (lines) lineno += lines.length;
     let i = str.lastIndexOf(NEWLINE);
     column = ~i ? str.length - i : column + str.length;
   }
   function position() {
     let start = { line: lineno, column };
-    return function(node) {
+    return function (node) {
       node.position = new Position(start);
       whitespace();
       return node;
@@ -239,20 +284,22 @@ function parseInlineStyles(style, options) {
   }
   Position.prototype.content = style;
   function error(msg) {
-    const err = new Error(options.source + ":" + lineno + ":" + column + ": " + msg);
+    const err = new Error(
+      options.source + ":" + lineno + ":" + column + ": " + msg,
+    );
     err.reason = msg;
     err.filename = options.source;
     err.line = lineno;
     err.column = column;
     err.source = style;
-    if (options.silent) ; else {
+    if (options.silent);
+    else {
       throw err;
     }
   }
   function match(re) {
     const m = re.exec(style);
-    if (!m)
-      return;
+    if (!m) return;
     const str = m[0];
     updatePosition(str);
     style = style.slice(str.length);
@@ -264,7 +311,7 @@ function parseInlineStyles(style, options) {
   function comments(rules) {
     let c;
     rules = rules || [];
-    while (c = comment()) {
+    while ((c = comment())) {
       if (c !== false) {
         rules.push(c);
       }
@@ -273,10 +320,12 @@ function parseInlineStyles(style, options) {
   }
   function comment() {
     const pos = position();
-    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1))
-      return;
+    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1)) return;
     let i = 2;
-    while (EMPTY_STRING != style.charAt(i) && (ASTERISK != style.charAt(i) || FORWARD_SLASH != style.charAt(i + 1))) {
+    while (
+      EMPTY_STRING != style.charAt(i) &&
+      (ASTERISK != style.charAt(i) || FORWARD_SLASH != style.charAt(i + 1))
+    ) {
       ++i;
     }
     i += 2;
@@ -290,22 +339,22 @@ function parseInlineStyles(style, options) {
     column += 2;
     return pos({
       type: TYPE_COMMENT,
-      comment: str
+      comment: str,
     });
   }
   function declaration() {
     const pos = position();
     const prop = match(PROPERTY_REGEX);
-    if (!prop)
-      return;
+    if (!prop) return;
     comment();
-    if (!match(COLON_REGEX))
-      return error("property missing ':'");
+    if (!match(COLON_REGEX)) return error("property missing ':'");
     const val = match(VALUE_REGEX);
     const ret = pos({
       type: TYPE_DECLARATION,
       property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
-      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
+      value: val
+        ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING))
+        : EMPTY_STRING,
     });
     match(SEMICOLON_REGEX);
     return ret;
@@ -314,7 +363,7 @@ function parseInlineStyles(style, options) {
     const decls = [];
     comments(decls);
     let decl;
-    while (decl = declaration()) {
+    while ((decl = declaration())) {
       if (decl !== false) {
         decls.push(decl);
         comments(decls);
@@ -383,7 +432,8 @@ function parseInlineCSSToReactLikeObject(css) {
   if (typeof css === "string") {
     const cssObject = {};
     styleToObject(css, (originalCssDirective, value) => {
-      const reactCssDirective = convertCssDirectiveNameToReactCamelCase(originalCssDirective);
+      const reactCssDirective =
+        convertCssDirectiveNameToReactCamelCase(originalCssDirective);
       cssObject[reactCssDirective] = value;
     });
     return cssObject;
@@ -400,7 +450,7 @@ function convertCssDirectiveNameToReactCamelCase(original) {
 const htmlTag = {
   attributes: {
     name: { type: String, required: true },
-    attrs: { type: Object }
+    attrs: { type: Object },
   },
   transform(node, config) {
     const { name, attrs: unsafeAttributes } = node.attributes;
@@ -411,7 +461,7 @@ const htmlTag = {
       safeAttributes.style = styleObject;
     }
     return new Markdoc$1.Tag(name, safeAttributes, children);
-  }
+  },
 };
 
 async function setupConfig(userConfig = {}, options) {
@@ -444,44 +494,46 @@ function mergeConfig(configA, configB) {
     ...configB,
     ctx: {
       ...configA.ctx,
-      ...configB.ctx
+      ...configB.ctx,
     },
     tags: {
       ...configA.tags,
-      ...configB.tags
+      ...configB.tags,
     },
     nodes: {
       ...configA.nodes,
-      ...configB.nodes
+      ...configB.nodes,
     },
     functions: {
       ...configA.functions,
-      ...configB.functions
+      ...configB.functions,
     },
     variables: {
       ...configA.variables,
-      ...configB.variables
+      ...configB.variables,
     },
     partials: {
       ...configA.partials,
-      ...configB.partials
+      ...configB.partials,
     },
     validation: {
       ...configA.validation,
-      ...configB.validation
-    }
+      ...configB.validation,
+    },
   };
 }
-function resolveComponentImports(markdocConfig, tagComponentMap, nodeComponentMap) {
+function resolveComponentImports(
+  markdocConfig,
+  tagComponentMap,
+  nodeComponentMap,
+) {
   for (const [tag, render] of Object.entries(tagComponentMap)) {
     const config = markdocConfig.tags[tag];
-    if (config)
-      config.render = render;
+    if (config) config.render = render;
   }
   for (const [node, render] of Object.entries(nodeComponentMap)) {
     const config = markdocConfig.nodes[node];
-    if (config)
-      config.render = render;
+    if (config) config.render = render;
   }
   return markdocConfig;
 }
@@ -499,13 +551,15 @@ function getTextContent(childNodes) {
 const headingLevels = [1, 2, 3, 4, 5, 6];
 function collectHeadings(children, collectedHeadings) {
   for (const node of children) {
-    if (typeof node !== "object" || !Markdoc$1.Tag.isTag(node))
-      continue;
-    if (node.attributes.__collectHeading === true && typeof node.attributes.level === "number") {
+    if (typeof node !== "object" || !Markdoc$1.Tag.isTag(node)) continue;
+    if (
+      node.attributes.__collectHeading === true &&
+      typeof node.attributes.level === "number"
+    ) {
       collectedHeadings.push({
         slug: node.attributes.id,
         depth: node.attributes.level,
-        text: getTextContent(node.children)
+        text: getTextContent(node.children),
       });
       continue;
     }
@@ -514,7 +568,7 @@ function collectHeadings(children, collectedHeadings) {
         collectedHeadings.push({
           slug: node.attributes.id,
           depth: level,
-          text: getTextContent(node.children)
+          text: getTextContent(node.children),
         });
       }
     }
@@ -527,28 +581,44 @@ function createGetHeadings(stringifiedAst, userConfig, options) {
     const ast = Markdoc$1.Ast.fromJSON(stringifiedAst);
     const content = Markdoc$1.transform(ast, config);
     let collectedHeadings = [];
-    collectHeadings(Array.isArray(content) ? content : [content], collectedHeadings);
+    collectHeadings(
+      Array.isArray(content) ? content : [content],
+      collectedHeadings,
+    );
     return collectedHeadings;
   };
 }
-function createContentComponent(Renderer, stringifiedAst, userConfig, options, tagComponentMap, nodeComponentMap) {
+function createContentComponent(
+  Renderer,
+  stringifiedAst,
+  userConfig,
+  options,
+  tagComponentMap,
+  nodeComponentMap,
+) {
   return createComponent({
     async factory(result, props) {
       const withVariables = mergeConfig(userConfig, { variables: props });
       const config = resolveComponentImports(
         await setupConfig(withVariables, options),
         tagComponentMap,
-        nodeComponentMap
+        nodeComponentMap,
       );
-      return renderComponent(result, Renderer.name, Renderer, { stringifiedAst, config }, {});
+      return renderComponent(
+        result,
+        Renderer.name,
+        Renderer,
+        { stringifiedAst, config },
+        {},
+      );
     },
-    propagation: "self"
+    propagation: "self",
   });
 }
 const HTML_CONFIG = {
   tags: {
-    "html-tag": htmlTag
-  }
+    "html-tag": htmlTag,
+  },
 };
 
 const assetsConfig = {
@@ -556,20 +626,29 @@ const assetsConfig = {
     image: {
       attributes: {
         ...Markdoc$1.nodes.image.attributes,
-        __optimizedSrc: { type: "Object" }
+        __optimizedSrc: { type: "Object" },
       },
       transform(node, config) {
         const attributes = node.transformAttributes(config);
         const children = node.transformChildren(config);
         if (node.type === "image" && "__optimizedSrc" in node.attributes) {
           const { __optimizedSrc, ...rest } = node.attributes;
-          return new Markdoc$1.Tag($$Image, { ...rest, src: __optimizedSrc }, children);
+          return new Markdoc$1.Tag(
+            $$Image,
+            { ...rest, src: __optimizedSrc },
+            children,
+          );
         } else {
           return new Markdoc$1.Tag("img", attributes, children);
         }
-      }
-    }
-  }
+      },
+    },
+  },
 };
 
-export { $$Renderer as $, assetsConfig as a, createContentComponent as b, createGetHeadings as c };
+export {
+  $$Renderer as $,
+  assetsConfig as a,
+  createContentComponent as b,
+  createGetHeadings as c,
+};

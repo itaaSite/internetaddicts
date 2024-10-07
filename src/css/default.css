@@ -9,37 +9,37 @@
 *,
 *:after,
 *:before {
- padding: 0;
- margin: 0;
- border: 0;
- box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
 a {
- text-decoration: none;
- user-select: none;
+  text-decoration: none;
+  user-select: none;
 }
 ul:where(body),
 ol:where(body),
 li:where(body) {
- list-style: none;
+  list-style: none;
 }
 
 a:hover {
-    color: #01c976ef; /* Цвет текста при наведении (зелёный) */
-  }
+  color: #01c976ef; /* Цвет текста при наведении (зелёный) */
+}
 
 img {
- vertical-align: top;
+  vertical-align: top;
 }
 
 p {
- hyphens: none;
- text-align: justify; /* Добавлено выравнивание по ширине */
+  hyphens: none;
+  text-align: justify; /* Добавлено выравнивание по ширине */
 }
 
 q {
- quotes: "«" "»";
+  quotes: "«" "»";
 }
 
 h1,
@@ -48,6 +48,6 @@ h3,
 h4,
 h5,
 h6 {
- font-weight: inherit;
- font-size: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }

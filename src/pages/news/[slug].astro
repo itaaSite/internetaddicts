@@ -3,8 +3,8 @@ import PageLayout from '../../layout/PageLayout.astro'
 import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const pages = await getCollection('news')
-  return pages.map((page) => ({
+  const news = await getCollection('news')
+  return news.map((page) => ({
     params: { slug: page.slug },
     props: page,
   }))

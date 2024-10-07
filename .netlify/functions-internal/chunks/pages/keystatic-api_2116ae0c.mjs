@@ -1,23 +1,33 @@
-import { makeGenericAPIRouteHandler } from '@keystatic/core/api/generic';
-import { parseString } from 'set-cookie-parser';
-import { config as config$1, collection, fields } from '@keystatic/core';
+import { makeGenericAPIRouteHandler } from "@keystatic/core/api/generic";
+import { parseString } from "set-cookie-parser";
+import { config as config$1, collection, fields } from "@keystatic/core";
 
 function makeHandler(_config) {
   var _config$clientId, _config$clientSecret, _config$secret;
-  const handler = makeGenericAPIRouteHandler({
-    ..._config,
-    clientId: (_config$clientId = _config.clientId) !== null && _config$clientId !== void 0 ? _config$clientId : tryOrUndefined(() => ({}).KEYSTATIC_GITHUB_CLIENT_ID),
-    clientSecret: (_config$clientSecret = _config.clientSecret) !== null && _config$clientSecret !== void 0 ? _config$clientSecret : tryOrUndefined(() => ({}).KEYSTATIC_GITHUB_CLIENT_SECRET),
-    secret: (_config$secret = _config.secret) !== null && _config$secret !== void 0 ? _config$secret : tryOrUndefined(() => ({}).KEYSTATIC_SECRET)
-  }, {
-    slugEnvName: 'PUBLIC_KEYSTATIC_GITHUB_APP_SLUG'
-  });
+  const handler = makeGenericAPIRouteHandler(
+    {
+      ..._config,
+      clientId:
+        (_config$clientId = _config.clientId) !== null &&
+        _config$clientId !== void 0
+          ? _config$clientId
+          : tryOrUndefined(() => ({}).KEYSTATIC_GITHUB_CLIENT_ID),
+      clientSecret:
+        (_config$clientSecret = _config.clientSecret) !== null &&
+        _config$clientSecret !== void 0
+          ? _config$clientSecret
+          : tryOrUndefined(() => ({}).KEYSTATIC_GITHUB_CLIENT_SECRET),
+      secret:
+        (_config$secret = _config.secret) !== null && _config$secret !== void 0
+          ? _config$secret
+          : tryOrUndefined(() => ({}).KEYSTATIC_SECRET),
+    },
+    {
+      slugEnvName: "PUBLIC_KEYSTATIC_GITHUB_APP_SLUG",
+    },
+  );
   return async function keystaticAPIRoute(context) {
-    const {
-      body,
-      headers,
-      status
-    } = await handler(context.request);
+    const { body, headers, status } = await handler(context.request);
     // all this stuff should be able to go away when astro is using a version of undici with getSetCookie
     let headersInADifferentStructure = new Map();
     if (headers) {
@@ -28,14 +38,21 @@ function makeHandler(_config) {
           }
           headersInADifferentStructure.get(key.toLowerCase()).push(value);
         }
-      } else if (typeof headers.entries === 'function') {
+      } else if (typeof headers.entries === "function") {
         for (const [key, value] of headers.entries()) {
           headersInADifferentStructure.set(key.toLowerCase(), [value]);
         }
-        if ('getSetCookie' in headers && typeof headers.getSetCookie === 'function') {
+        if (
+          "getSetCookie" in headers &&
+          typeof headers.getSetCookie === "function"
+        ) {
           const setCookieHeaders = headers.getSetCookie();
-          if (setCookieHeaders !== null && setCookieHeaders !== void 0 && setCookieHeaders.length) {
-            headersInADifferentStructure.set('set-cookie', setCookieHeaders);
+          if (
+            setCookieHeaders !== null &&
+            setCookieHeaders !== void 0 &&
+            setCookieHeaders.length
+          ) {
+            headersInADifferentStructure.set("set-cookie", setCookieHeaders);
           }
         }
       } else {
@@ -44,30 +61,35 @@ function makeHandler(_config) {
         }
       }
     }
-    const setCookieHeaders = headersInADifferentStructure.get('set-cookie');
-    headersInADifferentStructure.delete('set-cookie');
+    const setCookieHeaders = headersInADifferentStructure.get("set-cookie");
+    headersInADifferentStructure.delete("set-cookie");
     if (setCookieHeaders) {
       for (const setCookieValue of setCookieHeaders) {
         var _options$sameSite;
-        const {
-          name,
-          value,
-          ...options
-        } = parseString(setCookieValue);
-        const sameSite = (_options$sameSite = options.sameSite) === null || _options$sameSite === void 0 ? void 0 : _options$sameSite.toLowerCase();
+        const { name, value, ...options } = parseString(setCookieValue);
+        const sameSite =
+          (_options$sameSite = options.sameSite) === null ||
+          _options$sameSite === void 0
+            ? void 0
+            : _options$sameSite.toLowerCase();
         context.cookies.set(name, value, {
           domain: options.domain,
           expires: options.expires,
           httpOnly: options.httpOnly,
           maxAge: options.maxAge,
           path: options.path,
-          sameSite: sameSite === 'lax' || sameSite === 'strict' || sameSite === 'none' ? sameSite : undefined
+          sameSite:
+            sameSite === "lax" || sameSite === "strict" || sameSite === "none"
+              ? sameSite
+              : undefined,
         });
       }
     }
     return new Response(body, {
       status,
-      headers: [...headersInADifferentStructure.entries()].flatMap(([key, val]) => val.map(x => [key, x]))
+      headers: [...headersInADifferentStructure.entries()].flatMap(
+        ([key, val]) => val.map((x) => [key, x]),
+      ),
     });
   };
 }
@@ -81,7 +103,7 @@ function tryOrUndefined(fn) {
 
 const config = config$1({
   storage: {
-    kind: "local"
+    kind: "local",
   },
   collections: {
     posts: collection({
@@ -90,23 +112,23 @@ const config = config$1({
       path: "src/content/posts/*",
       entryLayout: "content",
       format: {
-        contentField: "content"
+        contentField: "content",
       },
       schema: {
         title: fields.slug({ name: { label: "Заголовок" } }),
         description: fields.text({
           label: "Описание",
           description: "от 20 до 150 символов",
-          validation: { length: { min: 20, max: 150 } }
+          validation: { length: { min: 20, max: 150 } },
         }),
         pubDate: fields.date({
           label: "Время",
-          description: "Время публикации"
+          description: "Время публикации",
         }),
         img: fields.image({
           label: "Фото поста",
           directory: "src/assets/images/posts",
-          publicPath: "../../assets/images/posts/"
+          publicPath: "../../assets/images/posts/",
         }),
         content: fields.document({
           label: "Контент",
@@ -115,10 +137,10 @@ const config = config$1({
           links: true,
           images: {
             directory: "src/assets/images/posts",
-            publicPath: "../../assets/images/posts/"
-          }
-        })
-      }
+            publicPath: "../../assets/images/posts/",
+          },
+        }),
+      },
     }),
     // notes: collection({
     //   label: 'Заметки',
@@ -161,7 +183,7 @@ const config = config$1({
         description: fields.text({
           label: "Описание",
           description: "от 20 до 150 символов",
-          validation: { length: { min: 40, max: 320 } }
+          validation: { length: { min: 40, max: 320 } },
         }),
         content: fields.document({
           label: "Контент",
@@ -170,10 +192,10 @@ const config = config$1({
           links: true,
           images: {
             directory: "src/assets/images/stories",
-            publicPath: "../../assets/images/stories/"
-          }
-        })
-      }
+            publicPath: "../../assets/images/stories/",
+          },
+        }),
+      },
     }),
     groups: collection({
       label: "Группы",
@@ -184,23 +206,23 @@ const config = config$1({
         description: fields.text({
           label: "Описание",
           description: "от 20 до 420 символов",
-          validation: { length: { min: 20, max: 420 } }
+          validation: { length: { min: 20, max: 420 } },
         }),
         date: fields.text({
           label: "Время",
-          description: "Время публикации"
+          description: "Время публикации",
         }),
         type: fields.text({
           label: "Тип группы",
           description: "Онлайн либо Живая",
-          defaultValue: "Онлайн"
+          defaultValue: "Онлайн",
         }),
         link: fields.url({
-          label: "Ссылка (URL)"
-        })
-      }
-    })
-  }
+          label: "Ссылка (URL)",
+        }),
+      },
+    }),
+  },
 });
 
 const all = makeHandler({ config });

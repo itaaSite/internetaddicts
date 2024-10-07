@@ -14,12 +14,12 @@ const post = Astro.props
 const { Content } = await post.render()
 ---
 
-<Post title={post.data.title}>
+<Post title={post.data.title} description={post.data.description}>
   <aside class="mx-auto max-w-[780px] mb-10">
     <a
       href="/posts"
       class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-      >⬅ Назад к постам</a
+      >&#8592; {/* ← Левая стрелка */} Назад к статьям</a
     >
   </aside>
   <main
