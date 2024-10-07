@@ -88,7 +88,7 @@ function makeHandler(_config) {
     return new Response(body, {
       status,
       headers: [...headersInADifferentStructure.entries()].flatMap(
-        ([key, val]) => val.map((x) => [key, x]),
+        ([key, val]) => val.map(x => [key, x]),
       ),
     });
   };

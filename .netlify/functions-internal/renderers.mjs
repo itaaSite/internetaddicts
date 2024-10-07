@@ -64,7 +64,7 @@ const opts = {
   experimentalReactChildren: false,
 };
 
-const slotName$1 = (str) =>
+const slotName$1 = str =>
   str.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
 const reactTypeof = Symbol.for("react.element");
 
@@ -165,7 +165,7 @@ async function renderToStaticMarkup$1(
   const newChildren = children ?? props.children;
   if (children && opts.experimentalReactChildren) {
     const convert = await import("./chunks/vnode-children_3769332a.mjs").then(
-      (mod) => mod.default,
+      mod => mod.default,
     );
     newProps.children = convert(children);
   } else if (newChildren != null) {
@@ -228,7 +228,7 @@ async function renderToStaticNodeStreamAsync(vnode, options) {
   let html = "";
   return new Promise((resolve, reject) => {
     let stream = ReactDOM.renderToStaticNodeStream(vnode, options);
-    stream.on("error", (err) => {
+    stream.on("error", err => {
       reject(err);
     });
     stream.pipe(
@@ -281,7 +281,7 @@ const _renderer0 = {
   supportsAstroStaticSlot: true,
 };
 
-const slotName = (str) =>
+const slotName = str =>
   str.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
 async function check(
   Component,

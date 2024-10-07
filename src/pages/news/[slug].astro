@@ -1,20 +1,31 @@
 ---
-import PageLayout from '../../layout/PageLayout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection } from "astro:content";
+import Post from "../../layout/Post.astro";
 
 export async function getStaticPaths() {
-  const news = await getCollection('news')
-  return news.map((page) => ({
-    params: { slug: page.slug },
-    props: page,
-  }))
-} 
+  const posts = await getCollection("news");
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
 
-const page = Astro.props
-const { Content } = await page.render()
+const post = Astro.props;
+const { Content } = await post.render();
 ---
-<PageLayout title={page.data.title} desc={page.data.description}>
-  <main class="prose lg:prose-lg md:prose-md xl:prose-xl ">
+
+<Post title={post.data.title} description={post.data.description}>
+  <aside class="mx-auto max-w-[780px] mb-10">
+    <a
+      href="/news"
+      class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+      >&#8592; {/* ← Левая стрелка */} Назад к новостям</a
+    >
+  </aside>
+  <main
+    class="mx-auto max-w-[780px] prose lg:prose-lg md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-p:font-base prose-p:leading-relaxed prose-a:no-underline prose-stone bg-white rounded-2xl md:p-10 p-5"
+  >
+    <h1>{post.data.title}</h1>
     <Content />
   </main>
-</PageLayout>
+</Post>

@@ -20,11 +20,11 @@ new TextEncoder();
 
 function getRouteGenerator(segments, addTrailingSlash) {
   const template = segments
-    .map((segment) => {
+    .map(segment => {
       return (
         "/" +
         segment
-          .map((part) => {
+          .map(part => {
             if (part.spread) {
               return `:${part.content.slice(3)}(.*)?`;
             } else if (part.dynamic) {

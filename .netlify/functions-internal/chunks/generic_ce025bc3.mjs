@@ -6,6 +6,6 @@ import "./astro_321cb245.mjs";
 import "clsx";
 import "html-escaper";
 
-const page = () => import("./pages/generic_00af1ab3.mjs").then((n) => n.g);
+const page = () => import("./pages/generic_00af1ab3.mjs").then(n => n.g);
 
 export { page };

@@ -1,100 +1,111 @@
 ---
-import { getCollection } from "astro:content"
-import { getEntry } from "astro:content"
-import Layout from "../layout/Layout.astro"
+import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
+import Layout from "../layout/Layout.astro";
 
 export const prerender = false;
 
-const plusParam = Number(Astro.url.searchParams.get("plus") || '0');
-const minusParam = Number(Astro.url.searchParams.get("minus") || '0');
+const plusParam = Number(Astro.url.searchParams.get("plus") || "0");
+const minusParam = Number(Astro.url.searchParams.get("minus") || "0");
 
-const currentParam = plusParam - minusParam
+const currentParam = plusParam - minusParam;
 
-let plusLink
+let plusLink;
 if (minusParam === 0) {
-  plusLink = "?plus=" + (currentParam + 1) 
+  plusLink = "?plus=" + (currentParam + 1);
 } else {
-  plusLink = "?minus=" + (minusParam - 1) 
+  plusLink = "?minus=" + (minusParam - 1);
 }
-let minusLink
+let minusLink;
 if (plusParam > 0) {
-  minusLink = "?plus=" + (plusParam - 1) 
+  minusLink = "?plus=" + (plusParam - 1);
 } else {
-  minusLink = "?minus=" + (minusParam + 1) 
+  minusLink = "?minus=" + (minusParam + 1);
 }
 
-const diary = await getCollection("diary")
-const currentDate = new Date()
-const currentDay = currentDate.getDate() 
-const currentMonth = currentDate.getMonth()
-
+const diary = await getCollection("diary");
+const currentDate = new Date();
+const currentDay = currentDate.getDate();
+const currentMonth = currentDate.getMonth();
 
 /* const sortedDiary = diary.sort((a, b) =>
 							new Date(b.data.when).getTime() - new Date(a.data.when).getTime(),
 					).reverse()
 */
 
-const sortedDiary = diary.sort((a, b) => {
-  const dateA = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(a.data.when));
-  const dateB = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(b.data.when));
-  return dateB.getTime() - dateA.getTime();
-}).reverse();
+const sortedDiary = diary
+  .sort((a, b) => {
+    const dateA = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      Number(a.data.when),
+    );
+    const dateB = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      Number(b.data.when),
+    );
+    return dateB.getTime() - dateA.getTime();
+  })
+  .reverse();
 
 /* const todayIndex = sortedDiary.findIndex( (a) => 
     (new Date(a.data.when).getDate() === currentDay) && (new Date(a.data.when).getMonth() == currentMonth) 
 ) 
-*/    
+*/
 
-const todayIndex = sortedDiary.findIndex((a) => {
-  const diaryDay = Number(a.data.when);  
+const todayIndex = sortedDiary.findIndex(a => {
+  const diaryDay = Number(a.data.when);
   return diaryDay === currentDay && currentMonth === currentDate.getMonth();
 });
 
-let currentDiary
+let currentDiary;
 
-const realIndex = todayIndex + currentParam
+const realIndex = todayIndex + currentParam;
 if (realIndex < 0 || realIndex >= sortedDiary.length) {
   // TODO
-  currentDiary = sortedDiary.at(0)
+  currentDiary = sortedDiary.at(0);
 } else {
-  currentDiary = sortedDiary.at(realIndex)
+  currentDiary = sortedDiary.at(realIndex);
 }
 
 //const diaryDate = new Date(currentDiary.data.when)
-const diaryDay = Number(currentDiary.data.when);  
-const diaryDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), diaryDay);
+const diaryDay = Number(currentDiary.data.when);
+const diaryDate = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth(),
+  diaryDay,
+);
 
 const dateOptions: object = {
-	day: "numeric",
-	month: "long",
-}
+  day: "numeric",
+  month: "long",
+};
 
-const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions)
+const formattedDate = diaryDate.toLocaleDateString("ru-RU", dateOptions);
 
-const entry = await getEntry("diary", currentDiary.slug)
+const entry = await getEntry("diary", currentDiary.slug);
 if (entry === undefined) {
-  return Astro.redirect("/404")
+  return Astro.redirect("/404");
 }
 const { Content } = await entry.render();
-
 ---
 
-<Layout
-	title="Ежедневник"
-	desc="Ежедневник АИЗ"
->
+<Layout title="Ежедневник" desc="Ежедневник АИЗ">
   <main class="p-5">
     <aside class="mx-auto max-w-[780px] mb-10">
       <a
         href={minusLink}
-        style={{ fontSize: '2rem', fontWeight: 'bold' }}
+        style={{ fontSize: "2rem", fontWeight: "bold" }}
         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-        >&#8592; {/* ← Левая стрелка */}</a>
+        >&#8592; {/* ← Левая стрелка */}</a
+      >
       <a
         href={plusLink}
-         style={{ fontSize: '2rem', fontWeight: 'bold' }}
-         class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-        >&#8594; {/* → Правая стрелка */}</a>
+        style={{ fontSize: "2rem", fontWeight: "bold" }}
+        class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+        >&#8594; {/* → Правая стрелка */}</a
+      >
     </aside>
     <main
       class="mx-auto max-w-[780px] prose lg:prose-lg xl:prose-xl md:prose-md prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:leading-tight prose-p:leading-relaxed prose-a:no-underline prose-zinc bg-white md:p-10 p-5 rounded-2xl"

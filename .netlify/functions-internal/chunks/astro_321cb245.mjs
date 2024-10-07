@@ -11,7 +11,7 @@ function codeFrame(src, loc) {
   }
   const lines = normalizeLF(src)
     .split("\n")
-    .map((ln) => ln.replace(/\t/g, "  "));
+    .map(ln => ln.replace(/\t/g, "  "));
   const visibleLines = [];
   for (let n = -2; n <= 2; n++) {
     if (lines[loc.line + n]) visibleLines.push(loc.line + n);
@@ -104,9 +104,7 @@ ${
 but ${plural ? "none were" : "it was not"} able to server-side render \`${componentName}\`.`
     : `No valid renderer was found ${componentExtension ? `for the \`.${componentExtension}\` file extension.` : `for this file extension.`}`
 }`,
-  hint: (
-    probableRenderers,
-  ) => `Did you mean to enable the ${probableRenderers} integration?
+  hint: probableRenderers => `Did you mean to enable the ${probableRenderers} integration?
 
 See https://docs.astro.build/en/core-concepts/framework-components/ for more information on how to install and configure integrations.`,
 };
@@ -120,22 +118,22 @@ const NoClientEntrypoint = {
 const NoClientOnlyHint = {
   name: "NoClientOnlyHint",
   title: "Missing hint on client:only directive.",
-  message: (componentName) =>
+  message: componentName =>
     `Unable to render \`${componentName}\`. When using the \`client:only\` hydration strategy, Astro needs a hint to use the correct renderer.`,
-  hint: (probableRenderers) =>
+  hint: probableRenderers =>
     `Did you mean to pass \`client:only="${probableRenderers}"\`? See https://docs.astro.build/en/reference/directives-reference/#clientonly for more information on client:only`,
 };
 const NoMatchingImport = {
   name: "NoMatchingImport",
   title: "No import found for component.",
-  message: (componentName) =>
+  message: componentName =>
     `Could not render \`${componentName}\`. No matching import has been found for \`${componentName}\`.`,
   hint: "Please make sure the component is properly imported.",
 };
 const InvalidComponentArgs = {
   name: "InvalidComponentArgs",
   title: "Invalid component arguments.",
-  message: (name) =>
+  message: name =>
     `Invalid arguments passed to${name ? ` <${name}>` : ""} component.`,
   hint: "Astro components cannot be rendered directly via function call, such as `Component()` or `{items.map(Component)}`.",
 };
@@ -182,27 +180,27 @@ Full serialized options received: \`${fullOptions}\`.`,
 const ExpectedImageOptions = {
   name: "ExpectedImageOptions",
   title: "Expected image options.",
-  message: (options) =>
+  message: options =>
     `Expected getImage() parameter to be an object. Received \`${options}\`.`,
 };
 const LocalImageUsedWrongly = {
   name: "LocalImageUsedWrongly",
   title: "Local images must be imported.",
-  message: (imageFilePath) =>
+  message: imageFilePath =>
     `\`Image\`'s and \`getImage\`'s \`src\` parameter must be an imported image or an URL, it cannot be a string filepath. Received \`${imageFilePath}\`.`,
   hint: "If you want to use an image from your `src` folder, you need to either import it or if the image is coming from a content collection, use the [image() schema helper](https://docs.astro.build/en/guides/images/#images-in-content-collections) See https://docs.astro.build/en/guides/images/#src-required for more information on the `src` property.",
 };
 const AstroGlobUsedOutside = {
   name: "AstroGlobUsedOutside",
   title: "Astro.glob() used outside of an Astro file.",
-  message: (globStr) =>
+  message: globStr =>
     `\`Astro.glob(${globStr})\` can only be used in \`.astro\` files. \`import.meta.glob(${globStr})\` can be used instead to achieve a similar result.`,
   hint: "See Vite's documentation on `import.meta.glob` for more information: https://vitejs.dev/guide/features.html#glob-import",
 };
 const AstroGlobNoMatch = {
   name: "AstroGlobNoMatch",
   title: "Astro.glob() did not match any files.",
-  message: (globStr) =>
+  message: globStr =>
     `\`Astro.glob(${globStr})\` did not return any matching files. Check the pattern for typos.`,
 };
 const MissingSharp = {
@@ -254,7 +252,7 @@ function createComponent(arg1, moduleId, propagation) {
 const ASTRO_VERSION = "3.2.3";
 
 function createAstroGlobFn() {
-  const globHandler = (importMetaGlobResult) => {
+  const globHandler = importMetaGlobResult => {
     if (typeof importMetaGlobResult === "string") {
       throw new AstroError({
         ...AstroGlobUsedOutside,
@@ -270,7 +268,7 @@ function createAstroGlobFn() {
         message: AstroGlobNoMatch.message(JSON.stringify(importMetaGlobResult)),
       });
     }
-    return Promise.all(allEntries.map((fn) => fn()));
+    return Promise.all(allEntries.map(fn => fn()));
   };
   return globHandler;
 }
@@ -312,7 +310,7 @@ class HTMLString extends String {
     return "HTMLString";
   }
 }
-const markHTMLString = (value) => {
+const markHTMLString = value => {
   if (value instanceof HTMLString) {
     return value;
   }
@@ -354,7 +352,7 @@ function unescapeHTML(str) {
       const body = str.body;
       return unescapeChunksAsync(body);
     } else if (typeof str.then === "function") {
-      return Promise.resolve(str).then((value) => {
+      return Promise.resolve(str).then(value => {
         return unescapeHTML(value);
       });
     } else if (Symbol.iterator in str) {
@@ -401,7 +399,7 @@ function serializeArray(
 Cyclic references cannot be safely serialized for client-side usage. Please remove the cyclic reference.`);
   }
   parents.add(value);
-  const serialized = value.map((v) => {
+  const serialized = value.map(v => {
     return convertToSerializedForm(v, metadata, parents);
   });
   parents.delete(value);
@@ -530,7 +528,7 @@ function extractDirectives(inputProps, clientDirectives) {
           extracted.hydration.value = value;
           if (!clientDirectives.has(extracted.hydration.directive)) {
             const hydrationMethods = Array.from(clientDirectives.keys())
-              .map((d) => `client:${d}`)
+              .map(d => `client:${d}`)
               .join(", ");
             throw new Error(
               `Error: invalid hydration directive "${key}". Supported hydration methods: ${hydrationMethods}`,
@@ -597,7 +595,7 @@ async function generateHydrateScript(scriptOptions, metadata) {
       value: metadata.hydrateArgs || "",
     }),
   );
-  transitionDirectivesToCopyOnIsland.forEach((name) => {
+  transitionDirectivesToCopyOnIsland.forEach(name => {
     if (props[name]) {
       island.props[name] = props[name];
     }
@@ -737,7 +735,7 @@ const htmlEnumAttributes = /^(contenteditable|draggable|spellcheck|value)$/i;
 const svgEnumAttributes =
   /^(autoReverse|externalResourcesRequired|focusable|preserveAlpha)$/i;
 const STATIC_DIRECTIVES = /* @__PURE__ */ new Set(["set:html", "set:text"]);
-const toIdent = (k) =>
+const toIdent = k =>
   k.trim().replace(/(?:(?!^)\b\w|\s+|[^\w]+)/g, (match, index) => {
     if (/[^\w]|\s/.test(match)) return "";
     return index === 0 ? match : match.toUpperCase();
@@ -746,11 +744,11 @@ const toAttributeString = (value, shouldEscape = true) =>
   shouldEscape
     ? String(value).replace(/&/g, "&#38;").replace(/"/g, "&#34;")
     : value;
-const kebab = (k) =>
+const kebab = k =>
   k.toLowerCase() === k
     ? k
-    : k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
-const toStyleString = (obj) =>
+    : k.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+const toStyleString = obj =>
   Object.entries(obj)
     .map(([k, v]) => {
       if (k[0] !== "-" && k[1] !== "-") return `${kebab(k)}:${v}`;
@@ -859,7 +857,7 @@ function renderElement$1(
 function renderToBufferDestination(bufferRenderFunction) {
   const bufferChunks = [];
   const bufferDestination = {
-    write: (chunk) => bufferChunks.push(chunk),
+    write: chunk => bufferChunks.push(chunk),
   };
   const renderPromise = bufferRenderFunction(bufferDestination);
   return {
@@ -867,7 +865,7 @@ function renderToBufferDestination(bufferRenderFunction) {
       for (const chunk of bufferChunks) {
         destination.write(chunk);
       }
-      bufferDestination.write = (chunk) => destination.write(chunk);
+      bufferDestination.write = chunk => destination.write(chunk);
       await renderPromise;
     },
   };
@@ -879,7 +877,7 @@ const uniqueElements = (item, index, all) => {
   return (
     index ===
     all.findIndex(
-      (i) => JSON.stringify(i.props) === props && i.children == children,
+      i => JSON.stringify(i.props) === props && i.children == children,
     )
   );
 };
@@ -887,7 +885,7 @@ function renderAllHeadContent(result) {
   result._metadata.hasRenderedHead = true;
   const styles = Array.from(result.styles)
     .filter(uniqueElements)
-    .map((style) =>
+    .map(style =>
       style.props.rel === "stylesheet"
         ? renderElement$1("link", style)
         : renderElement$1("style", style),
@@ -895,12 +893,12 @@ function renderAllHeadContent(result) {
   result.styles.clear();
   const scripts = Array.from(result.scripts)
     .filter(uniqueElements)
-    .map((script) => {
+    .map(script => {
       return renderElement$1("script", script, false);
     });
   const links = Array.from(result.links)
     .filter(uniqueElements)
-    .map((link) => renderElement$1("link", link, false));
+    .map(link => renderElement$1("link", link, false));
   let content = links.join("\n") + styles.join("\n") + scripts.join("\n");
   if (result._metadata.extraHead.length > 0) {
     for (const part of result._metadata.extraHead) {
@@ -972,7 +970,7 @@ async function renderSlots(result, slots = {}) {
   if (slots) {
     await Promise.all(
       Object.entries(slots).map(([key, value]) =>
-        renderSlotToString(result, value).then((output) => {
+        renderSlotToString(result, value).then(output => {
           if (output.instructions) {
             if (slotInstructions === null) {
               slotInstructions = [];
@@ -1072,8 +1070,8 @@ async function renderChild(destination, child) {
   } else if (isHTMLString(child)) {
     destination.write(child);
   } else if (Array.isArray(child)) {
-    const childRenders = child.map((c) => {
-      return renderToBufferDestination((bufferDestination) => {
+    const childRenders = child.map(c => {
+      return renderToBufferDestination(bufferDestination => {
         return renderChild(bufferDestination, c);
       });
     });
@@ -1182,9 +1180,9 @@ class RenderTemplateResult {
   constructor(htmlParts, expressions) {
     this.htmlParts = htmlParts;
     this.error = void 0;
-    this.expressions = expressions.map((expression) => {
+    this.expressions = expressions.map(expression => {
       if (isPromise(expression)) {
-        return Promise.resolve(expression).catch((err) => {
+        return Promise.resolve(expression).catch(err => {
           if (!this.error) {
             this.error = err;
             throw err;
@@ -1195,8 +1193,8 @@ class RenderTemplateResult {
     });
   }
   async render(destination) {
-    const expRenders = this.expressions.map((exp) => {
-      return renderToBufferDestination((bufferDestination) => {
+    const expRenders = this.expressions.map(exp => {
+      return renderToBufferDestination(bufferDestination => {
         if (exp || exp === 0) {
           return renderChild(bufferDestination, exp);
         }
@@ -1379,7 +1377,7 @@ Did you forget to import the component or is it possible there is a typo?`,
     metadata.componentUrl = hydration.componentUrl;
   }
   const probableRendererNames = guessRenderers(metadata.componentUrl);
-  const validRenderers = renderers.filter((r) => r.name !== "astro:jsx");
+  const validRenderers = renderers.filter(r => r.name !== "astro:jsx");
   const { children, slotInstructions } = await renderSlots(result, slots);
   let renderer;
   if (metadata.hydrate !== "only") {
@@ -1446,13 +1444,11 @@ Did you forget to import the component or is it possible there is a typo?`,
         ...NoClientOnlyHint,
         message: NoClientOnlyHint.message(metadata.displayName),
         hint: NoClientOnlyHint.hint(
-          probableRendererNames
-            .map((r) => r.replace("@astrojs/", ""))
-            .join("|"),
+          probableRendererNames.map(r => r.replace("@astrojs/", "")).join("|"),
         ),
       });
     } else if (typeof Component !== "string") {
-      const matchingRenderers = validRenderers.filter((r) =>
+      const matchingRenderers = validRenderers.filter(r =>
         probableRendererNames.includes(r.name),
       );
       const plural = validRenderers.length > 1;
@@ -1466,7 +1462,7 @@ Did you forget to import the component or is it possible there is a typo?`,
             validRenderers.length,
           ),
           hint: NoMatchingRenderer.hint(
-            formatList(probableRendererNames.map((r) => "`" + r + "`")),
+            formatList(probableRendererNames.map(r => "`" + r + "`")),
           ),
         });
       } else if (matchingRenderers.length === 1) {
@@ -1594,7 +1590,7 @@ ${serializeProps(props, metadata)}`,
     unrenderedSlots.length > 0
       ? unrenderedSlots
           .map(
-            (key) =>
+            key =>
               `<template data-astro-template${key !== "default" ? `="${key}"` : ""}>${children[key]}</template>`,
           )
           .join("")
@@ -1638,7 +1634,7 @@ async function renderHTMLComponent(result, Component, _props, slots = {}) {
   const { slotInstructions, children } = await renderSlots(result, slots);
   const html = Component({ slots: children });
   const hydrationHtml = slotInstructions
-    ? slotInstructions.map((instr) => chunkToString(result, instr)).join("")
+    ? slotInstructions.map(instr => chunkToString(result, instr)).join("")
     : "";
   return {
     render(destination) {
@@ -1795,7 +1791,7 @@ async function renderJSX(result, vnode) {
       return "";
     case Array.isArray(vnode):
       return markHTMLString(
-        (await Promise.all(vnode.map((v) => renderJSX(result, v)))).join(""),
+        (await Promise.all(vnode.map(v => renderJSX(result, v)))).join(""),
       );
   }
   let skip;
@@ -1851,7 +1847,7 @@ Did you forget to import the component or is it possible there is a typo?`);
     if (vnode.type) {
       let extractSlots2 = function (child) {
         if (Array.isArray(child)) {
-          return child.map((c) => extractSlots2(c));
+          return child.map(c => extractSlots2(c));
         }
         if (!isVNode(child)) {
           _slots.default.push(child);
@@ -1914,7 +1910,7 @@ Did you forget to import the component or is it possible there is a typo?`);
       const slots = {};
       for (const [key, value] of Object.entries(_slots)) {
         slotPromises.push(
-          renderJSX(result, value).then((output2) => {
+          renderJSX(result, value).then(output2 => {
             if (output2.toString().trim().length === 0) return;
             slots[key] = () => output2;
           }),
@@ -1991,7 +1987,7 @@ function renderScriptElement({ props, children }) {
 }
 function renderUniqueStylesheet(result, sheet) {
   if (sheet.type === "external") {
-    if (Array.from(result.styles).some((s) => s.props.href === sheet.src))
+    if (Array.from(result.styles).some(s => s.props.href === sheet.src))
       return "";
     return renderElement$1("link", {
       props: { rel: "stylesheet", href: sheet.src },
@@ -1999,9 +1995,7 @@ function renderUniqueStylesheet(result, sheet) {
     });
   }
   if (sheet.type === "inline") {
-    if (
-      Array.from(result.styles).some((s) => s.children.includes(sheet.content))
-    )
+    if (Array.from(result.styles).some(s => s.children.includes(sheet.content)))
       return "";
     return renderElement$1("style", { props: {}, children: sheet.content });
   }
@@ -2026,7 +2020,7 @@ function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
 
 const AstroJSX = "astro:jsx";
 const Empty = Symbol("empty");
-const toSlotName = (slotAttr) => slotAttr;
+const toSlotName = slotAttr => slotAttr;
 function isVNode(vnode) {
   return vnode && typeof vnode === "object" && vnode[AstroJSX];
 }
@@ -2045,7 +2039,7 @@ function transformSlots(vnode) {
   }
   if (Array.isArray(vnode.props.children)) {
     vnode.props.children = vnode.props.children
-      .map((child) => {
+      .map(child => {
         if (!isVNode(child)) return child;
         if (!("slot" in child.props)) return child;
         const name = toSlotName(child.props.slot);
@@ -2058,13 +2052,13 @@ function transformSlots(vnode) {
         delete child.props.slot;
         return Empty;
       })
-      .filter((v) => v !== Empty);
+      .filter(v => v !== Empty);
   }
   Object.assign(vnode.props, slots);
 }
 function markRawChildren(child) {
   if (typeof child === "string") return markHTMLString(child);
-  if (Array.isArray(child)) return child.map((c) => markRawChildren(c));
+  if (Array.isArray(child)) return child.map(c => markRawChildren(c));
   return child;
 }
 function transformSetDirectives(vnode) {

@@ -19,7 +19,7 @@ const ComponentNode = createComponent({
     if (treeNode.type === "text") return renderTemplate`${treeNode.content}`;
     const slots = {
       default: () =>
-        renderTemplate`${treeNode.children.map((child) =>
+        renderTemplate`${treeNode.children.map(child =>
           renderComponent(result, "ComponentNode", ComponentNode, {
             treeNode: child,
           }),
@@ -31,7 +31,7 @@ const ComponentNode = createComponent({
         scripts = "";
       if (Array.isArray(treeNode.collectedStyles)) {
         styles = treeNode.collectedStyles
-          .map((style) =>
+          .map(style =>
             renderUniqueStylesheet(result, {
               type: "inline",
               content: style,
@@ -41,7 +41,7 @@ const ComponentNode = createComponent({
       }
       if (Array.isArray(treeNode.collectedLinks)) {
         links = treeNode.collectedLinks
-          .map((link) => {
+          .map(link => {
             return renderUniqueStylesheet(result, {
               type: "external",
               src: link[0] === "/" ? link : "/" + link,
@@ -51,7 +51,7 @@ const ComponentNode = createComponent({
       }
       if (Array.isArray(treeNode.collectedScripts)) {
         scripts = treeNode.collectedScripts
-          .map((script) => renderScriptElement(script))
+          .map(script => renderScriptElement(script))
           .join("");
       }
       const head = unescapeHTML(styles + links + scripts);
@@ -96,7 +96,7 @@ async function createTreeNode(node) {
     return { type: "text", content: "" };
   }
   const children = await Promise.all(
-    node.children.map((child) => createTreeNode(child)),
+    node.children.map(child => createTreeNode(child)),
   );
   if (typeof node.name === "function") {
     const component = node.name;
@@ -146,7 +146,7 @@ const $$Renderer = createComponent(
     const { stringifiedAst, config } = Astro2.props;
     const ast = Markdoc$1.Ast.fromJSON(stringifiedAst);
     const content = Markdoc$1.transform(ast, config);
-    return renderTemplate`${Array.isArray(content) ? content.map(async (c) => renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(c) })}`) : renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(content) })}`}`;
+    return renderTemplate`${Array.isArray(content) ? content.map(async c => renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(c) })}`) : renderTemplate`${renderComponent($$result, "ComponentNode", ComponentNode, { treeNode: await createTreeNode(content) })}`}`;
   },
   "/Users/samgold/Desktop/\u041F\u0440\u043E\u0435\u043A\u0442\u044B/itaa/node_modules/@astrojs/markdoc/components/Renderer.astro",
   void 0,

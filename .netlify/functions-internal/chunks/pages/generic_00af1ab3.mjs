@@ -17,7 +17,7 @@ import {
 } from "../astro_321cb245.mjs";
 import "clsx";
 
-const fnv1a52 = (str) => {
+const fnv1a52 = str => {
   const len = str.length;
   let i = 0,
     t0 = 0,
@@ -87,7 +87,7 @@ const imageConfig = {
 new URL(
   "file:///Users/samgold/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B/itaa/dist/",
 );
-const getImage = async (options) => await getImage$1(options, imageConfig);
+const getImage = async options => await getImage$1(options, imageConfig);
 
 async function loadRemoteImage(src) {
   try {

@@ -250,15 +250,15 @@ function isRemoteAllowed(src, { domains = [], remotePatterns = [] }) {
   if (!isRemotePath(src)) return false;
   const url = new URL(src);
   return (
-    domains.some((domain) => matchHostname(url, domain)) ||
-    remotePatterns.some((remotePattern) => matchPattern(url, remotePattern))
+    domains.some(domain => matchHostname(url, domain)) ||
+    remotePatterns.some(remotePattern => matchPattern(url, remotePattern))
   );
 }
 async function getConfiguredImageService() {
   if (!globalThis?.astroAsset?.imageService) {
     const { default: service } = await Promise.resolve()
       .then(() => sharp$1)
-      .catch((e) => {
+      .catch(e => {
         const error = new AstroError(InvalidImageService);
         error.cause = e;
         throw error;

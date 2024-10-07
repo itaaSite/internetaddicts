@@ -33,6 +33,42 @@ img {
   vertical-align: top;
 }
 
+nav a {
+  position: relative; /* Для позиционирования подчеркивания */
+  text-decoration: none; /* Убираем стандартное подчеркивание */
+  color: #000; /* Основной цвет текста */
+}
+
+/* Стиль ссылки по умолчанию */
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: #000; /* Основной цвет текста */
+}
+
+/* Меняем цвет текста при наведении */
+nav a:hover {
+  color: #01c976ef; /* Цвет текста при наведении (зелёный) */
+}
+
+/* Псевдоэлемент для подчеркивания */
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #01c976ef;
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(0); /* Скрытое подчеркивание по умолчанию */
+  transition: transform 0.3s ease; /* Плавная анимация */
+}
+
+/* Показать подчеркивание только для активной ссылки */
+nav a.active::after {
+  transform: scaleX(1); /* Показать подчеркивание */
+}
+
 p {
   hyphens: none;
   text-align: justify; /* Добавлено выравнивание по ширине */

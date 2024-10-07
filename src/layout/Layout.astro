@@ -1,29 +1,29 @@
 ---
-import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
-import { BANNER } from '../consts'
-import '../css/base.css'
-import '../css/default.css'
-import '../css/style.css'
-import Metrika from '../components/Head/Metrika.astro'
-import Links from '../components/Head/Links.astro'
-import Verification from '../components/Head/Verification.astro'
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { BANNER } from "../consts";
+import "../css/base.css";
+import "../css/default.css";
+import "../css/style.css";
+import Metrika from "../components/Head/Metrika.astro";
+import Links from "../components/Head/Links.astro";
+import Verification from "../components/Head/Verification.astro";
 
 export interface Props {
-  title?: string
-  desc?: string
-  typeSite?: string
-  pubDate?: string
-  elemsTrue?: boolean
+  title?: string;
+  desc?: string;
+  typeSite?: string;
+  pubDate?: string;
+  elemsTrue?: boolean;
 }
 
-const LD_name = 'internetaddicts.ru'
+const LD_name = "internetaddicts.ru";
 
-const poster = BANNER
+const poster = BANNER;
 
-const { title, desc, typeSite, pubDate, elemsTrue } = Astro.props
+const { title, desc, typeSite, pubDate, elemsTrue } = Astro.props;
 
-const typeSiteFinal = typeSite ?? 'website'
+const typeSiteFinal = typeSite ?? "website";
 ---
 
 <!doctype html>
@@ -41,16 +41,19 @@ const typeSiteFinal = typeSite ?? 'website'
     <Links />
     <Verification />
 
-    <meta name="title" content={'АИЗ | ' + title} />
+    <meta name="title" content={"АИЗ | " + title} />
     <meta name="description" content={desc} />
     <meta property="og:type" content={typeSiteFinal} />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:site_name" content="АИЗ - Анонимные Интернет-Зависимые" />
-    <meta property="og:title" content={'АИЗ | ' + title} />
+    <meta
+      property="og:site_name"
+      content="АИЗ - Анонимные Интернет-Зависимые"
+    />
+    <meta property="og:title" content={"АИЗ | " + title} />
     <meta property="og:description" content={desc} />
     <meta property="og:image" content={BANNER} />
     {pubDate && <meta property="article:modified_time" content={pubDate} />}
-    <title>{'АИЗ | ' + title}</title>
+    <title>{"АИЗ | " + title}</title>
   </head>
   <body class="scroll-smooth bg-zinc-50 min-w-[320px] overflow-x-hidden">
     <Header />

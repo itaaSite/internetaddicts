@@ -1,8 +1,8 @@
 ---
-const { href, class: className, ...props } = Astro.props
+const { href, class: className, ...props } = Astro.props;
 
-const { pathname } = Astro.url
-const isActive = href === pathname || href === pathname.replace(/\/$/, '')
+const { pathname } = Astro.url;
+const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
@@ -16,4 +16,3 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '')
     @apply bg-gray-100;
   }
 </style>
-

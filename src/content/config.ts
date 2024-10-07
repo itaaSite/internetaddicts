@@ -64,7 +64,7 @@ export const collections = {
   groups: groupsCollection,
   posts: postsCollection,
   story: storyCollection,
- // pages: pagesCollections,
+  // pages: pagesCollections,
   speakers: speakers,
   diary: diaryCollection,
   news: newsCollection,

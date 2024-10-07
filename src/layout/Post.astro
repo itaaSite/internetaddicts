@@ -1,14 +1,14 @@
 ---
-import Layout from './Layout.astro'
+import Layout from "./Layout.astro";
 
 export interface Props {
-  url?: string
-  title: string
-  description: string
-  pubDate?: string
+  url?: string;
+  title: string;
+  description: string;
+  pubDate?: string;
 }
 
-const { title, description, pubDate } = Astro.props
+const { title, description, pubDate } = Astro.props;
 ---
 
 <Layout title={title} desc={description} typeSite="article" pubDate={pubDate}>
