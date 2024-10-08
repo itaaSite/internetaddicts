@@ -25,29 +25,18 @@ li:where(body) {
   list-style: none;
 }
 
-a:hover {
-  color: #01c976ef; /* Цвет текста при наведении (зелёный) */
-}
-
 img {
   vertical-align: top;
 }
 
-nav a {
-  position: relative; /* Для позиционирования подчеркивания */
-  text-decoration: none; /* Убираем стандартное подчеркивание */
-  color: #000; /* Основной цвет текста */
-}
-
 /* Стиль ссылки по умолчанию */
 nav a {
-  position: relative;
-  text-decoration: none;
+  position: relative; /* Для позиционирования подчеркивания */
+  text-decoration: none; /* Убираем стандартное подчеркивание текста */
   color: #000; /* Основной цвет текста */
 }
 
-/* Меняем цвет текста при наведении */
-nav a:hover {
+a:hover {
   color: #01c976ef; /* Цвет текста при наведении (зелёный) */
 }
 
@@ -60,11 +49,10 @@ nav a::after {
   background-color: #01c976ef;
   bottom: -2px;
   left: 0;
-  transform: scaleX(0); /* Скрытое подчеркивание по умолчанию */
-  transition: transform 0.3s ease; /* Плавная анимация */
+  transform: scaleX(0); /* Изначально подчеркивание скрыто */
 }
 
-/* Показать подчеркивание только для активной ссылки */
+/* Показать подчеркивание для активной ссылки */
 nav a.active::after {
   transform: scaleX(1); /* Показать подчеркивание */
 }
@@ -75,7 +63,7 @@ p {
 }
 
 q {
-  quotes: "«" "»";
+  quotes: '«' '»';
 }
 
 h1,

@@ -443,6 +443,20 @@ declare module 'astro:content' {
 } & { render(): Render[".mdoc"] };
 };
 "news": {
+"new-group-drop-the-rock.mdoc": {
+	id: "new-group-drop-the-rock.mdoc";
+  slug: "new-group-drop-the-rock";
+  body: string;
+  collection: "news";
+  data: InferEntrySchema<"news">
+} & { render(): Render[".mdoc"] };
+"new-group-traditions.mdoc": {
+	id: "new-group-traditions.mdoc";
+  slug: "new-group-traditions";
+  body: string;
+  collection: "news";
+  data: InferEntrySchema<"news">
+} & { render(): Render[".mdoc"] };
 "new-live-group-msk.mdoc": {
 	id: "new-live-group-msk.mdoc";
   slug: "new-live-group-msk";
