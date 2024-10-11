@@ -355,6 +355,62 @@ declare module 'astro:content' {
   collection: "diary";
   data: InferEntrySchema<"diary">
 } & { render(): Render[".mdoc"] };
+"diary_05_12.mdoc": {
+	id: "diary_05_12.mdoc";
+  slug: "diary_05_12";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_13.mdoc": {
+	id: "diary_05_13.mdoc";
+  slug: "diary_05_13";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_14.mdoc": {
+	id: "diary_05_14.mdoc";
+  slug: "diary_05_14";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_15.mdoc": {
+	id: "diary_05_15.mdoc";
+  slug: "diary_05_15";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_16.mdoc": {
+	id: "diary_05_16.mdoc";
+  slug: "diary_05_16";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_17.mdoc": {
+	id: "diary_05_17.mdoc";
+  slug: "diary_05_17";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_18.mdoc": {
+	id: "diary_05_18.mdoc";
+  slug: "diary_05_18";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
+"diary_05_31.mdoc": {
+	id: "diary_05_31.mdoc";
+  slug: "diary_05_31";
+  body: string;
+  collection: "diary";
+  data: InferEntrySchema<"diary">
+} & { render(): Render[".mdoc"] };
 };
 "groups": {
 "aiz_group_1_10.mdoc": {
