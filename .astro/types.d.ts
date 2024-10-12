@@ -543,6 +543,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"dependent_thinking.mdoc": {
+	id: "dependent_thinking.mdoc";
+  slug: "dependent_thinking";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 "detox_list.mdoc": {
 	id: "detox_list.mdoc";
   slug: "detox_list";
