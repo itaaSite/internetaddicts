@@ -543,13 +543,6 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
-"dependent_thinking.mdoc": {
-	id: "dependent_thinking.mdoc";
-  slug: "dependent_thinking";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
 "detox_list.mdoc": {
 	id: "detox_list.mdoc";
   slug: "detox_list";
@@ -648,11 +641,25 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"test-na-internet-zavisimost.mdoc": {
+	id: "test-na-internet-zavisimost.mdoc";
+  slug: "test-na-internet-zavisimost";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"zavisimoe-myshlenie.mdoc": {
+	id: "zavisimoe-myshlenie.mdoc";
+  slug: "zavisimoe-myshlenie";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 };
 "speakers": {
-"1-step-reading-BBAA.mdoc": {
-	id: "1-step-reading-BBAA.mdoc";
-  slug: "1-step-reading-bbaa";
+"1-shag-chtenie-knigi.mdoc": {
+	id: "1-shag-chtenie-knigi.mdoc";
+  slug: "1-shag-chtenie-knigi";
   body: string;
   collection: "speakers";
   data: InferEntrySchema<"speakers">
