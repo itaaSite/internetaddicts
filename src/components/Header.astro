@@ -2,27 +2,128 @@
 import { getCollection } from "astro:content";
 import Link from "./Link.astro";
 import Logo from "./Logo.astro";
+import { map } from "astro:schema";
 
-const posts = (await getCollection("posts")).length;
-const story = (await getCollection("story")).length;
-const groups = (await getCollection("groups")).length;
-const speakers = (await getCollection("speakers")).length;
-const news = (await getCollection("news")).length;
+const collections = ["posts", "story", "groups", "speakers", "news"];
+
+// Параллельный вызов getCollection для всех коллекций
+const counts = await Promise.all(
+	collections.map(async collection => {
+		const data = await getCollection(collection);
+		return data.length;
+	}),
+);
+
+// Создаем объект с количеством для каждой коллекции
+const countsObject = {
+	posts: counts[0],
+	story: counts[1],
+	groups: counts[2],
+	speakers: counts[3],
+	news: counts[4],
+};
+
+// Деструктуризация для удобства
+const { posts, story, groups, speakers, news } = countsObject;
+
+const links = [
+	{
+		href: "/",
+		class: "",
+		label: "Главная",
+	},
+	{
+		href: "/groups",
+		class: "",
+		label: "Собрания",
+		count: groups, // Assuming 'groups' is defined in your context
+	},
+	{
+		href: "/diary",
+		class: "",
+		label: "Ежедневник",
+	},
+	{
+		href: "/posts",
+		class: "",
+		label: "Статьи",
+		count: posts, // Assuming 'posts' is defined in your context
+	},
+	{
+		href: "/stories",
+		class: "",
+		label: "Истории",
+		count: story, // Assuming 'story' is defined in your context
+	},
+	{
+		href: "/speakers",
+		class: "",
+		label: "Спикерские",
+		count: speakers, // Assuming 'speakers' is defined in your context
+	},
+	{
+		href: "/news",
+		class: "",
+		label: "Новости",
+		count: news, // Assuming 'news' is defined in your context
+	},
+];
 ---
 
-<header class="py-5 bg-white">
-  <div
-    class="container max-w-6xl px-5 mx-auto gap-5 flex justify-between items-start md:items-center flex-col sm:flex-row"
-  >
-    <Logo />
-    <nav class="flex gap-2 flex-wrap items-center">
-      <Link href="/" style={{ fontWeight: "bold" }}>Главная</Link>
-      <Link href="/groups" style={{ fontWeight: "bold" }}>Собрания ({groups})</Link>
-      <Link href="/diary" style={{ fontWeight: "bold" }}>Ежедневник</Link>
-      <Link href="/posts" style={{ fontWeight: "bold" }}>Статьи ({posts})</Link>
-      <Link href="/stories" style={{ fontWeight: "bold" }}>Истории ({story})</Link>
-      <Link href="/speakers" style={{ fontWeight: "bold" }}>Спикерские ({speakers})</Link>
-      <Link href="/news" style={{ fontWeight: "bold" }}>Новости ({news})</Link>
-    </nav>
-  </div>
+<header class="py-5 bg-white relative">
+	<div
+		class="container max-w-6xl px-5 mx-auto gap-5 flex justify-between items-center"
+	>
+		<Logo />
+		<nav class="flex gap-2 flex-wrap items-center hidden md:flex">
+			{
+				links &&
+					links.map(link => (
+						<Link href={link.href}>
+							{link.label} {link.count && ` (${link.count})`}
+						</Link>
+					))
+			}
+		</nav>
+		<button
+			id="menuOpen"
+			class="md:hidden flex items-center gap-1 px-4 py-1.5 rounded-lg bg-black text-white"
+		>
+			<span>Меню</span>
+		</button>
+		<nav
+			id="menu"
+			class="hidden absolute left-0 top-[95px] bg-black/70 backdrop-blur-lg w-full h-screen"
+		>
+			<div class="flex flex-col mt-10 items-center gap-5">
+				{
+					links &&
+						links.map(link => (
+							<a href={link.href} class="text-white text-xl font-medium">
+								{link.label} {link.count && ` (${link.count})`}
+							</a>
+						))
+				}
+			</div>
+		</nav>
+	</div>
 </header>
+
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const openMenu = document.querySelector("#menuOpen");
+		const menu = document.querySelector("#menu");
+		const html = document.querySelector("html");
+
+		const toggleMenu = () => {
+			menu.classList.toggle("hidden");
+			menu.classList.toggle("block");
+			html.classList.toggle("overflow-hidden");
+		};
+		openMenu.addEventListener("click", toggleMenu);
+	});
+
+	document.addEventListener("astro:after-swap", () => {
+		document.querySelector("#openMenu").addEventListener("click", toggleMenu);
+	});
+</script>

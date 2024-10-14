@@ -33,7 +33,7 @@ img {
 nav a {
   position: relative; /* Для позиционирования подчеркивания */
   text-decoration: none; /* Убираем стандартное подчеркивание текста */
-  color: #000; /* Основной цвет текста */
+  color: #121212; /* Основной цвет текста */
 }
 
 a:hover {
@@ -57,21 +57,3 @@ nav a.active::after {
   transform: scaleX(1); /* Показать подчеркивание */
 }
 
-p {
-  hyphens: none;
-  /* text-align: justify;  */
-}
-
-q {
-  quotes: '«' '»';
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: inherit;
-  font-size: inherit;
-}
