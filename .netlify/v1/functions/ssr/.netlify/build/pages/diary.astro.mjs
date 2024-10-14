@@ -1,7 +1,7 @@
 import { b as createAstro, c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead, d as addAttribute } from '../chunks/astro/server_BAgBan8v.mjs';
 import 'kleur/colors';
-import { g as getCollection, a as getEntry } from '../chunks/_astro_content_BqSkOHYe.mjs';
-import { $ as $$Layout } from '../chunks/Layout_Dx3gzzKg.mjs';
+import { g as getCollection, a as getEntry } from '../chunks/_astro_content_Dlvo6q7l.mjs';
+import { $ as $$Layout } from '../chunks/Layout_fLcqfOOa.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro("https://internetaddicts.ru/");

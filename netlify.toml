@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  external_node_modules = ["mime", "path-to-regexp"]
+  node_bundler = "vite"  # убедись, что используется esbuild или другой подходящий бандлер
+  included_files = ["netlify/functions-internal/*"]

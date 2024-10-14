@@ -2,7 +2,7 @@ import { b as createAstro, c as createComponent, r as renderTemplate, d as addAt
 import 'kleur/colors';
 import 'clsx';
 /* empty css                          */
-import { g as getCollection } from './_astro_content_BqSkOHYe.mjs';
+import { g as getCollection } from './_astro_content_Dlvo6q7l.mjs';
 
 const $$Astro$2 = createAstro("https://internetaddicts.ru/");
 const $$ViewTransitions = createComponent(($$result, $$props, $$slots) => {
