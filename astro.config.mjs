@@ -8,6 +8,8 @@ import tailwind from "@astrojs/tailwind";
 import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 
+import icon from "astro-icon";
+
 export default defineConfig({
   site: "https://internetaddicts.ru/",
   prefetch: {
@@ -27,6 +29,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
+    icon(),
   ],
   output: "hybrid",
   adapter: netlify(),

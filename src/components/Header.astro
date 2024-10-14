@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Link from "./Link.astro";
 import Logo from "./Logo.astro";
 import { map } from "astro:schema";
+import { Icon } from "astro-icon/components";
 
 const collections = ["posts", "story", "groups", "speakers", "news"];
 
@@ -89,6 +90,7 @@ const links = [
 			id="menuOpen"
 			class="md:hidden flex items-center gap-1 px-4 py-1.5 rounded-lg bg-black text-white"
 		>
+			<Icon name="mdi:menu-open" />
 			<span>Меню</span>
 		</button>
 		<nav

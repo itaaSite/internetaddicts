@@ -1,7 +1,7 @@
 ---
-import { getCollection, getEntry } from "astro:content";
 import Layout from "@/layout/Layout.astro";
-
+import { Icon } from "astro-icon/components";
+import { getCollection, getEntry } from "astro:content";
 export const prerender = false;
 
 const plusParam = Number(Astro.url.searchParams.get("plus") || "0");
@@ -92,17 +92,30 @@ const { Content } = await entry.render();
 
 <Layout title="Ежедневник" desc="Ежедневник АИЗ">
 	<main class="p-5">
-		<aside class="mx-auto max-w-[780px] mb-10">
+		<aside
+			class="md:mx-auto -mx-5 flex-wrap max-w-[780px] mb-10 items-center flex justify-between gap-3"
+		>
 			<a
 				href={minusLink}
 				style={{ fontSize: "2rem", fontWeight: "bold" }}
-				class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+				class="text-lg bg-white font-medium rounded-lg py-2 px-3"
 				>&#8592; {/* ← Левая стрелка */}</a
 			>
 			<a
+				target="_blank"
+				href={`https://t.me/share/url?url=${new URL(Astro.url.pathname, Astro.site)}&text=Ежедневник АИЗ: ${currentDiary.data.title} | ${formattedDate}`}
+				class="text-blue-600 flex items-center gap-1 ring-1 ring-blue-400/50 bg-blue-100 rounded-lg px-4 py-1.5 hover:text-blue-700"
+			>
+				<Icon name="mdi:telegram" />
+				<span>Поделится в группе</span>
+			</a>
+
+			<!-- <ShareToTelegram client:visible/> -->
+
+			<a
 				href={plusLink}
 				style={{ fontSize: "2rem", fontWeight: "bold" }}
-				class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
+				class="text-lg bg-white font-medium rounded-lg py-2 px-3"
 				>&#8594; {/* → Правая стрелка */}</a
 			>
 		</aside>
