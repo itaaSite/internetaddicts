@@ -8,8 +8,11 @@ import tailwind from "@astrojs/tailwind";
 import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 
-// https://astro.build/config
 export default defineConfig({
+  site: "https://internetaddicts.ru/",
+  prefetch: {
+    defaultStrategy: "viewport",
+  },
   integrations: [
     react(),
     markdoc(),

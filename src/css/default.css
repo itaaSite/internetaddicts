@@ -59,7 +59,7 @@ nav a.active::after {
 
 p {
   hyphens: none;
-  text-align: justify; /* Добавлено выравнивание по ширине */
+  /* text-align: justify;  */
 }
 
 q {
