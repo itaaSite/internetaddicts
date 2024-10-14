@@ -1,5 +1,7 @@
 # Офицальный сайт сообщества АИЗ
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aaa8abb8-59a3-4500-87ea-e9d5fb35dd45/deploy-status)](https://app.netlify.com/sites/itaa/deploys)
+
 ## Анонимные Интернет-Зависимые
 **от устройств, цифровых технологий и потребления любого контента**
 
