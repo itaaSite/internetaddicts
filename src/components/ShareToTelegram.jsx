@@ -36,7 +36,7 @@ const ShareToTelegram = () => {
           rel="noopener noreferrer"
           className="text-blue-600 flex items-center gap-1 ring-1 ring-blue-400/50 bg-blue-100 rounded-lg px-4 py-1.5 hover:text-blue-700"
         >
-          <span>Поделится в группе</span>
+          <span>Поделиться в группе</span>
         </a>
       )}
     </div>
