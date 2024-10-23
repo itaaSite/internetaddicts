@@ -57,3 +57,7 @@ nav a.active::after {
   transform: scaleX(1); /* Показать подчеркивание */
 }
 
+.red-text {
+  color: red;
+}
+
