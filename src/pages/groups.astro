@@ -41,7 +41,7 @@ function sortGroupsByDay(groups) {
     Онлайн-группы ({groups.filter(f => f.data.type === "Онлайн").length})
   </h4>
 
-  <div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-5">
     {
       groups &&
         sortGroupsByDay(groups.filter(f => f.data.type === "Онлайн")).map(
@@ -77,7 +77,7 @@ function sortGroupsByDay(groups) {
   <h4 class="text-2xl text-gray-700 font-medium">
     Живые группы ({groups.filter(f => f.data.type === "Живая").length})
   </h4>
-  <div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-5">
     {
       groups &&
         sortGroupsByDay(groups.filter(f => f.data.type === "Живая")).map(
