@@ -29,35 +29,8 @@ img {
   vertical-align: top;
 }
 
-/* Стиль ссылки по умолчанию */
-nav a {
-  position: relative; /* Для позиционирования подчеркивания */
-  text-decoration: none; /* Убираем стандартное подчеркивание текста */
-  color: #121212; /* Основной цвет текста */
-}
 
-a:hover {
-  color: #01c976ef; /* Цвет текста при наведении (зелёный) */
-}
-
-/* Псевдоэлемент для подчеркивания */
-nav a::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #01c976ef;
-  bottom: -2px;
-  left: 0;
-  transform: scaleX(0); /* Изначально подчеркивание скрыто */
-}
-
-/* Показать подчеркивание для активной ссылки */
-nav a.active::after {
-  transform: scaleX(1); /* Показать подчеркивание */
-}
 
 .red-text {
   color: red;
 }
-
