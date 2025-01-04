@@ -36,7 +36,7 @@ const links = [
 	{
 		href: "/groups",
 		class: "",
-		label: "Собрания",
+		label: "Группы",
 		count: groups, // Assuming 'groups' is defined in your context
 	},
 	{
@@ -47,13 +47,13 @@ const links = [
 	{
 		href: "/posts",
 		class: "",
-		label: "Статьи",
+		label: "Архив",
 		count: posts, // Assuming 'posts' is defined in your context
 	},
 	{
 		href: "/stories",
 		class: "",
-		label: "Истории",
+		label: "Л. Истории",
 		count: story, // Assuming 'story' is defined in your context
 	},
 	{
@@ -81,7 +81,7 @@ const links = [
 		class="container max-w-6xl px-5 mx-auto gap-5 flex justify-between items-center"
 	>
 		<Logo />
-		<nav class="flex gap-2 flex-wrap items-center hidden md:flex">
+		<nav class="flex gap-1 flex-wrap items-center hidden md:flex">
 			{
 				links &&
 					links.map(link => (

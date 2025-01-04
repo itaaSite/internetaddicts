@@ -18,12 +18,13 @@ const countPostsByTag = (posts, tagField = "tags") => {
 }
 const tags = await getTaxonomy("posts", "tags")
 const tagCounts = countPostsByTag(posts)
+const { pathname } = Astro.url
 ---
 
 <div class="flex flex-wrap gap-3">
 	<a
 		href="/posts"
-		class:list={`${Astro.url.pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
+		class:list={`${pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
 		>Все посты <b class="text-sm">({posts.length})</b></a
 	>
 	{
@@ -32,7 +33,7 @@ const tagCounts = countPostsByTag(posts)
 				<a
 					href={`/tags/${slugify(tag)}`}
 					class:list={
-						Astro.url.pathname === `/tags/${slugify(tag)}`
+						pathname === `/tags/${slugify(tag)}`
 							? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400"
 							: "bg-white rounded-lg px-3 py-2 text-zinc-600 border"
 					}
