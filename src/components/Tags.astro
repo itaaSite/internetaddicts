@@ -24,7 +24,7 @@ const { pathname } = Astro.url
 <div class="flex flex-wrap gap-3">
 	<a
 		href="/posts"
-		class:list={`${pathname === "/posts" || "/posts/" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
+		class:list={`${pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
 		>Все посты <b class="text-sm">({posts.length})</b></a
 	>
 	{
@@ -33,7 +33,7 @@ const { pathname } = Astro.url
 				<a
 					href={`/tags/${slugify(tag)}`}
 					class:list={
-						pathname === `/tags/${slugify(tag)}` || `/tags/${slugify(tag)}/`
+						pathname === `/tags/${slugify(tag)}`
 							? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400"
 							: "bg-white rounded-lg px-3 py-2 text-zinc-600 border"
 					}
