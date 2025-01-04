@@ -1,18 +1,18 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import Post from "@/layout/Post.astro";
+import Post from "@/layout/Post.astro"
+import { Image } from "astro:assets"
+import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
-	const posts = await getCollection("posts");
+	const posts = await getCollection("posts")
 	return posts.map(post => ({
 		params: { slug: post.slug },
 		props: post,
-	}));
+	}))
 }
 
-const post = Astro.props;
-const { Content } = await post.render();
+const post = Astro.props
+const { Content } = await post.render()
 ---
 
 <Post title={post.data.title} description={post.data.description}>
@@ -22,17 +22,16 @@ const { Content } = await post.render();
 		>
 	</aside>
 
-  
 	<main class="prose-aiz">
-    <Image
-      src={post.data.img}
-      alt={`изображение поста: ${post.data.title}`}
-      quality={10}
-      format={"webp"}
-      class="rounded-xl object-cover"
-    />
+		<Image
+			src={post.data.img}
+			alt={`изображение поста: ${post.data.title}`}
+			quality={10}
+			format={"webp"}
+			class="rounded-xl object-cover"
+		/>
 		<h1>{post.data.title}</h1>
-    <p class="text-sm text-zinc-600 italic">{post.data.description}</p>
+		<p class="text-sm text-zinc-600 italic">{post.data.description}</p>
 		<Content />
 	</main>
 </Post>

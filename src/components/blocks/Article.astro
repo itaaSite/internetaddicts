@@ -1,39 +1,50 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from "astro:assets"
 export interface Props {
 	data: {
-		img: string;
-		title: string;
-		description: string;
-		pubDate: string;
-	};
-	slug;
+		img: string
+		title: string
+		tags: any
+		description: string
+		pubDate: string
+	}
+	slug
 }
 
 const {
-	data: { description, title, pubDate, img },
+	data: { description, title, pubDate, tags, img },
 	slug,
-} = Astro.props;
+} = Astro.props
 ---
 
 <a href={`/posts/${slug}`} class="hover-top" aria-label={title}>
-	<article class="bg-white p-5 rounded-2xl prose max-w-none">
+	<article class="bg-white items-center sm:flex rounded-2xl">
 		{
-			img && (
+			img ? (
 				<Image
 					src={img}
 					title={title}
 					aria-label={title}
-					class="rounded-xl w-full object-cover"
+					class="rounded-xl object-cover bg-center sm:max-w-[220px] h-[220px]"
 					alt={`Изображения поста: ${title}`}
 					format={"webp"}
 					quality={10}
 				/>
+			) : (
+				<div class="rounded-xl bg-zinc-900 max-w-[220px] h-[220px]" />
 			)
 		}
-		<h3>{title}</h3>
-		<p class="line-clamp-2 text-gray-500">{description}</p>
-		{
+		<div class="flex gap-3 p-5 flex-col">
+			<h3 class="text-xl line-clamp-3 font-semibold text-balance">{title}</h3>
+			<p class="line-clamp-3 italic text-pretty text-sm text-zinc-500">{description}</p>
+			<div class="flex line-clamp-1 gap-2">
+				{
+					tags &&
+						tags.map(tag => <span class="text-sm font-bold text-zinc-800">💡{tag}</span>)
+				}
+			</div>
+		</div>
+		<!-- {
 			pubDate && (
 				<time datetime={pubDate} class="font-medium">
 					{new Date(pubDate).toLocaleDateString("ru-RU", {
@@ -43,6 +54,6 @@ const {
 					})}
 				</time>
 			)
-		}
+		} -->
 	</article>
 </a>

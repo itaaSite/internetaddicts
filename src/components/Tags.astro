@@ -1,0 +1,44 @@
+---
+const posts = await getAllPosts("posts")
+import { getAllPosts } from "@/lib/getPosts"
+import getTaxonomy from "@/lib/getTaxonomy"
+import { slugify } from "@/lib/utils"
+
+const countPostsByTag = (posts, tagField = "tags") => {
+	const tagCounts = {}
+
+	posts.forEach(post => {
+		const tags = post.data[tagField] || []
+		tags.forEach(tag => {
+			tagCounts[tag] = (tagCounts[tag] || 0) + 1
+		})
+	})
+
+	return tagCounts
+}
+const tags = await getTaxonomy("posts", "tags")
+const tagCounts = countPostsByTag(posts)
+---
+
+<div class="flex flex-wrap gap-3">
+	<a
+		href="/posts"
+		class:list={`${Astro.url.pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
+		>Все посты <b class="text-sm">({posts.length})</b></a
+	>
+	{
+		tags &&
+			tags.map(tag => (
+				<a
+					href={`/tags/${slugify(tag)}`}
+					class:list={
+						Astro.url.pathname === `/tags/${slugify(tag)}`
+							? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400"
+							: "bg-white rounded-lg px-3 py-2 text-zinc-600 border"
+					}
+				>
+					{tag} <b class="text-sm">({tagCounts[tag] || 0})</b>
+				</a>
+			))
+	}
+</div>
