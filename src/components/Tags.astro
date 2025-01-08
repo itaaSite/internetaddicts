@@ -3,6 +3,7 @@ const posts = await getAllPosts("posts")
 import { getAllPosts } from "@/lib/getPosts"
 import getTaxonomy from "@/lib/getTaxonomy"
 import { slugify } from "@/lib/utils"
+import TagLink from "./TagLink.astro"
 
 const countPostsByTag = (posts, tagField = "tags") => {
 	const tagCounts = {}
@@ -22,24 +23,19 @@ const { pathname } = Astro.url
 ---
 
 <div class="flex flex-wrap gap-3">
-	<a
+	<!-- <a
 		href="/posts"
 		class:list={`${pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
 		>Все посты <b class="text-sm">({posts.length})</b></a
-	>
+	> -->
+	<TagLink href="/posts">Все посты <b class="text-sm">({posts.length})</b></TagLink>
+
 	{
 		tags &&
 			tags.map(tag => (
-				<a
-					href={`/tags/${slugify(tag)}`}
-					class:list={
-						pathname === `/tags/${slugify(tag)}`
-							? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400"
-							: "bg-white rounded-lg px-3 py-2 text-zinc-600 border"
-					}
-				>
-					{tag} <b class="text-sm">({tagCounts[tag] || 0})</b>
-				</a>
+				<TagLink href={`/tags/${slugify(tag)}`}>
+					{tag} <b class="text-sm"> ({tagCounts[tag] || 0})</b>
+				</TagLink>
 			))
 	}
 </div>

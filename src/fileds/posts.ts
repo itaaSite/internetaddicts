@@ -42,6 +42,10 @@ export const posts = collection({
 			directory: "src/assets/images/posts",
 			publicPath: "../../assets/images/posts/",
 		}),
+		favorite: fields.checkbox({
+			label: "Избранный пост",
+			description: "Избранный пост в начале",
+		}),
 		content: fields.mdx({
 			label: "Контент",
 		}),

@@ -8,6 +8,7 @@ const postsCollection = defineCollection({
 			pubDate: z.union([z.string(), z.date()]),
 			img: image().optional(),
 			tags: z.array(z.string()).optional(),
+			favorite: z.boolean().default(false).optional(),
 		}),
 })
 const groupsCollection = defineCollection({

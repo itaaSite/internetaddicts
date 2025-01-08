@@ -23,13 +23,13 @@ const { Content } = await post.render()
 	</aside>
 
 	<main class="prose-aiz">
-		<Image
+		<!-- <Image
 			src={post.data.img}
 			alt={`изображение поста: ${post.data.title}`}
 			quality={10}
 			format={"webp"}
 			class="rounded-xl object-cover"
-		/>
+		/> -->
 		<h1>{post.data.title}</h1>
 		<p class="text-sm text-zinc-600 italic">{post.data.description}</p>
 		<Content />
