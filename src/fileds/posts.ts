@@ -27,8 +27,14 @@ export const posts = collection({
 			label: "Теги к посту",
 			description: "Выберите теги",
 			options: [
+				{ label: "Информация", value: "Информация" },
+				{ label: "Для групп", value: "Для групп" },
+				{ label: "Инструменты", value: "Инструменты" },
+				{ label: "Идеи", value: "Идеи" },
+				{ label: "Руководство", value: "Руководство" },
+				{ label: "Тест", value: "Тест" },
 				{ label: "12 шагов", value: "12 шагов" },
-				{ label: "Здоровье", value: "Здоровье" },
+				{ label: "12 традиций", value: "12 традиций" },
 			],
 		}),
 		img: fields.image({

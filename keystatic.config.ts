@@ -4,17 +4,16 @@ import { config } from "@keystatic/core"
 const isProd = import.meta.env.PROD
 
 export default config({
-	storage:
-		// isProd
-		// ? {
-		//     kind: "github",
-		//     repo: "itaaSite/internetaddicts",
-		//     branchPrefix: "main/",
-		//   }
-		// :
-		{
-			kind: "local",
-		},
+	storage: isProd
+		? {
+				kind: "cloud",
+			}
+		: {
+				kind: "local",
+			},
+	cloud: {
+		project: "aiz-site/internetaddicts",
+	},
 	collections: {
 		posts,
 		// story,
