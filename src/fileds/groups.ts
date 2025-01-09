@@ -5,14 +5,17 @@ export const groups = collection({
 	slugField: "title",
 	path: "src/content/groups/*",
 	entryLayout: "content",
+	columns: ["title", "when", "dateTime", "type"],
 	format: { contentField: "body" },
 	schema: {
 		title: fields.slug({ name: { label: "Название группы" } }),
-		body: fields.document({
+		body: fields.mdx({
 			label: "Описание группы",
-			formatting: true,
-			dividers: true,
-			links: true,
+		}),
+		logo: fields.image({
+			label: "Логотип",
+			directory: "src/assets/images/groups_logos",
+			publicPath: "../../assets/images/groups_logos/",
 		}),
 		when: fields.text({
 			label: "Время",

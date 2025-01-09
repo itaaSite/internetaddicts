@@ -16,7 +16,7 @@ const groupsCollection = defineCollection({
 		z.object({
 			title: z.string(),
 			when: z.string(),
-			dateTime: z.string().default("20:00"),
+			dateTime: z.string().optional(),
 			body: z.string().optional(),
 			logo: image().optional(),
 			type: z.string().default("Онлайн"),
