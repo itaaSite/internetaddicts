@@ -1,6 +1,6 @@
 ---
+import PageViews from "@/components/PageViews.astro"
 import Post from "@/layout/Post.astro"
-import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 const post = Astro.props
 const { Content } = await post.render()
+const pageUrl = new URL(Astro.url.pathname, Astro.url.origin).href
 ---
 
 <Post title={post.data.title} description={post.data.description}>
@@ -23,14 +24,8 @@ const { Content } = await post.render()
 	</aside>
 
 	<main class="prose-aiz">
-		<!-- <Image
-			src={post.data.img}
-			alt={`изображение поста: ${post.data.title}`}
-			quality={10}
-			format={"webp"}
-			class="rounded-xl object-cover"
-		/> -->
 		<h1>{post.data.title}</h1>
+		<div class="flex justify-start"><PageViews url={pageUrl} /></div>
 		<p class="text-sm text-zinc-600 italic">{post.data.description}</p>
 		<Content />
 	</main>
