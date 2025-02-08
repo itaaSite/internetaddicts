@@ -11,11 +11,14 @@ const groups = await getCollection("groups")
 		<div class="container max-w-6xl px-5 mx-auto">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-6">
 				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Архив</span>
+					<span class="text-lg text-zinc-700 font-bold">Последние посты. Архив</span>
 					{
 						posts &&
 							posts.slice(0, 5).map(item => (
-								<a href={item.slug} class="md:text-left text-center text-blue-500">
+								<a
+									href={`/posts/${item.slug}`}
+									class="md:text-left text-center text-blue-500"
+								>
 									{item.data.title}
 								</a>
 							))
@@ -26,7 +29,10 @@ const groups = await getCollection("groups")
 					{
 						stories &&
 							stories.map(item => (
-								<a href={item.slug} class="md:text-left text-center text-blue-500">
+								<a
+									href={`/stories/${item.slug}`}
+									class="md:text-left text-center text-blue-500"
+								>
 									{item.data.title}
 								</a>
 							))
@@ -37,7 +43,7 @@ const groups = await getCollection("groups")
 					{
 						groups &&
 							groups.map(item => (
-								<a href={item.slug} class="md:text-left text-center text-blue-500">
+								<a href={`/groups/`} class="md:text-left text-center text-blue-500">
 									{item.data.title}
 								</a>
 							))
