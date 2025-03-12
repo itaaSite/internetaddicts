@@ -11,10 +11,10 @@ const groups = await getCollection("groups")
 		<div class="container max-w-6xl px-5 mx-auto">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-6">
 				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Последние посты. Архив</span>
+					<span class="text-lg text-zinc-700 font-bold">Последние посты. Архив.</span>
 					{
 						posts &&
-							posts.slice(0, 5).map(item => (
+							posts.slice(0, 3).map(item => (
 								<a
 									href={`/posts/${item.slug}`}
 									class="md:text-left text-center text-blue-500"
@@ -25,10 +25,10 @@ const groups = await getCollection("groups")
 					}
 				</div>
 				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Личные истории</span>
+					<span class="text-lg text-zinc-700 font-bold">Послднее л. истории</span>
 					{
 						stories &&
-							stories.map(item => (
+							stories.slice(0, 3).map(item => (
 								<a
 									href={`/stories/${item.slug}`}
 									class="md:text-left text-center text-blue-500"
@@ -52,7 +52,15 @@ const groups = await getCollection("groups")
 			</div>
 		</div>
 	</div>
-	<div class="container max-w-6xl px-5 mx-auto flex items-center justify-center gap-6">
+	<div
+		class="container max-w-6xl sm:flex-row flex-col px-5 mx-auto flex items-center justify-between gap-6"
+	>
 		<span>&copy; {new Date().getFullYear()} <b>internetaddicts.ru</b></span>
+		<a
+			href="https://t.me/legion_free"
+			target="_blank"
+			class="underline underline-offset-4 text-blue-600"
+			>👉 Разработка сайтов. Написать.</a
+		>
 	</div>
 </footer>
