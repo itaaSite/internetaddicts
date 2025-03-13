@@ -1,0 +1,51 @@
+---
+const { page } = Astro.props
+---
+
+<div class="flex sm:flex-row flex-col justify-between items-center gap-3">
+	<span class="font-bold">Страница {page.currentPage}</span>
+	<div class="flex gap-3 md:w-fit w-full">
+		{
+			page.url.prev ? (
+				<a
+					href={page.url.prev}
+					class="md:w-fit w-full text-center px-3 py-1.5 bg-blue-500 text-white rounded-md"
+				>
+					Предыдущая
+				</a>
+			) : null
+		}
+		{
+			page.url.next ? (
+				<a
+					href={page.url.next}
+					class="md:w-fit w-full text-center px-3 py-1.5 bg-blue-500 text-white rounded-md"
+				>
+					Следущая
+				</a>
+			) : null
+		}
+	</div>
+	<div class="flex gap-3 md:w-fit w-full">
+		{
+			page.url.first ? (
+				<a
+					href={page.url.first}
+					class="md:w-fit w-full text-center px-3 py-1.5 bg-zinc-700 text-white rounded-md"
+				>
+					Первая
+				</a>
+			) : null
+		}
+		{
+			page.url.last ? (
+				<a
+					href={page.url.last}
+					class="md:w-fit w-full text-center px-3 py-1.5 bg-zinc-700 text-white rounded-md"
+				>
+					Последняя
+				</a>
+			) : null
+		}
+	</div>
+</div>
