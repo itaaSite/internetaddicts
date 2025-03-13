@@ -15,7 +15,7 @@ const q = Astro.url.searchParams.get("q") ?? undefined
 	desc="Архив АИЗ. Полезная информация, методы шагов, инструменты и прочее."
 >
 	<Tags />
-	<Search query={q} />
+	<Search query={q} uiOptions={{ showImages: false }} />
 
 	<div class="md:grid-cols-2 gap-5 grid grid-cols-1">
 		{

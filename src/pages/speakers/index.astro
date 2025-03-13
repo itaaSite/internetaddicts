@@ -1,11 +1,12 @@
 ---
-import Layout from "@/layout/Layout.astro";
-import { YouTube } from "@astro-community/astro-embed-youtube";
-import { getCollection } from "astro:content";
-const speakers = await getCollection("speakers");
+import Layout from "@/layout/Layout.astro"
+import { YouTube } from "@astro-community/astro-embed-youtube"
+import { getCollection } from "astro:content"
+const speakers = await getCollection("speakers")
 ---
 
 <Layout
+	data-pagefind-ignore="all"
 	title="Спикерские участников АИЗ"
 	desc="Спикеры АИЗ и их опыт выздоровления от интернет-зависимости"
 >
@@ -17,8 +18,7 @@ const speakers = await getCollection("speakers");
 						speakers
 							.sort(
 								(a, b) =>
-									new Date(b.data.pubDate).getTime() -
-									new Date(a.data.pubDate).getTime(),
+									new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 							)
 							.map(post => (
 								<a href={`/speakers/${post.slug}`} class="hover-top">
@@ -28,14 +28,11 @@ const speakers = await getCollection("speakers");
 										<p class="line-clamp-2 text-gray-500">{post.data.desc}</p>
 										{post.data.pubDate && (
 											<time datetime={post.data.pubDate} class="font-medium">
-												{new Date(post.data.pubDate).toLocaleDateString(
-													"ru-RU",
-													{
-														year: "numeric",
-														month: "numeric",
-														day: "numeric",
-													},
-												)}
+												{new Date(post.data.pubDate).toLocaleDateString("ru-RU", {
+													year: "numeric",
+													month: "numeric",
+													day: "numeric",
+												})}
 											</time>
 										)}
 									</article>

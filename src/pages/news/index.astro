@@ -1,11 +1,11 @@
 ---
-import { getCollection } from "astro:content"
 import Layout from "@/layout/Layout.astro"
+import { getCollection } from "astro:content"
 
 const news = await getCollection("news")
 ---
 
-<Layout title="Новости" desc="Новости сообщества АИЗ">
+<Layout data-pagefind-ignore="all" title="Новости" desc="Новости сообщества АИЗ">
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 		{
 			news &&

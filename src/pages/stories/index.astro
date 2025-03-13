@@ -6,6 +6,7 @@ const stories = await getCollection("story")
 ---
 
 <Layout
+	data-pagefind-ignore="all"
 	title="Личные истории членов"
 	desc="Личные истории членов АИЗ, которые прошли путь и пришли к душевному спокойствию."
 >
@@ -22,9 +23,9 @@ const stories = await getCollection("story")
 								<h3 class="font-bold text-2xl">{item.data.title}</h3>
 								<span class="text-2xl">📃 👤</span>
 							</div>
-								{item.data.old ? (
-									<span class="text-green-500 italic font-medium">{item.data.old}</span>
-								) : null}
+							{item.data.old ? (
+								<span class="text-green-500 italic font-medium">{item.data.old}</span>
+							) : null}
 							<p class="font-normal leading-relaxed text-gray-500 line-clamp-2">
 								{item.data.description}
 							</p>
