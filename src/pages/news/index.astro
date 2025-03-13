@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 const news = await getCollection("news")
 ---
 
-<Layout data-pagefind-ignore="all" title="Новости" desc="Новости сообщества АИЗ">
+<Layout data-pagefind-ignore title="Новости" desc="Новости сообщества АИЗ">
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 		{
 			news &&

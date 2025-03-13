@@ -36,6 +36,7 @@ function sortGroupsByDay(groups) {
 ---
 
 <Layout
+	data-pagefind-ignore
 	title={`Онлайн и Офлайн группы`}
 	desc={`Время встреч для анонимных интернет-зависимых. Собраний (${groupsCounter})`}
 >
@@ -66,7 +67,9 @@ function sortGroupsByDay(groups) {
 							<p class="flex items-center gap-2">
 								<Icon name="mdi:alarm" />
 								<span>{group.data.when}</span>{" "}
-								{group.data.dateTime &&<span class="font-bold">{group.data.dateTime}</span>}
+								{group.data.dateTime && (
+									<span class="font-bold">{group.data.dateTime}</span>
+								)}
 							</p>
 							<p set:html={marked(group.body)} />
 							<a

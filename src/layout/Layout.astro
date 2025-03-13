@@ -23,7 +23,7 @@ const LD_name = "internetaddicts.ru"
 
 const poster = BANNER
 
-const { title, desc, typeSite, pubDate, elemsTrue } = Astro.props
+const { title, desc, typeSite, pubDate, elemsTrue, ...props } = Astro.props
 
 const typeSiteFinal = typeSite ?? "website"
 ---
@@ -59,6 +59,7 @@ const typeSiteFinal = typeSite ?? "website"
 		<ViewTransitions />
 	</head>
 	<body
+		{...props}
 		class="scroll-smooth bg-gradient-to-b from-gray-100 to-white min-w-[320px] overflow-x-hidden"
 	>
 		<Header />

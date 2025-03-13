@@ -1,20 +1,20 @@
 ---
-import { getCollection } from "astro:content";
-import Post from "@/layout/Post.astro";
+import Post from "@/layout/Post.astro"
+import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
-	const posts = await getCollection("news");
+	const posts = await getCollection("news")
 	return posts.map(post => ({
 		params: { slug: post.slug },
 		props: post,
-	}));
+	}))
 }
 
-const post = Astro.props;
-const { Content } = await post.render();
+const post = Astro.props
+const { Content } = await post.render()
 ---
 
-<Post title={post.data.title} description={post.data.description}>
+<Post data-pagefind-ignore title={post.data.title} description={post.data.description}>
 	<aside class="mx-auto max-w-[780px] mb-10">
 		<a
 			href="/news"
