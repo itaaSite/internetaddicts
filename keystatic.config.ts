@@ -17,8 +17,8 @@ export default config({
 	},
 	collections: {
 		posts,
-		// story,
 		groups,
+		// story,
 		// speakers,
 		// news,
 	},

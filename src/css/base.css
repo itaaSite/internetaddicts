@@ -4,6 +4,6 @@
 
 @layer base {
 	.prose-aiz {
-		@apply md:mx-auto ring-1 ring-zinc-200 -mx-10 max-w-[780px] prose-lg prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:text-balance prose-p:text-pretty prose-p:leading-relaxed prose-a:underline prose-zinc bg-white md:p-10 p-5 rounded-2xl prose prose-a:underline-offset-4 ;
+		@apply md:mx-auto ring-1 ring-zinc-200 -mx-10 max-w-[780px] prose-lg prose-p:text-slate-900 prose-a:text-blue-500 prose-headings:text-balance prose-p:text-pretty prose-p:leading-relaxed prose-a:underline prose-zinc bg-white md:p-10 p-5 rounded-2xl prose prose-a:underline-offset-4;
 	}
 }
