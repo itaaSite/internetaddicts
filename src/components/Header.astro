@@ -1,31 +1,30 @@
 ---
-import { getCollection } from "astro:content";
-import Link from "./Link.astro";
-import Logo from "./Logo.astro";
-import { map } from "astro:schema";
-import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content"
+import Link from "./Link.astro"
+import Logo from "./Logo.astro"
+import { map } from "astro:schema"
+import { Icon } from "astro-icon/components"
 
-const collections = ["posts", "story", "groups", "speakers", "news"];
+const collections = ["posts", "story", "groups", "speakers", "news"]
 
 // Параллельный вызов getCollection для всех коллекций
 const counts = await Promise.all(
 	collections.map(async collection => {
-		const data = await getCollection(collection);
-		return data.length;
+		const data = await getCollection(collection)
+		return data.length
 	}),
-);
+)
 
 // Создаем объект с количеством для каждой коллекции
 const countsObject = {
 	posts: counts[0],
 	story: counts[1],
 	groups: counts[2],
-	speakers: counts[3],
 	news: counts[4],
-};
+}
 
 // Деструктуризация для удобства
-const { posts, story, groups, speakers, news } = countsObject;
+const { posts, story, groups, speakers, news } = countsObject
 
 const links = [
 	{
@@ -57,7 +56,8 @@ const links = [
 		count: story, // Assuming 'story' is defined in your context
 	},
 	{
-		href: "/speakers",
+		href: "https://www.youtube.com/@aiz_itaa",
+		target: "_blank",
 		class: "",
 		label: "Спикерские",
 		count: speakers, // Assuming 'speakers' is defined in your context
@@ -73,19 +73,17 @@ const links = [
 		class: "",
 		label: "Контакты",
 	},
-];
+]
 ---
 
 <header class="py-5 bg-white relative">
-	<div
-		class="container max-w-6xl px-5 mx-auto gap-5 flex justify-between items-center"
-	>
+	<div class="container max-w-6xl px-5 mx-auto gap-5 flex justify-between items-center">
 		<Logo />
 		<nav class="flex gap-1 flex-wrap items-center hidden md:flex">
 			{
 				links &&
 					links.map(link => (
-						<Link href={link.href}>
+						<Link target={link?.target} href={link.href}>
 							{link.label} {link.count && ` (${link.count})`}
 						</Link>
 					))
@@ -106,7 +104,11 @@ const links = [
 				{
 					links &&
 						links.map(link => (
-							<a href={link.href} class="text-white text-xl font-medium">
+							<a
+								href={link.href}
+								target={link?.target}
+								class="text-white text-xl font-medium"
+							>
 								{link.label} {link.count && ` (${link.count})`}
 							</a>
 						))
@@ -118,19 +120,19 @@ const links = [
 
 <script is:inline>
 	document.addEventListener("astro:page-load", () => {
-		const openMenu = document.querySelector("#menuOpen");
-		const menu = document.querySelector("#menu");
-		const html = document.querySelector("html");
+		const openMenu = document.querySelector("#menuOpen")
+		const menu = document.querySelector("#menu")
+		const html = document.querySelector("html")
 
 		const toggleMenu = () => {
-			menu.classList.toggle("hidden");
-			menu.classList.toggle("block");
-			html.classList.toggle("overflow-hidden");
-		};
-		openMenu.addEventListener("click", toggleMenu);
-	});
+			menu.classList.toggle("hidden")
+			menu.classList.toggle("block")
+			html.classList.toggle("overflow-hidden")
+		}
+		openMenu.addEventListener("click", toggleMenu)
+	})
 
 	document.addEventListener("astro:after-swap", () => {
-		document.querySelector("#openMenu").addEventListener("click", toggleMenu);
-	});
+		document.querySelector("#openMenu").addEventListener("click", toggleMenu)
+	})
 </script>
