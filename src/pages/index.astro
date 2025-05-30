@@ -2,25 +2,6 @@
 import Title from "@/components/blocks/Title.astro"
 import Layout from "@/layout/Layout.astro"
 
-// const links = [
-// 	{
-// 		name: "Что такое интернет-зависимость?",
-// 		link: "https://internetaddicts.ru/posts/chto-takoe-internet-zavisimost/",
-// 	},
-// 	{
-// 		name: "Тест на интернет-зависимость",
-// 		link: "https://internetaddicts.ru/posts/test-na-internet-zavisimost/",
-// 	},
-// 	{
-// 		name: "Что делать, если ваш друг, или член семьи, интернет-зависимый?",
-// 		link: "https://internetaddicts.ru/posts/chto-delat-esli-vash-drug-ili-chlen-semi-internet-zavisimyj/",
-// 	},
-// 	{
-// 		name: "Кто такие АИЗ?",
-// 		link: "https://internetaddicts.ru/posts/kto-takie-aiz/",
-// 	},
-// ]
-
 import { Icon } from "astro-icon/components"
 import { Content } from "../about.md"
 ---
@@ -44,113 +25,9 @@ import { Content } from "../about.md"
 	</div>
 	<section class="max-w-[880px] mx-auto flex flex-col gap-10 text-zinc-800">
 		<div
-			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance prose-a:underline-offset-4 xl:prose-xl prose-blue"
+			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl prose-a:decoration-2 prose-a:before:content-['›'] prose-a:decoration-sky-500 prose-a:underline prose-a:underline-offset-4 prose-a:border-sky-500"
 		>
 			<Content />
 		</div>
-
-		<!-- <nav class="flex justify-between items-center flex-wrap gap-2 md:gap-3">
-			<p class="text-xl leading-relaxed font-regular">
-				Мы рады, что вы нашли нас и надеемся, что наше сообщество окажется для вас таким
-				же полезным, как и для нас. Анонимные Интернет-Зависимые (АИЗ) — это
-				двенадцатишаговое сообщество людей, которые поддерживают друг друга в
-				выздоровлении от интернет-зависимости.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				<a
-					href="https://internetaddicts.ru/posts/chto-takoe-internet-zavisimost/"
-					class="underline underline-offset-4"
-				>
-					К зависимым формам использования интернета</a
-				>
-				относятся: социальные сети, смартфоны, видео, аудиоконтент, новостные ленты и любые
-				другие виды контента и цифровой активности, которые становятся проблемными и мешают
-				полноценной жизни. <br /><br />
-				Это может проявляться через неконтролируемое потребление контента, постоянное желание
-				проверить телефон или ленту новостей, просмотры видео без остановки, чрезмерное потребление
-				развлекательного и информационного контента, откладывание важных дел ради онлайн-активностей,
-				потерю чувства времени и нарушение сна. Со временем зависимость приводит к ухудшению
-				отношений, проблемам на работе или учебе, а также негативно влияет на физическое и
-				эмоциональное здоровье.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				<b>Присоединиться к нашему сообществу может каждый</b>, независимо от возраста,
-				пола, национальности, убеждений, ментальных состояний, диагнозов и религиозных
-				взглядов.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				<b>Как начать выздоравливать?</b>
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				Для знакомства с сообществом АИЗ и программой 12 шагов рекомендуется посетить
-				несколько собраний групп. В конце каждого собрания у вас будет возможность задать
-				любые вопросы.
-				<a href="https://internetaddicts.ru/groups/" class="underline underline-offset-4"
-					>Расписание и ссылки собраний</a
-				>
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				Как только появится желание выздоравливать и идти по шагам, нужно <b
-					>найти спонсора</b
-				> и начать заниматься с ним индивидуально или в составе малой группы.
-				<a
-					href="https://internetaddicts.ru/posts/kto-takoj-sponsor-nastavnik-v-anonimnyh-internet-zavisimyh/"
-					class="underline underline-offset-4">Кто такой наставник (спонсор) в АИЗ?</a
-				>
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				В сообществе АИЗ занимаются по книге «Анонимные Алкоголики», при чтении заменяя
-				слово «алкоголь» на «интернет». Эту книгу можно приобрести на живых группах АА в
-				вашем городе или скачать
-				<a href="http://aarus.ru/pdf/bigbook.pdf" class="underline underline-offset-4"
-					>электронную версию книги.</a
-				>
-				Также доступна в группе
-				<a href="https://t.me/+6PZ24b7JeR81ODEy" class="underline underline-offset-4"
-					>аудиокнига</a
-				>.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				Мы не полностью отказываемся от интернета, а учимся разумно его использовать,
-				поэтому "полностью отказаться от алкоголя" заменяется на "<b
-					>отказаться от использования интернета без пользы или для удовольствия</b
-				>". Каждый участник нашего сообщества сам решает, как именно ограничить свое
-				использование интернета, что допустимо для него, а что категорически неприемлемо и
-				ведет к срыву.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				Продолжайте посещать собрания и делиться своими открытиями и опытом. Помните, что
-				12-шаговые сообщества помогли миллионам людей по всему миру преодолеть
-				зависимость, изменить свою жизнь к лучшему, найти новых друзей и научиться
-				радоваться жизни.
-			</p>
-			<p class="text-xl leading-relaxed font-regular">
-				<b>Рекомендации по поиску спонсора:</b>
-				<ul class="list-disc list-inside text-xl leading-relaxed font-regular mb-10">
-					<li>
-						Приходите на группы, слушайте опыт и высказывания других участников.
-						Обращайтесь к ним лично с вопросом о спонсорстве.
-					</li>
-					<li>
-						Напишите сообщение о поиске спонсора в <a
-							href="https://t.me/aiz_itta"
-							class="underline underline-offset-4">чате сообщества АИЗ</a>
-					</li>
-				</ul>
-			</p>
-
-			<div class="flex gap-6 flex-wrap">
-				<nav class="flex flex-col gap-3 text-xl leading-relaxed font-regular">
-					{
-						links &&
-							links.map(item => (
-								<a href={item.link} class="underline underline-offset-4 font-medium">
-									{item.name}
-								</a>
-							))
-					}
-				</nav>
-			</div>
-		</nav> -->
 	</section>
 </Layout>
