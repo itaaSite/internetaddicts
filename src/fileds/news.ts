@@ -4,6 +4,8 @@ export const news = collection({
 	label: "Новости",
 	slugField: "title",
 	path: "src/content/news/*",
+	entryLayout: "content",
+	columns: ["title", "pubDate"],
 	format: { contentField: "content" },
 	schema: {
 		title: fields.slug({ name: { label: "Заголовок" } }),
@@ -15,6 +17,9 @@ export const news = collection({
 		pubDate: fields.date({
 			label: "Время",
 			description: "Время публикации",
+		}),
+		content: fields.mdx({
+			label: "Контент",
 		}),
 	},
 })

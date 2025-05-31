@@ -1,5 +1,7 @@
-import { groups } from '@/fileds/groups'
+import { groups } from "@/fileds/groups"
+import { news } from "@/fileds/news"
 import { posts } from "@/fileds/posts"
+import { story } from "@/fileds/story"
 import { config } from "@keystatic/core"
 
 const isProd = import.meta.env.PROD
@@ -18,8 +20,8 @@ export default config({
 	collections: {
 		posts,
 		groups,
-		// story,
+		news,
+		story,
 		// speakers,
-		// news,
 	},
 })
