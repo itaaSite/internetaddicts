@@ -4,23 +4,20 @@ import netlify from "@astrojs/netlify/functions"
 import partytown from "@astrojs/partytown"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import tailwind from "@astrojs/tailwind"
 import keystatic from "@keystatic/astro"
 import icon from "astro-icon"
-import pagefind from "astro-pagefind"
 import { defineConfig } from "astro/config"
+
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
 	site: "https://internetaddicts.ru/",
-	build: {
-		format: "file",
-	},
+
 	prefetch: {
 		defaultStrategy: "viewport",
 	},
 	integrations: [
 		react(),
-		pagefind(),
 		markdoc(),
 		keystatic(),
 		mdx(),
@@ -30,11 +27,11 @@ export default defineConfig({
 			},
 		}),
 		sitemap(),
-		tailwind({
-			applyBaseStyles: false,
-		}),
 		icon(),
 	],
-	output: "hybrid",
+	output: "static",
 	adapter: netlify(),
+	vite: {
+		plugins: [tailwindcss()],
+	},
 })

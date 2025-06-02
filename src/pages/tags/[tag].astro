@@ -1,5 +1,5 @@
 ---
-import Article from "@/components/blocks/Article.astro"
+import Article from "@/components/Article.astro"
 import Tags from "@/components/Tags.astro"
 import Layout from "@/layout/Layout.astro"
 import { getAllPosts } from "@/lib/getPosts"
@@ -29,7 +29,7 @@ const filterByTags = taxonomyFilter(posts, "tags", tag)
 >
 	<Tags />
 
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 		{
 			filterByTags &&
 				filterByTags

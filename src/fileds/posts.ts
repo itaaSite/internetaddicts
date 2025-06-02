@@ -5,7 +5,7 @@ export const posts = collection({
 	slugField: "title",
 	path: "src/content/posts/*",
 	entryLayout: "content",
-	columns: ["title", "pubDate"],
+	columns: ["title", "pubDate", "favorite"],
 	format: {
 		contentField: "content",
 	},

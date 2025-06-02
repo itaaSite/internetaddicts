@@ -52,7 +52,7 @@ const newsCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		pubDate: z.string(),
+		pubDate: z.union([z.string(), z.date()]),
 	}),
 })
 

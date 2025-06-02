@@ -1,0 +1,13 @@
+---
+import { cn } from "@/utils/cn"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<div class={cn("container flex-1 px-5 mx-auto max-w-6xl", className)}>
+	<slot />
+</div>

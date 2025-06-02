@@ -28,13 +28,13 @@ const { pathname } = Astro.url
 		class:list={`${pathname === "/posts" ? "bg-green-200 text-green-700 rounded-lg px-3 py-2 ring-1 ring-green-400" : "bg-white rounded-lg px-3 py-2 text-zinc-600 border"}`}
 		>Все посты <b class="text-sm">({posts.length})</b></a
 	> -->
-	<TagLink href="/posts">Все посты <b class="text-sm">({posts.length})</b></TagLink>
+	<TagLink href="/posts">Все посты ({posts.length})</TagLink>
 
 	{
 		tags &&
 			tags.map(tag => (
 				<TagLink href={`/tags/${slugify(tag)}`}>
-					{tag} <b class="text-sm"> ({tagCounts[tag] || 0})</b>
+					{tag} ({tagCounts[tag] || 0})
 				</TagLink>
 			))
 	}

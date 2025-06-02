@@ -12,7 +12,7 @@ export const news = collection({
 		description: fields.text({
 			label: "Описание",
 			description: "от 20 до 150 символов",
-			validation: { length: { min: 40, max: 320 } },
+			validation: { length: { min: 20, max: 320 } },
 		}),
 		pubDate: fields.date({
 			label: "Время",

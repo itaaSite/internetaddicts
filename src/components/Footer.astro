@@ -1,15 +1,18 @@
 ---
+import { Icon } from "astro-icon/components"
+import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
+import Container from "./Container.astro"
 
 const posts = await getCollection("posts")
 const stories = await getCollection("story")
 const groups = await getCollection("groups")
 ---
 
-<footer class="py-6 bg-white">
-	<div class="py-6">
-		<div class="container max-w-6xl px-5 mx-auto">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-6">
+<footer class="pt-8 rounded-3xl border-t border-zinc-200 pb-0 md:py-8 bg-white">
+	<div class="py-8">
+		<Container class="max-w-6xl mx-auto">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
 				<div class="flex flex-col gap-3 items-center md:items-start">
 					<span class="text-lg text-zinc-700 font-bold">Последние посты. Архив.</span>
 					{
@@ -42,25 +45,41 @@ const groups = await getCollection("groups")
 					<span class="text-lg text-zinc-700 font-bold">Группы</span>
 					{
 						groups &&
-							groups.map(item => (
-								<a href={`/groups/`} class="md:text-left text-center text-blue-500">
-									{item.data.title}
-								</a>
-							))
+							groups
+								.filter(
+									(item, index, self) =>
+										self.findIndex(g => g.data.title === item.data.title) === index,
+								)
+								.map(item => (
+									<a
+										href={`/groups/`}
+										class="md:text-left text-center flex items-center gap-2 text-blue-500"
+									>
+										<Image
+											class="w-6 h-6 rounded-full"
+											width={30}
+											height={30}
+											alt={item.data.title}
+											src={item.data.logo}
+										/>
+										<span>{item.data.title}</span>
+									</a>
+								))
 					}
 				</div>
 			</div>
-		</div>
+		</Container>
 	</div>
-	<div
-		class="container max-w-6xl sm:flex-row flex-col px-5 mx-auto flex items-center justify-between gap-2 md:gap-6 bg-zinc-100 rounded-xl p-3"
+	<Container
+		class="max-w-6xl sm:flex-row flex-col px-5 mx-auto flex items-center justify-between gap-2 md:gap-6 bg-[#f8fafc] shadow-sm rounded-xl p-3"
 	>
 		<span>&copy; {new Date().getFullYear()} <b>internetaddicts.ru</b></span>
 		<a
 			href="https://t.me/legion_free"
 			target="_blank"
-			class="underline underline-offset-4 text-blue-600"
-			>👉 Разработка сайтов. Написать.</a
+			class="underline flex items-center gap-1 underline-offset-4 text-purple-500"
 		>
-	</div>
+			<Icon name="mdi:greater-than-or-equal" /><span>Разработчик</span></a
+		>
+	</Container>
 </footer>

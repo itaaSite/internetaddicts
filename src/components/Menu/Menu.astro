@@ -1,0 +1,60 @@
+---
+import { navigation } from "@/data/consts"
+import NavList from "./NavList.astro"
+import { Icon } from "astro-icon/components"
+---
+
+<nav class="hidden md:flex gap-6 items-center">
+	<NavList
+		navigation={navigation}
+		className="text-zinc-700 flex items-center gap-1 transition-colors hover:text-zinc-600"
+	/>
+</nav>
+
+<button
+	title="Мобильное меню"
+	id="open"
+	class="text-white md:hidden gap-2 px-4 h-[36px] justify-center flex items-center bg-zinc-800 py-1.5 rounded-lg"
+	aria-controls="menu"
+	aria-expanded="false"
+>
+	<Icon name="mdi:menu-open" class="text-xl" />
+	<span>Меню</span>
+	<span class="sr-only">Мобильное меню</span>
+</button>
+
+<div
+	id="menu"
+	class="hidden absolute w-full p-12 justify-center flex items-start min-h-full bg-white/30 backdrop-blur-md shadow-sm md:-z-10 z-50 top-[75px] rounded-xl left-0 transition-all duration-300 ease-in-out"
+	role="menu"
+	aria-hidden="true"
+>
+	<nav class="flex flex-col gap-8 items-center">
+		<NavList navigation={navigation} className=" text-2xl flex items-center gap-1" />
+	</nav>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const menu = document.querySelector("#menu")
+		const menuBtn = document.querySelector("#open")
+		const body = document.querySelector("body")
+		const menunavigation = document.querySelectorAll("#menu a")
+
+		menunavigation.forEach(link => {
+			link.addEventListener("click", () => {
+				menu?.classList.add("hidden")
+				body?.classList.remove("overflow-hidden")
+				menuBtn?.setAttribute("aria-expanded", "false")
+				menu?.setAttribute("aria-hidden", "true")
+			})
+		})
+
+		menuBtn?.addEventListener("click", () => {
+			const isHidden = menu?.classList.toggle("hidden")
+			body?.classList.toggle("overflow-hidden")
+			menuBtn?.setAttribute("aria-expanded", !isHidden)
+			menu?.setAttribute("aria-hidden", isHidden)
+		})
+	})
+</script>

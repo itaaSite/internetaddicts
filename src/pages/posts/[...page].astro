@@ -1,20 +1,18 @@
 ---
-import Article from "@/components/blocks/Article.astro"
+import Article from "@/components/Article.astro"
 import Paginate from "@/components/Paginate.astro"
 import Tags from "@/components/Tags.astro"
 import Layout from "@/layout/Layout.astro"
-import Search from "astro-pagefind/components/Search"
 import { getCollection } from "astro:content"
 const posts = await getCollection("posts")
 
 export async function getStaticPaths({ paginate }) {
 	const posts = await getCollection("posts")
 	return paginate(posts, {
-		pageSize: 8,
+		pageSize: 9,
 	})
 }
 const { page } = Astro.props
-const q = Astro.url.searchParams.get("q") ?? undefined
 ---
 
 <Layout
@@ -23,19 +21,22 @@ const q = Astro.url.searchParams.get("q") ?? undefined
 	desc="Архив АИЗ. Полезная информация, методы шагов, инструменты и прочее."
 >
 	<Tags />
-	<Search query={q} uiOptions={{ showImages: false }} />
 
-	<div class="md:grid-cols-2 gap-5 grid grid-cols-1">
-		{
-			posts &&
-				posts
-					.filter(post => post.data.favorite === true)
-					.slice(0, 2)
-					.map(post => <Article favorite slug={post.slug} data={post.data} />)
-		}
-	</div>
+	{
+		page.currentPage === 1 && (
+			<div class="md:grid-cols-3 gap-6 grid grid-cols-1">
+				{posts &&
+					posts
+						.filter(post => post.data.favorite === true)
+						.slice(0, 3)
+						.map(post => <Article favorite slug={post.slug} data={post.data} />)}
+			</div>
+		)
+	}
+
 	<Paginate page={page} />
-	<div class="grid md:grid-cols-2 grid-cols-1 gap-5">
+
+	<div class="grid md:grid-cols-3 grid-cols-1 gap-6">
 		<!-- filter(post => post.data.favorite !== true) -->
 		{
 			page.data

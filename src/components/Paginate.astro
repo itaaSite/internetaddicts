@@ -1,51 +1,33 @@
 ---
+import { Icon } from "astro-icon/components"
+
 const { page } = Astro.props
 ---
 
-<div class="flex sm:flex-row flex-col justify-between items-center gap-3">
-	<span class="font-bold">Страница {page.currentPage}</span>
-	<div class="flex gap-3 md:w-fit w-full">
-		{
-			page.url.prev ? (
+{
+	page.lastPage > 1 && (
+		<div class="flex md:flex-row flex-col gap-4 justify-between items-center py-3 px-4 rounded-xl bg-white shadow-2xs">
+			{page.url.prev && (
 				<a
-					href={page.url.prev}
-					class="md:w-fit w-full text-center px-3 py-1.5 bg-blue-500 text-white rounded-md"
+					href={`${page.url.prev}`}
+					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-md"
 				>
-					Предыдущая
+					<Icon name="mdi:arrow-left" />
+					<span>Назад</span>
 				</a>
-			) : null
-		}
-		{
-			page.url.next ? (
+			)}
+			<span class="text-zinc-500">
+				Страница <b>{page.currentPage}</b> из <b>{page.lastPage}</b>
+			</span>
+			{page.url.next && (
 				<a
-					href={page.url.next}
-					class="md:w-fit w-full text-center px-3 py-1.5 bg-blue-500 text-white rounded-md"
+					href={`${page.url.next}`}
+					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-md"
 				>
-					Следующая
+					<span>Дальше</span>
+					<Icon name="mdi:arrow-right" />
 				</a>
-			) : null
-		}
-	</div>
-	<div class="flex gap-3 md:w-fit w-full">
-		{
-			page.url.first ? (
-				<a
-					href={page.url.first}
-					class="md:w-fit w-full text-center px-3 py-1.5 bg-zinc-700 text-white rounded-md"
-				>
-					Первая
-				</a>
-			) : null
-		}
-		{
-			page.url.last ? (
-				<a
-					href={page.url.last}
-					class="md:w-fit w-full text-center px-3 py-1.5 bg-zinc-700 text-white rounded-md"
-				>
-					Последняя
-				</a>
-			) : null
-		}
-	</div>
-</div>
+			)}
+		</div>
+	)
+}

@@ -9,6 +9,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "")
 	<slot />
 </a>
 <style>
+	@reference "tailwindcss";
 	a {
 		@apply font-medium px-3 py-1 rounded-lg hover:bg-gray-200 transition-colors ease-linear;
 	}
