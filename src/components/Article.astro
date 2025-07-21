@@ -24,61 +24,66 @@ const {
 	class="hover:translate-y-1 transition-all ease-out"
 	aria-label={title}
 >
-	<article class={`bg-white h-full rounded-xl shadow-md shadow-black/5`}>
-		<div class="relative">
+	<article class="flex flex-col gap-4">
+		<div>
 			{
 				favorite ? (
-					<div class="absolute top-0 left-0  bg-black/50 backdrop-blur-xl rounded-tl-lg rounded-br-lg px-3 py-1.5 text-white text-sm">
+					<div class="bg-red-50 ring-1 ring-red-300 max-w-fit text-red-700 rounded-xl px-3 py-1.5 text-sm">
 						❤ Избранное
 					</div>
 				) : (
 					""
 				)
 			}
-			<div
-				class="absolute text-white bottom-0 rounded-t-lg w-full flex p-2 bg-black/50 backdrop-blur-md flex-wrap gap-2"
-			>
-				{tags && tags.map(tag => <span class="text-sm ">💡{tag}</span>)}
-			</div>
-			<div
-				class="absolute top-0 right-0 px-2 py-1 bg-white/50 backdrop-blur-md rounded-tr-lg rounded-bl-lg"
-			>
-				{
-					pubDate && (
-						<time datetime={pubDate} class="text-sm">
-							{new Date(pubDate).toLocaleDateString("ru-RU", {
-								year: "numeric",
-								month: "short",
-								day: "numeric",
-							})}
-						</time>
-					)
-				}
-			</div>
+		</div>
+
+		{
+			img ? (
+				<div class="overflow-hidden">
+					<Image
+						src={img}
+						title={title}
+						aria-label={title}
+						width={800}
+						height={800}
+						class="rounded-xl max-w-full h-[180px] object-cover bg-center "
+						alt={`Изображения поста: ${title}`}
+						format={"webp"}
+						quality={10}
+					/>
+				</div>
+			) : (
+				<div class="rounded-xl text-zinc-500 text-lg bg-slate-100 h-[200px] flex justify-center items-center">
+					Нет изображения
+				</div>
+			)
+		}
+		<div class="flex gap-1 items-center">
 			{
-				img ? (
-					<div class="overflow-hidden">
-						<Image
-							src={img}
-							title={title}
-							aria-label={title}
-							width={800}
-							height={800}
-							class="rounded-t-xl max-w-full h-[160px] object-cover bg-center "
-							alt={`Изображения поста: ${title}`}
-							format={"webp"}
-							quality={10}
-						/>
-					</div>
-				) : (
-					<div class="rounded-xl text-zinc-500 text-lg bg-slate-100 h-[200px] flex justify-center items-center">
-						Нет изображения
-					</div>
-				)
+				tags &&
+					tags.map(tag => (
+						<span class="text-xs px-3 rounded-full bg-zinc-100 ring-1 ring-zinc-300 py-1">
+							{tag}
+						</span>
+					))
 			}
 		</div>
-		<div class="flex gap-3 flex-col">
-			<h3 class="text-xl p-4 line-clamp-3 font-semibold text-balance">{title}</h3>
+		<h3 class="text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
+			{title}
+		</h3>
+		<div class="flex justify-between text-sm text-zinc-600 items-center">
+			<span>Написано <b>АИЗ</b></span>
+			{
+				pubDate && (
+					<time datetime={pubDate} class="">
+						{new Date(pubDate).toLocaleDateString("ru-RU", {
+							year: "numeric",
+							month: "short",
+							day: "numeric",
+						})}
+					</time>
+				)
+			}
 		</div>
 	</article>
 </a>
