@@ -2,8 +2,8 @@
 import Title from "@/components/Title.astro"
 import Layout from "@/layout/Layout.astro"
 
+import { Content as MainText } from "@/data/page/about.mdx"
 import { Icon } from "astro-icon/components"
-import { Content } from "../about.md"
 ---
 
 <Layout
@@ -33,7 +33,7 @@ import { Content } from "../about.md"
 		<div
 			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl prose-a:decoration-2 prose-a:before:content-['›'] prose-a:decoration-sky-500 prose-a:underline prose-a:underline-offset-4 prose-a:border-sky-500"
 		>
-			<Content />
+			<MainText />
 		</div>
 	</section>
 </Layout>

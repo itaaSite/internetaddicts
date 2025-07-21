@@ -1,3 +1,4 @@
+import { about } from "@/fileds/about"
 import { groups } from "@/fileds/groups"
 import { news } from "@/fileds/news"
 import { posts } from "@/fileds/posts"
@@ -10,10 +11,10 @@ export default config({
 	storage: isProd
 		? {
 				kind: "cloud",
-			}
+		  }
 		: {
 				kind: "local",
-			},
+		  },
 	cloud: {
 		project: "aiz-site/internetaddicts",
 	},
@@ -22,6 +23,7 @@ export default config({
 		groups,
 		news,
 		story,
+		about,
 		// speakers,
 	},
 })
