@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components"
-import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
 import Container from "./Container.astro"
 
@@ -20,8 +19,9 @@ const groups = await getCollection("groups")
 							posts.slice(0, 6).map(item => (
 								<a
 									href={`/posts/${item.slug}`}
-									class="md:text-left text-center text-blue-500"
+									class="items-center flex gap-1 md:text-left text-center text-zinc-600 underline underline-offset-4"
 								>
+									<Icon name="mdi:arrow-right-thin" />
 									{item.data.title}
 								</a>
 							))
@@ -34,8 +34,9 @@ const groups = await getCollection("groups")
 							stories.map(item => (
 								<a
 									href={`/stories/${item.slug}`}
-									class="md:text-left text-center text-blue-500"
+									class="items-center flex gap-1 md:text-left text-center text-zinc-600 underline underline-offset-4"
 								>
+									<Icon name="mdi:arrow-right-thin" />
 									{item.data.title}
 								</a>
 							))
@@ -53,15 +54,9 @@ const groups = await getCollection("groups")
 								.map(item => (
 									<a
 										href={`/groups/`}
-										class="md:text-left text-center flex items-center gap-2 text-blue-500"
+										class="items-center flex gap-1 md:text-left text-center flex items-center gap-2 text-zinc-600 underline underline-offset-4"
 									>
-										<Image
-											class="w-6 h-6 rounded-full"
-											width={30}
-											height={30}
-											alt={item.data.title}
-											src={item.data.logo}
-										/>
+										<Icon name="mdi:arrow-right-thin" />
 										<span>{item.data.title}</span>
 									</a>
 								))
@@ -77,7 +72,7 @@ const groups = await getCollection("groups")
 		<a
 			href="https://t.me/legion_free"
 			target="_blank"
-			class="underline flex items-center gap-1 underline-offset-4 text-purple-500"
+			class="underline flex items-center gap-1 underline-offset-4 text-purple-700"
 		>
 			<Icon name="mdi:greater-than-or-equal" /><span>Разработчик</span></a
 		>
