@@ -1,7 +1,6 @@
 export function slugify(input) {
 	if (!input) return ""
 
-	// Словарь для замены русских букв на латиницу
 	const ruToEn = {
 		а: "a",
 		б: "b",
@@ -30,27 +29,23 @@ export function slugify(input) {
 		ч: "ch",
 		ш: "sh",
 		щ: "shch",
-		ы: "y",
-		э: "e",
+		ы: "y`", // y с бэктиком
+		э: "e`",
 		ю: "yu",
 		я: "ya",
-		ъ: "",
-		ь: "",
+		ъ: "`",
+		ь: "'",
 	}
 
-	// Заменяем русские буквы на латиницу
 	let slug = input
 		.toLowerCase()
 		.trim()
-		.replace(/[а-яё]/gi, match => ruToEn[match] || "")
+		.replace(/[а-яё]/gi, match => ruToEn[match] || match)
 
-	// Удаляем акценты и специальные символы
 	slug = slug.normalize("NFD").replace(/\p{M}/gu, "")
 
-	// Заменяем недопустимые символы пробелами
-	slug = slug.replace(/[^a-z0-9\s-]/g, " ").trim()
+	slug = slug.replace(/[^a-z0-9\s-`']/g, " ").trim()
 
-	// Заменяем несколько пробелов или дефисов на один дефис
 	slug = slug.replace(/[\s-]+/g, "-")
 
 	return slug
@@ -59,7 +54,6 @@ export function slugify(input) {
 export function slugifyReverse(input) {
 	if (!input) return ""
 
-	// Сначала длинные комбинации
 	const enToRu = {
 		shch: "щ",
 		yo: "ё",
@@ -70,6 +64,10 @@ export function slugifyReverse(input) {
 		ya: "я",
 		kh: "х",
 		ts: "ц",
+		"y`": "ы",
+		"e`": "э",
+		"`": "ъ",
+		"'": "ь",
 		a: "а",
 		b: "б",
 		v: "в",
@@ -78,7 +76,6 @@ export function slugifyReverse(input) {
 		e: "е",
 		z: "з",
 		i: "и",
-		j: "й",
 		k: "к",
 		l: "л",
 		m: "м",
@@ -90,7 +87,7 @@ export function slugifyReverse(input) {
 		t: "т",
 		u: "у",
 		f: "ф",
-		y: "ы",
+		y: "й",
 	}
 
 	const words = input.split("-")
@@ -101,8 +98,7 @@ export function slugifyReverse(input) {
 		while (i < word.length) {
 			let found = false
 
-			// проверяем от 3 букв к 1
-			for (let len = 3; len > 0; len--) {
+			for (let len = 4; len > 0; len--) {
 				const part = word.slice(i, i + len)
 				if (enToRu[part]) {
 					translated += enToRu[part]
@@ -122,4 +118,3 @@ export function slugifyReverse(input) {
 
 	return translatedWords.join(" ")
 }
-

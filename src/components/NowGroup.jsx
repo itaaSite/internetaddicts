@@ -8,7 +8,6 @@ const dayOrder = {
 	Пятница: 5,
 	Суббота: 6,
 	Воскресенье: 7,
-	По_запросу: 8,
 }
 
 function sortGroupsByDay(groups) {
