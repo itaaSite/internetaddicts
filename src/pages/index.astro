@@ -2,38 +2,48 @@
 import Title from "@/components/Title.astro"
 import Layout from "@/layout/Layout.astro"
 
-import { Content as MainText } from "@/data/page/about.mdx"
+import NowGroup from "@/components/NowGroup"
+import { Content as AboutCommnuity } from "@/data/page/about.mdx"
 import { Icon } from "astro-icon/components"
 ---
 
 <Layout
+	containerOff
 	title="Анонимные Интернет-Зависимые"
 	desc="Это сообщество людей, которые поддерживают друг друга в преодолении проблем, вызванных одержимым использованием интернета и технических устройств."
 >
-	<Title />
-	<div class="flex gap-3 flex-wrap justify-center self-center">
-		<a
-			href="/groups"
-			class="bg-gradient-to-br from-green-400 to-lime-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white font-medium text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-			><Icon name="mdi:account-group" /><span>Найти Собрание</span></a
-		>
-		<a
-			href="/stories"
-			class="bg-gradient-to-br from-red-400 to-pink-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white font-medium text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-			><Icon name="mdi:format-list-group-plus" /><span>Истории</span></a
-		>
-		<a
-			href="https://t.me/aiz_resources"
-			target="_blank"
-			class="bg-gradient-to-br from-sky-400 to-blue-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white font-medium text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-			><Icon name="mdi:telegram" /><span>АИЗ ресурсы</span></a
-		>
-	</div>
-	<section class="max-w-[880px] mx-auto flex flex-col gap-10 text-zinc-800">
+	<section
+		class="bg-gradient-to-br rounded-3xl from-green-50 to-sky-50 py-14 md:py-24 px-5"
+	>
+		<Title />
+
+		<section class="mt-10 flex gap-3 md:gap-6 flex-wrap justify-center self-center">
+			<a
+				href="/groups"
+				class="bg-gradient-to-bl from-teal-400 to-green-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:account-group" /><span>Найти Собрание</span></a
+			>
+			<a
+				href="/stories"
+				class="bg-gradient-to-bl from-fuchsia-400 to-rose-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:format-list-group-plus" /><span>Истории</span></a
+			>
+			<a
+				href="https://t.me/aiz_resources"
+				target="_blank"
+				class="bg-gradient-to-bl from-blue-400 to-sky-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:telegram" /><span>АИЗ ресурсы</span></a
+			>
+		</section>
+	</section>
+
+	<section class="max-w-4xl mx-auto px-5 mb-14">
+		<NowGroup client:load />
+
 		<div
-			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl prose-a:decoration-2 prose-a:before:content-['›'] prose-a:decoration-sky-500 prose-a:underline prose-a:underline-offset-4 prose-a:border-sky-500"
+			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl leading-relaxed prose-a:no-underline prose-a:text-[#0098EA] prose-a:font-normal prose-a:hover:text-blue-500"
 		>
-			<MainText />
+			<AboutCommnuity />
 		</div>
 	</section>
 </Layout>

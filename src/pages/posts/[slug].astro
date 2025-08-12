@@ -12,20 +12,13 @@ export async function getStaticPaths() {
 
 const post = Astro.props
 const { Content } = await post.render()
-const pageUrl = new URL(Astro.url.pathname, Astro.url.origin).href
 ---
 
-<Post title={post.data.title} description={post.data.description}>
-	<aside class="mx-auto max-w-[780px] mb-10">
-		<a href="/posts" class="bg-white font-medium rounded-lg py-2 px-3"
-			>&#8592; {/* ← Левая стрелка */} Назад к статьям</a
-		>
-	</aside>
-
-	<main class="prose-aiz ">
-		<h1>{post.data.title}</h1>
-		<!-- <div class="flex justify-start"><PageViews url={pageUrl} /></div> -->
-		<p class="text-sm text-zinc-600 italic">{post.data.description}</p>
-		<Content />
-	</main>
+<Post
+	backUrl="/posts"
+	post={post.data}
+	title={post.data.title}
+	description={post.data.description}
+>
+	<Content />
 </Post>

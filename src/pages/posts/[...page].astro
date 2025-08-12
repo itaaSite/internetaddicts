@@ -3,6 +3,7 @@ import Article from "@/components/Article.astro"
 import Paginate from "@/components/Paginate.astro"
 import Tags from "@/components/Tags.astro"
 import Layout from "@/layout/Layout.astro"
+import { Icon } from "astro-icon/components"
 import { getCollection } from "astro:content"
 const posts = await getCollection("posts")
 
@@ -16,15 +17,19 @@ const { page } = Astro.props
 ---
 
 <Layout
-	data-pagefind-ignore
 	title={`Архив - страница: ${page.currentPage}`}
 	desc="Архив АИЗ. Полезная информация, методы шагов, инструменты и прочее."
 >
+	<h1 class="text-3xl text-gray-700 font-semibold flex gap-2 items-center">
+		<Icon name="mdi:file-search-outline" />
+		<span>{`Архив - страница: ${page.currentPage}`}</span>
+	</h1>
+
 	<Tags />
 
 	{
 		page.currentPage === 1 && (
-			<div class="md:grid-cols-3 gap-12 grid grid-cols-1">
+			<div class="md:grid-cols-3 gap-14 grid grid-cols-1">
 				{posts &&
 					posts
 						.filter(post => post.data.favorite === true)
@@ -36,7 +41,7 @@ const { page } = Astro.props
 
 	<Paginate page={page} />
 
-	<div class="grid md:grid-cols-3 grid-cols-1 gap-12">
+	<div class="grid md:grid-cols-3 grid-cols-1 gap-14">
 		<!-- filter(post => post.data.favorite !== true) -->
 		{
 			page.data

@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layout/Layout.astro"
+import { Icon } from "astro-icon/components"
 ---
 
 <Layout data-pagefind-ignore title="Контакты" desc="Для связи с сообществом АИЗ">
@@ -7,16 +8,17 @@ import Layout from "@/layout/Layout.astro"
 		<nav class="flex flex-col gap-6 md:gap-8">
 			<h2 class="text-3xl font-bold text-center md:text-left">Контакты</h2>
 
-			<p class="text-xl leading-relaxed font-regular text-center md:text-left">
+			<p class="text-xl leading-relaxed text-center md:text-left">
 				Мы всегда рады слышать Вас. Пожалуйста, не стесняйтесь обращаться к нам с любыми
 				вопросами или мыслями.
 			</p>
 
-			<p class="text-xl leading-relaxed font-regular">
+			<p class="text-xl leading-relaxed">
 				Вы можете написать нам в <a
 					href="https://t.me/aiz_itta"
-					class="underline underline-offset-4 text-blue-500">общем чате для общения АИЗ</a
-				> в Телеграм. Мы с нетерпением ждем вашего сообщения.
+					class="underline underline-offset-4 text-blue-500 inline-flex gap-1 items-center"
+					><Icon name="mdi:telegram" /><span>общем чате для общения АИЗ.</span></a
+				> Мы с нетерпением ждем вашего сообщения.
 			</p>
 
 			<h3 class="text-xl font-semibold mt-8">Наши друзья</h3>
@@ -26,15 +28,16 @@ import Layout from "@/layout/Layout.astro"
 				поддерживают друг друга в выздоровлении от прокрастинации.
 			</p>
 			<div class="flex gap-2 text-xl flex-col">
-				<a
+				<!-- <a
 					target="_blank"
 					href="https://papro.vercel.app/"
 					class="text-blue-500 underline underline-offset-4">Официальный сайт АПРО</a
-				>
+				> -->
 				<a
 					target="_blank"
 					href="https://t.me/+m2QG_NdGL6U0MmEy"
-					class="text-blue-500 underline underline-offset-4">Чат сообщества АПРО</a
+					class="text-blue-500 underline underline-offset-4 flex gap-1 items-center"
+					><Icon name="mdi:telegram" /><span>Чат сообщества АПРО</span></a
 				>
 			</div>
 		</nav>

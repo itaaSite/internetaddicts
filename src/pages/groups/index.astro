@@ -1,7 +1,9 @@
 ---
 import GroupArticle from "@/components/GroupArticle.astro"
 import Layout from "@/layout/Layout.astro"
+import  { Icon } from "astro-icon/components"
 import { getCollection } from "astro:content"
+
 
 const groups = await getCollection("groups")
 const groupsCounter = (await getCollection("groups")).length
@@ -36,21 +38,24 @@ function sortGroupsByDay(groups) {
 	title={`Онлайн и Офлайн группы`}
 	desc={`Время встреч для анонимных интернет-зависимых. Собраний (${groupsCounter})`}
 >
-	<div
-		class="flex-wrap bg-white flex gap-8 items-center md:gap-12 justify-between p-6 rounded-xl shadow-sm"
+	<!-- <div
+		class="flex flex-col gap-3"
 	>
-		<div class="flex flex-col gap-2">
+
 			<p>😇 Нам следует принимать всех, страдающих от ИЗ.</p>
 			<p>💯 Поэтому мы не можем отказывать никому из тех, кто желает выздоравливать.</p>
-		</div>
+
 		<a
 			href="/posts/sozdaem-svoyu-gruppu-aiz-za-3-min"
-			class="rounded-md px-3 py-2 bg-green-50 ring-1 ring-green-400 text-green-600"
+			class="self-start rounded-md px-3 py-1.5 bg-green-50 ring-1 ring-green-400 text-green-600"
 			>Создать группу</a
 		>
-	</div>
+	</div> -->
 
-	<h3 class="text-3xl text-gray-700 font-semibold">Оффлайн-группы</h3>
+	<h3 class="text-3xl text-gray-700 font-semibold flex gap-2 items-center">
+		<Icon name="mdi:account-group" />
+		<span>Оффлайн-группы</span>
+	</h3>
 
 	<div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-5">
 		{
@@ -61,7 +66,10 @@ function sortGroupsByDay(groups) {
 		}
 	</div>
 
-	<h3 class="text-3xl text-gray-700 font-semibold">Онлайн-группы</h3>
+	<h3 class="text-3xl text-gray-700 font-semibold flex gap-2 items-center">
+		<Icon name="mdi:wifi" />
+		<span>Онлайн-группы</span>
+	</h3>
 
 	<div class="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-5">
 		{

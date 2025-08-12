@@ -6,23 +6,23 @@ const { page } = Astro.props
 
 {
 	page.lastPage > 1 && (
-		<div class="flex md:flex-row flex-col gap-4 justify-between items-center py-3 px-4 rounded-xl bg-white shadow-2xs">
+		<div class="flex md:flex-row flex-col gap-4 justify-between items-center py-3 px-4 rounded-xl bg-blue-50">
 			{page.url.prev && (
 				<a
 					href={`${page.url.prev}`}
-					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-md"
+					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-lg"
 				>
 					<Icon name="mdi:arrow-left" />
 					<span>Назад</span>
 				</a>
 			)}
-			<span class="text-zinc-500">
+			<span class="text-blue-950">
 				Страница <b>{page.currentPage}</b> из <b>{page.lastPage}</b>
 			</span>
 			{page.url.next && (
 				<a
 					href={`${page.url.next}`}
-					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-md"
+					class="flex gap-1 items-center px-3 py-1.5 md:w-auto w-full justify-center bg-blue-500 text-white rounded-lg"
 				>
 					<span>Дальше</span>
 					<Icon name="mdi:arrow-right" />

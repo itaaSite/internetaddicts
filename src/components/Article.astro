@@ -19,60 +19,56 @@ const {
 } = Astro.props
 ---
 
-<a
-	href={`/posts/${slug}`}
-	class="hover:translate-y-1 transition-all ease-out"
-	aria-label={title}
->
+<a href={`/posts/${slug}`} class="" aria-label={title}>
 	<article class="flex flex-col gap-4">
-		<div>
+		<div class="relative">
 			{
-				favorite ? (
-					<div class="bg-red-50 ring-1 ring-red-300 max-w-fit text-red-700 rounded-xl px-3 py-1.5 text-sm">
-						❤ Избранное
+				favorite && (
+					<div class="absolute right-0 top-0 bg-black/50 backdrop-blur-lg max-w-fit text-white rounded-xl px-3 py-1.5 text-sm">
+						Важно ❤
 					</div>
-				) : (
-					""
 				)
 			}
-		</div>
 
-		{
-			img ? (
-				<div class="overflow-hidden">
+			{
+				img ? (
 					<Image
 						src={img}
 						title={title}
 						aria-label={title}
 						width={800}
 						height={800}
-						class="rounded-xl max-w-full h-[180px] object-cover bg-center "
+						class="shadow-2xs rounded-xl max-w-full h-[180px] object-cover bg-center "
 						alt={`Изображения поста: ${title}`}
 						format={"webp"}
 						quality={10}
 					/>
-				</div>
-			) : (
-				<div class="rounded-xl text-zinc-500 text-lg bg-slate-100 h-[200px] flex justify-center items-center">
-					Нет изображения
-				</div>
-			)
-		}
-		<div class="flex gap-1 items-center">
-			{
-				tags &&
-					tags.map(tag => (
-						<span class="text-xs px-3 rounded-full bg-zinc-100 ring-1 ring-zinc-300 py-1">
-							{tag}
-						</span>
-					))
+				) : (
+					<div class="shadow-2xs rounded-xl text-zinc-500 text-lg bg-slate-100 h-[200px] flex justify-center items-center">
+						Нет изображения
+					</div>
+				)
 			}
+			<div class="absolute bottom-2 left-2 flex items-center">
+				{
+					tags &&
+						tags.map(tag => (
+							<span class="text-xs px-3 rounded-full bg-black/50 backdrop-blur-lg text-white py-1">
+								{tag}
+							</span>
+						))
+				}
+			</div>
 		</div>
 		<h3 class="text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
 			{title}
 		</h3>
+		<p class="text-zinc-500 line-clamp-2">{description}</p>
+		<hr
+			class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
+		/>
 		<div class="flex justify-between text-sm text-zinc-600 items-center">
-			<span>Написано <b>АИЗ</b></span>
+			<span class="text-zinc-400">Написано <b>АИЗ</b></span>
 			{
 				pubDate && (
 					<time datetime={pubDate} class="">

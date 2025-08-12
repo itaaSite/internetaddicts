@@ -14,16 +14,11 @@ const post = Astro.props
 const { Content } = await post.render()
 ---
 
-<Post data-pagefind-ignore title={post.data.title} description={post.data.description}>
-	<aside class="mx-auto max-w-[780px] mb-10">
-		<a
-			href="/news"
-			class="text-lg md:ml-10 ml-5 bg-white font-medium rounded-lg py-2 px-3"
-			>&#8592; {/* ← Левая стрелка */} Назад к новостям</a
-		>
-	</aside>
-	<main class="prose-aiz">
-		<h1>{post.data.title}</h1>
-		<Content />
-	</main>
+<Post
+	backUrl="/news"
+	post={post.data}
+	title={post.data.title}
+	description={post.data.description}
+>
+	<Content />
 </Post>

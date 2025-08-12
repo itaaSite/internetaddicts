@@ -16,12 +16,12 @@ const { data, body } = Astro.props
 					data.logo ? (
 						<Image
 							src={data.logo}
-							class="w-8 h-8 rounded-full object-cover"
+							class="w-10 h-10 rounded-full object-cover"
 							alt={data.title}
 						/>
 					) : (
-						<div class="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center">
-							<span class="font-bold text-xs text-white">АИЗ</span>
+						<div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center">
+							<span class="font-black tracking-tight text-sm text-white">АИЗ</span>
 						</div>
 					)
 				}

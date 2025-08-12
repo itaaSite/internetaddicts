@@ -3,78 +3,78 @@ import { Icon } from "astro-icon/components"
 import { getCollection } from "astro:content"
 import Container from "./Container.astro"
 
-const posts = await getCollection("posts")
-const stories = await getCollection("story")
-const groups = await getCollection("groups")
+const [posts, stories, groups] = await Promise.all([
+	getCollection("posts"),
+	getCollection("story"),
+	getCollection("groups"),
+])
+
+// Фильтр уникальных групп
+const uniqueGroups = groups.filter(
+	(item, index, self) => self.findIndex(g => g.data.title === item.data.title) === index,
+)
+
+const sections = [
+	{
+		title: "Архив статей",
+		items: posts.slice(0, 6).map(item => ({
+			title: item.data.title,
+			url: `/posts/${item.slug}`,
+		})),
+	},
+	{
+		title: "Личные истории",
+		items: stories.map(item => ({
+			title: item.data.title,
+			url: `/stories/${item.slug}`,
+		})),
+	},
+	{
+		title: "Группы",
+		items: uniqueGroups.map(item => ({
+			title: item.data.title,
+			url: `/groups/`,
+		})),
+	},
+]
 ---
 
-<footer class="pt-8 rounded-3xl border-t border-zinc-200 pb-0 md:py-8 bg-white">
+<footer class="py-6 bg-white">
 	<div class="py-8">
 		<Container class="max-w-6xl mx-auto">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Последние посты. Архив.</span>
-					{
-						posts &&
-							posts.slice(0, 6).map(item => (
+			<div
+				class="grid grid-cols-1 md:grid-cols-2 justify-items-center lg:grid-cols-3 gap-12"
+			>
+				{
+					sections.map(section => (
+						<div class="flex flex-col gap-3 items-center md:items-start">
+							<span class="text-lg text-zinc-700 font-bold">{section.title}</span>
+							{section.items.map(({ title, url }) => (
 								<a
-									href={`/posts/${item.slug}`}
-									class="items-center flex gap-1 md:text-left text-center text-zinc-600 underline underline-offset-4"
+									href={url}
+									class="items-center flex gap-1 md:text-left text-center text-zinc-500"
 								>
-									<Icon name="mdi:arrow-right-thin" />
-									{item.data.title}
+									{/* <Icon name="mdi:arrow-right-thin" />  */}
+									<span>{title}</span>
 								</a>
-							))
-					}
-				</div>
-				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Личные истории</span>
-					{
-						stories &&
-							stories.map(item => (
-								<a
-									href={`/stories/${item.slug}`}
-									class="items-center flex gap-1 md:text-left text-center text-zinc-600 underline underline-offset-4"
-								>
-									<Icon name="mdi:arrow-right-thin" />
-									{item.data.title}
-								</a>
-							))
-					}
-				</div>
-				<div class="flex flex-col gap-3 items-center md:items-start">
-					<span class="text-lg text-zinc-700 font-bold">Группы</span>
-					{
-						groups &&
-							groups
-								.filter(
-									(item, index, self) =>
-										self.findIndex(g => g.data.title === item.data.title) === index,
-								)
-								.map(item => (
-									<a
-										href={`/groups/`}
-										class="items-center flex gap-1 md:text-left text-center flex items-center gap-2 text-zinc-600 underline underline-offset-4"
-									>
-										<Icon name="mdi:arrow-right-thin" />
-										<span>{item.data.title}</span>
-									</a>
-								))
-					}
-				</div>
+							))}
+						</div>
+					))
+				}
 			</div>
 		</Container>
 	</div>
+
 	<Container
-		class="max-w-6xl sm:flex-row flex-col px-5 mx-auto flex items-center justify-between gap-2 md:gap-6 bg-[#f8fafc] shadow-sm rounded-xl p-3"
+		class="max-w-6xl sm:flex-row flex-col px-5 mx-auto flex items-center justify-between gap-2 md:gap-6 p-3"
 	>
 		<span>&copy; {new Date().getFullYear()} <b>internetaddicts.ru</b></span>
 		<a
 			href="https://t.me/legion_free"
 			target="_blank"
-			class="underline flex items-center gap-1 underline-offset-4 text-purple-700"
+			class="flex items-center gap-1 text-blue-500"
 		>
-			<Icon name="mdi:greater-than-or-equal" /><span>Разработчик</span></a
-		>
+			<Icon name="mdi:telegram" /><span>Разработчик сайта.</span>
+		</a>
 	</Container>
 </footer>

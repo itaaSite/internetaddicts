@@ -6,6 +6,7 @@ import { getAllPosts } from "@/lib/getPosts"
 import getTaxonomy from "@/lib/getTaxonomy"
 import taxonomyFilter from "@/lib/taxonomyFilter"
 import { slugify, slugifyReverse } from "@/lib/utils"
+import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
 	const categories = await getTaxonomy("posts", "tags")
@@ -27,6 +28,11 @@ const filterByTags = taxonomyFilter(posts, "tags", tag)
 	title={`Архив: ${slugifyReverse(tag)}`}
 	desc="Статьи АИЗ. Полезная информация, методы шагов, инструменты"
 >
+	<h1 class="text-3xl text-gray-700 font-semibold flex gap-2 items-center">
+		<Icon name="mdi:label-outline" />
+		<span>{`Архив: ${slugifyReverse(tag)}`}</span>
+	</h1>
+
 	<Tags />
 
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">

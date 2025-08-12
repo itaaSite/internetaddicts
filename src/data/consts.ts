@@ -38,7 +38,7 @@ export const navigation = [
 		label: "Главная",
 		target: "",
 		icon: "mdi:home-roof",
-		style: "text-green-600 hover:text-green-700",
+		style: "underline underline-offset-4 text-blue-500 hover:text-blue-600",
 	},
 	{
 		href: "/groups",
@@ -72,13 +72,13 @@ export const navigation = [
 		style: "",
 		count: news,
 	},
-	{
-		href: "/diary",
-		label: "Ежедневник",
-		target: "",
-		icon: "mdi:account-card",
-		style: "",
-	},
+	// {
+	// 	href: "/diary",
+	// 	label: "Ежедневник",
+	// 	target: "",
+	// 	icon: "mdi:account-card",
+	// 	style: "",
+	// },
 	{
 		href: "/contacts",
 		label: "Контакты",

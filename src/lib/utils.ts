@@ -59,19 +59,26 @@ export function slugify(input) {
 export function slugifyReverse(input) {
 	if (!input) return ""
 
-	// Словарь для замены латинских букв на русские
+	// Сначала длинные комбинации
 	const enToRu = {
+		shch: "щ",
+		yo: "ё",
+		zh: "ж",
+		ch: "ч",
+		sh: "ш",
+		yu: "ю",
+		ya: "я",
+		kh: "х",
+		ts: "ц",
 		a: "а",
 		b: "б",
 		v: "в",
 		g: "г",
 		d: "д",
 		e: "е",
-		yo: "ё",
-		zh: "ж",
 		z: "з",
 		i: "и",
-		y: "й",
+		j: "й",
 		k: "к",
 		l: "л",
 		m: "м",
@@ -83,44 +90,36 @@ export function slugifyReverse(input) {
 		t: "т",
 		u: "у",
 		f: "ф",
-		kh: "х",
-		ts: "ц",
-		ch: "ч",
-		sh: "ш",
-		shch: "щ",
 		y: "ы",
-		e: "э",
-		yu: "ю",
-		ya: "я",
-		"": "", // для символа, который мы не можем преобразовать
 	}
 
-	// Разбиваем входную строку на отдельные слова, используя дефис как разделитель
 	const words = input.split("-")
 
-	// Для каждого слова преобразуем его обратно в кириллицу
 	const translatedWords = words.map(word => {
 		let translated = ""
-
-		// Ищем соответствующие русские буквы в словаре
 		let i = 0
 		while (i < word.length) {
-			if (i + 1 < word.length && enToRu[word.slice(i, i + 2)]) {
-				translated += enToRu[word.slice(i, i + 2)]
-				i += 2 // Пропускаем два символа
-			} else if (enToRu[word[i]]) {
-				translated += enToRu[word[i]]
-				i += 1 // Пропускаем один символ
-			} else {
-				// Если символ не имеет соответствия, добавляем его как есть
+			let found = false
+
+			// проверяем от 3 букв к 1
+			for (let len = 3; len > 0; len--) {
+				const part = word.slice(i, i + len)
+				if (enToRu[part]) {
+					translated += enToRu[part]
+					i += len
+					found = true
+					break
+				}
+			}
+
+			if (!found) {
 				translated += word[i]
-				i += 1 // Пропускаем один символ
+				i++
 			}
 		}
-
 		return translated
 	})
 
-	// Соединяем слова обратно с пробелами
 	return translatedWords.join(" ")
 }
+

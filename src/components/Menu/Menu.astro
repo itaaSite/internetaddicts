@@ -4,7 +4,7 @@ import NavList from "./NavList.astro"
 import { Icon } from "astro-icon/components"
 ---
 
-<nav class="hidden md:flex gap-6 items-center">
+<nav class="hidden w-full md:flex gap-6 justify-between items-center">
 	<NavList
 		navigation={navigation}
 		className="text-zinc-700 flex items-center gap-1 transition-colors hover:text-zinc-600"
@@ -25,7 +25,7 @@ import { Icon } from "astro-icon/components"
 
 <div
 	id="menu"
-	class="hidden absolute w-full p-12 justify-center flex items-start min-h-full bg-white shadow-sm md:-z-10 z-50 top-[75px] rounded-xl left-0 transition-all duration-300 ease-in-out"
+	class="hidden absolute w-full p-12 justify-center flex items-start min-h-full bg-white/60 backdrop-blur-2xl shadow-sm md:-z-10 z-50 top-[75px] rounded-xl left-0 transition-all duration-300 ease-in-out"
 	role="menu"
 	aria-hidden="true"
 >
