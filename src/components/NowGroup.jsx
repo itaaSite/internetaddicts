@@ -40,7 +40,6 @@ const GroupArticle = ({ data }) => (
 						)}
 						<span className="font-medium text-zinc-600">{data.title}</span>•
 						{data.dateTime && <span className="text-blue-500">{data.dateTime}</span>}•
-						{/* {data.type && <span className="text-green-600 font-medium">{data.type}</span>} */}
 						{data.type === "Онлайн" ? (
 							<span className="text-green-600 font-medium">{data.type}</span>
 						) : (
@@ -89,11 +88,11 @@ export default function NowGroup() {
 				•
 				{todayOnlineGroups ? (
 					<span className="text-xl text-gray-700 font-medium">
-						<span className="text-green-600 font-medium">Онлайн</span>-группы
+						<span className="text-blue-600 font-medium">Оффлайн</span>-группы
 					</span>
 				) : (
 					<span className="text-xl text-gray-700 font-medium">
-						<span className="text-blue-600 font-medium">Оффлайн</span>-группы
+						<span className="text-green-600 font-medium">Онлайн</span>-группы
 					</span>
 				)}
 			</h3>

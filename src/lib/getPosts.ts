@@ -1,7 +1,6 @@
 import { getCollection } from "astro:content"
 
 // Вывод постов по новым датам и по статусу draft
-
 export const getAllPosts = async content => {
 	const posts = (await getCollection(content))
 		.filter(({ data }) => (import.meta.env.PROD ? data.draft !== true : true))

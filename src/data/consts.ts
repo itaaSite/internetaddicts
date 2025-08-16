@@ -72,13 +72,13 @@ export const navigation = [
 		style: "",
 		count: news,
 	},
-	// {
-	// 	href: "/diary",
-	// 	label: "Ежедневник",
-	// 	target: "",
-	// 	icon: "mdi:account-card",
-	// 	style: "",
-	// },
+	{
+		href: "/diary",
+		label: "Ежедневник",
+		target: "",
+		icon: "mdi:account-card",
+		style: "",
+	},
 	{
 		href: "/contacts",
 		label: "Контакты",
