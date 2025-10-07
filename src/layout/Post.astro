@@ -8,12 +8,13 @@ const { backUrl, title, description, pubDate, post } = Astro.props
 <Layout title={title} desc={description} typeSite="article" pubDate={pubDate}>
 	<main class="max-w-4xl mx-auto flex flex-col gap-12">
 		<a
+			id="back"
 			href={backUrl}
 			class="bg-zinc-200 text-zinc-700 max-w-fit flex gap-1 items-center rounded-lg text-sm py-1.5 px-3"
 			><Icon name={"mdi:arrow-left"} /><span>Назад</span></a
 		>
 		<aside class="flex flex-col gap-3">
-			<div class="flex items-center gap-1">
+			<div id="tags" class="flex items-center gap-1">
 				{
 					post?.tags &&
 						post?.tags.map(tag => (

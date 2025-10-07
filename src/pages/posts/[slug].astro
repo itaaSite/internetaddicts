@@ -20,5 +20,92 @@ const { Content } = await post.render()
 	title={post.data.title}
 	description={post.data.description}
 >
+	<!-- Панель озвучки -->
+	<div
+		class="reader-panel mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-gray-300 bg-gray-100/60 backdrop-blur-md p-3"
+	>
+		<select
+			id="voiceSelect"
+			class="flex-1 max-w-full w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+		></select>
+
+		<div class="flex gap-2">
+			<button
+				id="readBtn"
+				class="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition"
+			>
+				▶️ Читать
+			</button>
+			<button
+				id="pauseBtn"
+				class="rounded-lg bg-yellow-500 px-4 py-2 text-sm font-medium text-white hover:bg-yellow-600 transition"
+			>
+				⏸ Пауза
+			</button>
+			<button
+				id="stopBtn"
+				class="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition"
+			>
+				⏹ Стоп
+			</button>
+		</div>
+	</div>
+
 	<Content />
+
+	<script>
+		const voiceSelect = document.getElementById("voiceSelect")
+		const readBtn = document.getElementById("readBtn")
+		const pauseBtn = document.getElementById("pauseBtn")
+		const stopBtn = document.getElementById("stopBtn")
+
+		let voices = []
+		let utterance = null
+
+		// Загрузка голосов
+		function loadVoices() {
+			voices = speechSynthesis.getVoices()
+			voiceSelect.innerHTML = voices
+				.map(v => `<option value="${v.name}">${v.name} (${v.lang})</option>`)
+				.join("")
+		}
+
+		loadVoices()
+		if (speechSynthesis.onvoiceschanged !== undefined) {
+			speechSynthesis.onvoiceschanged = loadVoices
+		}
+
+		// Чтение текста
+		function readContent() {
+			const contentEl = document.querySelector("main")
+
+			// Клонируем содержимое и удаляем ненужное
+			const clone = contentEl.cloneNode(true)
+			clone.querySelectorAll(".reader-panel, #back, #tags").forEach(el => el.remove())
+
+			const text = clone.innerText.trim()
+			if (!text) return
+
+			speechSynthesis.cancel()
+
+			utterance = new SpeechSynthesisUtterance(text)
+			const selectedVoice = voices.find(v => v.name === voiceSelect.value)
+			if (selectedVoice) utterance.voice = selectedVoice
+			utterance.lang = selectedVoice?.lang || "ru-RU"
+			utterance.rate = 1
+			utterance.pitch = 1
+
+			speechSynthesis.speak(utterance)
+		}
+
+		readBtn.addEventListener("click", readContent)
+		pauseBtn.addEventListener("click", () => {
+			if (speechSynthesis.speaking && !speechSynthesis.paused) {
+				speechSynthesis.pause()
+			} else if (speechSynthesis.paused) {
+				speechSynthesis.resume()
+			}
+		})
+		stopBtn.addEventListener("click", () => speechSynthesis.cancel())
+	</script>
 </Post>
