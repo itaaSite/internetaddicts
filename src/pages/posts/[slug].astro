@@ -1,5 +1,6 @@
 ---
 import Post from "@/layout/Post.astro"
+import { Icon } from "astro-icon/components"
 import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
@@ -12,6 +13,12 @@ export async function getStaticPaths() {
 
 const post = Astro.props
 const { Content } = await post.render()
+
+import fs from "fs"
+import path from "path"
+
+const audioPath = `public/audio/${post.slug}.mp3`
+const hasAudio = fs.existsSync(audioPath)
 ---
 
 <Post
@@ -24,29 +31,40 @@ const { Content } = await post.render()
 	<div
 		class="reader-panel mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-gray-300 bg-gray-100/60 backdrop-blur-md p-3"
 	>
+		{
+			hasAudio && (
+				<div class="w-full relative">
+					<span class="absolute ring-1 z-1 -top-5 left-5 text-xs px-3 py-1.5 bg-white rounded-md">
+						Озвучка <b>Google</b>
+					</span>
+					<audio class="w-full" controls src={`/audio/${post.slug}.mp3`} />
+				</div>
+			)
+		}
+
 		<select
 			id="voiceSelect"
-			class="flex-1 max-w-full w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+			class="flex-1 cursor-pointer max-w-full w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 		></select>
 
 		<div class="flex gap-2">
 			<button
 				id="readBtn"
-				class="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition"
+				class="flex cursor-pointer items-center gap-1 rounded-lg bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 transition"
 			>
-				▶️ Читать
+				<Icon name="mdi:play" /><span>Читать</span>
 			</button>
 			<button
 				id="pauseBtn"
-				class="rounded-lg bg-yellow-500 px-4 py-2 text-sm font-medium text-white hover:bg-yellow-600 transition"
+				class="flex cursor-pointer items-center gap-1 rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600 transition"
 			>
-				⏸ Пауза
+				<Icon name="mdi:pause" /><span>Пауза</span>
 			</button>
 			<button
 				id="stopBtn"
-				class="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition"
+				class="flex cursor-pointer items-center gap-1 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition"
 			>
-				⏹ Стоп
+				<Icon name="mdi:stop" /><span>Стоп</span>
 			</button>
 		</div>
 	</div>
@@ -62,12 +80,24 @@ const { Content } = await post.render()
 		let voices = []
 		let utterance = null
 
-		// Загрузка голосов
+		// --- Загрузка голосов (только RU и EN) ---
 		function loadVoices() {
-			voices = speechSynthesis.getVoices()
+			const allVoices = speechSynthesis.getVoices()
+			voices = allVoices.filter(
+				v =>
+					v.lang.toLowerCase().startsWith("ru") || v.lang.toLowerCase().startsWith("en"),
+			)
+
+			if (!voices.length) return
+
 			voiceSelect.innerHTML = voices
 				.map(v => `<option value="${v.name}">${v.name} (${v.lang})</option>`)
 				.join("")
+
+			// По умолчанию ставим русский, если есть
+			const defaultVoice =
+				voices.find(v => v.lang.toLowerCase().startsWith("ru")) || voices[0]
+			if (defaultVoice) voiceSelect.value = defaultVoice.name
 		}
 
 		loadVoices()
@@ -75,9 +105,10 @@ const { Content } = await post.render()
 			speechSynthesis.onvoiceschanged = loadVoices
 		}
 
-		// Чтение текста
+		// --- Чтение текста ---
 		function readContent() {
 			const contentEl = document.querySelector("main")
+			if (!contentEl) return
 
 			// Клонируем содержимое и удаляем ненужное
 			const clone = contentEl.cloneNode(true)
@@ -89,16 +120,22 @@ const { Content } = await post.render()
 			speechSynthesis.cancel()
 
 			utterance = new SpeechSynthesisUtterance(text)
+
 			const selectedVoice = voices.find(v => v.name === voiceSelect.value)
-			if (selectedVoice) utterance.voice = selectedVoice
-			utterance.lang = selectedVoice?.lang || "ru-RU"
+			if (selectedVoice) {
+				utterance.voice = selectedVoice
+				utterance.lang = selectedVoice.lang
+			}
+
 			utterance.rate = 1
 			utterance.pitch = 1
 
 			speechSynthesis.speak(utterance)
 		}
 
+		// --- Кнопки управления ---
 		readBtn.addEventListener("click", readContent)
+
 		pauseBtn.addEventListener("click", () => {
 			if (speechSynthesis.speaking && !speechSynthesis.paused) {
 				speechSynthesis.pause()
@@ -106,6 +143,7 @@ const { Content } = await post.render()
 				speechSynthesis.resume()
 			}
 		})
+
 		stopBtn.addEventListener("click", () => speechSynthesis.cancel())
 	</script>
 </Post>

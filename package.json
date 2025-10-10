@@ -7,6 +7,7 @@
 		"dev": "bun run astro dev",
 		"build": "bun run astro build",
 		"preview": "bun run astro preview",
+		"prebuild": "node scripts/generate-tts.mjs",
 		"start": "astro dev",
 		"astro": "astro"
 	},
@@ -29,6 +30,7 @@
 		"astro-icon": "^1.1.5",
 		"astro-pagefind": "^1.8.3",
 		"clsx": "^2.1.1",
+		"google-tts-api": "^2.0.2",
 		"marked": "^15.0.12",
 		"motion": "^12.23.12",
 		"react": "^19.1.0",
