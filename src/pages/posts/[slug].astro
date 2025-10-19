@@ -14,11 +14,11 @@ export async function getStaticPaths() {
 const post = Astro.props
 const { Content } = await post.render()
 
-import fs from "fs"
-import path from "path"
+// import fs from "fs"
+// import path from "path"
 
-const audioPath = `public/audio/${post.slug}.mp3`
-const hasAudio = fs.existsSync(audioPath)
+// const audioPath = `public/audio/${post.slug}.mp3`
+// const hasAudio = fs.existsSync(audioPath)
 ---
 
 <Post
@@ -31,7 +31,7 @@ const hasAudio = fs.existsSync(audioPath)
 	<div
 		class="reader-panel mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-gray-300 bg-gray-100/60 backdrop-blur-md p-3"
 	>
-		{
+		<!-- {
 			hasAudio && (
 				<div class="w-full relative">
 					<span class="absolute ring-1 z-1 -top-5 left-5 text-xs px-3 py-1.5 bg-white rounded-md">
@@ -40,7 +40,7 @@ const hasAudio = fs.existsSync(audioPath)
 					<audio class="w-full" controls src={`/audio/${post.slug}.mp3`} />
 				</div>
 			)
-		}
+		} -->
 
 		<select
 			id="voiceSelect"
