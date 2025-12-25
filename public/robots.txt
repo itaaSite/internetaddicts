@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /keystatic
+Disallow: /admin

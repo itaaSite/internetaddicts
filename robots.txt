@@ -1,4 +1,0 @@
-# public/robots.txt
-User-agent: *
-Disallow: /keystatic
-Disallow: /admin
