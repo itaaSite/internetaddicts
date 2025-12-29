@@ -5,9 +5,11 @@ import partytown from "@astrojs/partytown"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
 import keystatic from "@keystatic/astro"
+import tailwindcss from "@tailwindcss/vite"
 import icon from "astro-icon"
 import { defineConfig } from "astro/config"
-import tailwindcss from "@tailwindcss/vite"
+
+import vercel from "@astrojs/vercel"
 
 export default defineConfig({
 	site: "https://internetaddicts.ru/",
@@ -15,6 +17,7 @@ export default defineConfig({
 	prefetch: {
 		defaultStrategy: "viewport",
 	},
+
 	integrations: [
 		react(),
 		markdoc(),
@@ -28,9 +31,13 @@ export default defineConfig({
 		sitemap(),
 		icon(),
 	],
+
 	output: "static",
-//	adapter: netlify(),
+
+	//	adapter: netlify(),
 	vite: {
 		plugins: [tailwindcss()],
 	},
+
+	adapter: vercel(),
 })
