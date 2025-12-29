@@ -2,7 +2,7 @@
 import Title from "@/components/Title.astro"
 import Layout from "@/layout/Layout.astro"
 
-import NowGroup from "@/components/NowGroup"
+// import NowGroup from "@/components/NowGroup"
 import { Content as AboutCommnuity } from "@/data/page/about.mdx"
 import { Icon } from "astro-icon/components"
 ---
@@ -37,8 +37,8 @@ import { Icon } from "astro-icon/components"
 		</section>
 	</section>
 
-	<section class="max-w-4xl mx-auto px-5 mb-14">
-		<NowGroup client:load />
+	<section class="max-w-4xl mx-auto px-5 mb-14 mt-10">
+		<!-- <NowGroup client:load /> -->
 
 		<div
 			class="prose max-w-none prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl leading-relaxed prose-a:no-underline prose-a:text-[#0098EA] prose-a:font-normal prose-a:hover:text-blue-500"
@@ -47,6 +47,3 @@ import { Icon } from "astro-icon/components"
 		</div>
 	</section>
 </Layout>
-
-
-

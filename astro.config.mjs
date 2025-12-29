@@ -13,11 +13,9 @@ import vercel from "@astrojs/vercel"
 
 export default defineConfig({
 	site: "https://internetaddicts.ru/",
-
 	prefetch: {
 		defaultStrategy: "viewport",
 	},
-
 	integrations: [
 		react(),
 		markdoc(),
@@ -31,13 +29,9 @@ export default defineConfig({
 		sitemap(),
 		icon(),
 	],
-
 	output: "static",
-
-	//	adapter: netlify(),
 	vite: {
 		plugins: [tailwindcss()],
 	},
-
 	adapter: vercel(),
 })

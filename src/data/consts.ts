@@ -38,7 +38,7 @@ export const navigation = [
 		label: "Главная",
 		target: "",
 		icon: "mdi:home-roof",
-		style: "underline underline-offset-4 text-blue-500 hover:text-blue-600",
+		style: "",
 	},
 	{
 		href: "/groups",
@@ -46,7 +46,7 @@ export const navigation = [
 		target: "",
 		icon: "mdi:account-group",
 		style: "",
-		count: groups,
+		// count: groups,
 	},
 	{
 		href: "/posts",
@@ -54,7 +54,7 @@ export const navigation = [
 		target: "",
 		icon: "mdi:archive-search",
 		style: "",
-		count: posts,
+		// count: posts,
 	},
 	{
 		href: "/stories",
@@ -62,7 +62,7 @@ export const navigation = [
 		target: "",
 		icon: "mdi:account-details",
 		style: "",
-		count: story,
+		// count: story,
 	},
 	{
 		href: "/news",
@@ -70,7 +70,7 @@ export const navigation = [
 		target: "",
 		icon: "mdi:access-point",
 		style: "",
-		count: news,
+		// count: news,
 	},
 	{
 		href: "/diary",
@@ -91,6 +91,6 @@ export const navigation = [
 		target: "_blank",
 		label: "Спикерские",
 		icon: "mdi:account-music",
-		style: "underline underline-offset-4 text-blue-500 hover:text-blue-600",
+		style: "",
 	},
 ]

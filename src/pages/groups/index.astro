@@ -1,9 +1,8 @@
 ---
 import GroupArticle from "@/components/GroupArticle.astro"
 import Layout from "@/layout/Layout.astro"
-import  { Icon } from "astro-icon/components"
+import { Icon } from "astro-icon/components"
 import { getCollection } from "astro:content"
-
 
 const groups = await getCollection("groups")
 const groupsCounter = (await getCollection("groups")).length
@@ -35,8 +34,8 @@ function sortGroupsByDay(groups) {
 ---
 
 <Layout
-	title={`Онлайн и Офлайн группы`}
-	desc={`Время встреч для анонимных интернет-зависимых. Собраний (${groupsCounter})`}
+	title={`Онлайн и Оффлайн группы`}
+	desc={`Время встреч для анонимных интернет-зависимых. Собрания/Встречи и мероприятие каждый день.`}
 >
 	<!-- <div
 		class="flex flex-col gap-3"
