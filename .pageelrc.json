@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "projectType": "astro",
+  "paths": {
+    "posts": "src/content/posts",
+    "images": "public"
+  },
+  "domainUrl": "https://internetaddicts.ru",
+  "settings": {
+    "postFileTypes": ".md,.mdx",
+    "imageFileTypes": "image/*",
+    "publishDateSource": "file",
+    "imageCompressionEnabled": false,
+    "maxImageSize": 500,
+    "imageResizeMaxWidth": 1024
+  },
+  "commits": {
+    "newPost": "feat(content): add post \"{filename}\"",
+    "updatePost": "fix(content): update post \"{filename}\"",
+    "newImage": "feat(assets): add image \"{filename}\"",
+    "updateImage": "refactor(assets): update image for \"{filename}\""
+  },
+  "templates": {},
+  "ui": {}
+}
