@@ -64,14 +64,14 @@ export const navigation = [
 		style: "",
 		// count: story,
 	},
-	{
-		href: "/news",
-		label: "Новости",
-		target: "",
-		icon: "mdi:access-point",
-		style: "",
-		// count: news,
-	},
+	// {
+	// 	href: "/news",
+	// 	label: "Новости",
+	// 	target: "",
+	// 	icon: "mdi:access-point",
+	// 	style: "",
+	// 	// count: news,
+	// },
 	{
 		href: "/diary",
 		label: "Ежедневник",
@@ -90,7 +90,7 @@ export const navigation = [
 		href: "https://www.youtube.com/@aiz_itaa",
 		target: "_blank",
 		label: "Спикерские",
-		icon: "mdi:account-music",
-		style: "",
+		icon: "mdi:youtube",
+		style: "underline underline-offset-4 hover:text-red-600 text-red-500",
 	},
 ]

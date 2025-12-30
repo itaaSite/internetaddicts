@@ -81,7 +81,7 @@ const gradientIndex = hashString(seed) % gradients.length
 const gradientClass = gradients[gradientIndex]
 ---
 
-<a href={`/posts/${slug}`} class="" aria-label={title}>
+<a href={`/posts/${slug}`} class={`${favorite && "bg-gradient-to-b from-green-200 rounded-xl to-white"}`} aria-label={title}>
 	<article class="flex flex-col gap-4">
 		<div class="relative">
 			{
@@ -91,35 +91,43 @@ const gradientClass = gradients[gradientIndex]
 					</div>
 				)
 			}
-
+{favorite &&
 			<div
+				class='rounded-xl shadow-md shadow-green-200/50 ring-1 ring-green-300/80 h-[180px] bg-gradient-to-tr from-green-300 to-transparent'
+			>
+			</div>}
+
+      	{!favorite && <div
 				class={`shadow-2xs rounded-xl h-[180px]
     bg-gradient-to-br ${gradientClass}
     flex items-center justify-center`}
 			>
-			</div>
+			</div>}
 
-			<div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
-				{
-					tags &&
-						tags.map(tag => (
-							<span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
-								{tag}
-							</span>
-						))
-				}
-			</div>
+			{
+				!favorite && (
+					<div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
+						{tags &&
+							tags.map(tag => (
+								<span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
+									{tag}
+								</span>
+							))}
+					</div>
+				)
+			}
 		</div>
 
-		<h3 class="text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
+		<h3 class="px-4 text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
 			{title}
 		</h3>
-		<p class="text-zinc-500 line-clamp-2">{description}</p>
+    <p class="px-4 text-zinc-500 line-clamp-2">{description}</p>
+	{!favorite &&	
 		<hr
 			class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
 		/>
 		<div class="flex justify-between text-sm text-zinc-600 items-center">
-			<span class="text-zinc-400">Написано <b>АИЗ</b></span>
+			<span class="text-zinc-400">Автор: <b>АИЗ</b></span>
 			{
 				pubDate && (
 					<time datetime={pubDate} class="">
@@ -131,6 +139,6 @@ const gradientClass = gradients[gradientIndex]
 					</time>
 				)
 			}
-		</div>
+		</div>}
 	</article>
 </a>
