@@ -1,18 +1,17 @@
 ---
-import Post from "@/layout/Post.astro"
-import { Icon } from "astro-icon/components"
-import { getCollection } from "astro:content"
+import Post from "@/layout/Post.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = await getCollection("posts")
-	return posts.map(post => ({
+	const posts = await getCollection("posts");
+	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
-	}))
+	}));
 }
 
-const post = Astro.props
-const { Content } = await post.render()
+const post = Astro.props;
+const { Content } = await post.render();
 
 // import fs from "fs"
 // import path from "path"
@@ -27,123 +26,5 @@ const { Content } = await post.render()
 	title={post.data.title}
 	description={post.data.description}
 >
-	<!-- Панель озвучки -->
-	<div
-		class="reader-panel mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-gray-300 bg-gray-100/60 backdrop-blur-md p-3"
-	>
-		<!-- {
-			hasAudio && (
-				<div class="w-full relative">
-					<span class="absolute ring-1 z-1 -top-5 left-5 text-xs px-3 py-1.5 bg-white rounded-md">
-						Озвучка <b>Google</b>
-					</span>
-					<audio class="w-full" controls src={`/audio/${post.slug}.mp3`} />
-				</div>
-			)
-		} -->
-
-		<select
-			id="voiceSelect"
-			class="flex-1 cursor-pointer max-w-full w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-		></select>
-
-		<div class="flex gap-2">
-			<button
-				id="readBtn"
-				class="flex cursor-pointer items-center gap-1 rounded-lg bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 transition"
-			>
-				<Icon name="mdi:play" /><span>Читать</span>
-			</button>
-			<button
-				id="pauseBtn"
-				class="flex cursor-pointer items-center gap-1 rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600 transition"
-			>
-				<Icon name="mdi:pause" /><span>Пауза</span>
-			</button>
-			<button
-				id="stopBtn"
-				class="flex cursor-pointer items-center gap-1 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition"
-			>
-				<Icon name="mdi:stop" /><span>Стоп</span>
-			</button>
-		</div>
-	</div>
-
-	<Content />
-
-	<script>
-		const voiceSelect = document.getElementById("voiceSelect")
-		const readBtn = document.getElementById("readBtn")
-		const pauseBtn = document.getElementById("pauseBtn")
-		const stopBtn = document.getElementById("stopBtn")
-
-		let voices = []
-		let utterance = null
-
-		// --- Загрузка голосов (только RU и EN) ---
-		function loadVoices() {
-			const allVoices = speechSynthesis.getVoices()
-			voices = allVoices.filter(
-				v =>
-					v.lang.toLowerCase().startsWith("ru") || v.lang.toLowerCase().startsWith("en"),
-			)
-
-			if (!voices.length) return
-
-			voiceSelect.innerHTML = voices
-				.map(v => `<option value="${v.name}">${v.name} (${v.lang})</option>`)
-				.join("")
-
-			// По умолчанию ставим русский, если есть
-			const defaultVoice =
-				voices.find(v => v.lang.toLowerCase().startsWith("ru")) || voices[0]
-			if (defaultVoice) voiceSelect.value = defaultVoice.name
-		}
-
-		loadVoices()
-		if (speechSynthesis.onvoiceschanged !== undefined) {
-			speechSynthesis.onvoiceschanged = loadVoices
-		}
-
-		// --- Чтение текста ---
-		function readContent() {
-			const contentEl = document.querySelector("main")
-			if (!contentEl) return
-
-			// Клонируем содержимое и удаляем ненужное
-			const clone = contentEl.cloneNode(true)
-			clone.querySelectorAll(".reader-panel, #back, #tags").forEach(el => el.remove())
-
-			const text = clone.innerText.trim()
-			if (!text) return
-
-			speechSynthesis.cancel()
-
-			utterance = new SpeechSynthesisUtterance(text)
-
-			const selectedVoice = voices.find(v => v.name === voiceSelect.value)
-			if (selectedVoice) {
-				utterance.voice = selectedVoice
-				utterance.lang = selectedVoice.lang
-			}
-
-			utterance.rate = 1
-			utterance.pitch = 1
-
-			speechSynthesis.speak(utterance)
-		}
-
-		// --- Кнопки управления ---
-		readBtn.addEventListener("click", readContent)
-
-		pauseBtn.addEventListener("click", () => {
-			if (speechSynthesis.speaking && !speechSynthesis.paused) {
-				speechSynthesis.pause()
-			} else if (speechSynthesis.paused) {
-				speechSynthesis.resume()
-			}
-		})
-
-		stopBtn.addEventListener("click", () => speechSynthesis.cancel())
-	</script>
+	<main><Content /></main>
 </Post>

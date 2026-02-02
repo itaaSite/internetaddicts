@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+
 interface Props {
 	data: {
 		img?: string
@@ -12,133 +14,83 @@ interface Props {
 }
 
 const {
-	data: { pubDate, description, title, tags },
+	data: { pubDate, description, title, tags, img },
 	slug,
 	favorite,
 } = Astro.props
 
-/* -------------------------------
-   Градиенты (перемешанные)
--------------------------------- */
 
-const gradients = [
-	"from-cyan-400 via-sky-500 to-blue-600",
-	"from-indigo-700 via-blue-800 to-slate-900",
-	"from-orange-400 via-amber-500 to-yellow-400",
-	"from-green-500 via-teal-500 to-cyan-600",
-	"from-purple-500 via-pink-500 to-rose-500",
-	"from-sky-300 via-cyan-300 to-teal-300",
-	"from-emerald-400 via-teal-500 to-cyan-500",
-	"from-fuchsia-500 via-rose-500 to-orange-400",
-	"from-lime-300 via-emerald-400 to-green-600",
-	"from-slate-700 via-slate-800 to-zinc-900",
-	"from-indigo-500 via-purple-500 to-pink-500",
-	"from-amber-400 via-orange-500 to-red-500",
-	"from-pink-300 via-rose-300 to-orange-300",
-	"from-blue-500 via-indigo-500 to-violet-600",
-	"from-lime-400 via-green-500 to-emerald-600",
-	"from-sky-700 via-indigo-800 to-purple-900",
-	"from-zinc-700 via-neutral-800 to-stone-900",
-	"from-yellow-400 via-amber-500 to-orange-600",
-	"from-rose-400 via-pink-500 to-fuchsia-500",
-	"from-green-400 via-emerald-500 to-teal-600",
-	"from-indigo-300 via-violet-300 to-purple-300",
-	"from-teal-400 via-cyan-500 to-sky-500",
-	"from-red-400 via-rose-500 to-pink-500",
-	"from-gray-700 via-slate-800 to-zinc-900",
-	"from-indigo-600 via-violet-500 to-purple-600",
-	"from-orange-300 via-yellow-400 to-lime-400",
-	"from-pink-500 via-rose-500 to-red-500",
-	"from-violet-500 via-purple-500 to-fuchsia-500",
-	"from-sky-500 via-blue-600 to-indigo-600",
-	"from-lime-300 via-green-300 to-emerald-300",
-	"from-rose-500 via-red-500 to-orange-500",
-	"from-yellow-300 via-orange-400 to-rose-400",
-	"from-cyan-700 via-blue-800 to-indigo-900",
-	"from-stone-600 via-neutral-700 to-zinc-800",
-	"from-purple-600 via-fuchsia-500 to-pink-500",
-	"from-sky-400 via-cyan-500 to-teal-600",
-]
-
-/* -------------------------------
-   Нормальный hash (FNV-1a)
-   → совпадения очень редкие
--------------------------------- */
-
-function hashString(str: string) {
-	let hash = 2166136261
-	for (let i = 0; i < str.length; i++) {
-		hash ^= str.charCodeAt(i)
-		hash = Math.imul(hash, 16777619)
-	}
-	return hash >>> 0
-}
-
-// seed можно усилить при желании
-const seed = `${slug}|${title}`
-
-const gradientIndex = hashString(seed) % gradients.length
-const gradientClass = gradients[gradientIndex]
 ---
 
-<a href={`/posts/${slug}`} class={`${favorite && "bg-gradient-to-b from-green-200 rounded-xl to-white"}`} aria-label={title}>
-	<article class="flex flex-col gap-4">
-		<div class="relative">
-			{
-				favorite && (
-					<div class="absolute right-2 top-2 z-10 bg-black/50 backdrop-blur-lg text-white rounded-xl px-3 py-1.5 text-sm">
-						Важно ❤
-					</div>
-				)
-			}
-{favorite &&
-			<div
-				class='rounded-xl shadow-md shadow-green-200/50 ring-1 ring-green-300/80 h-[180px] bg-gradient-to-tr from-green-300 to-transparent'
-			>
-			</div>}
+<a href={`/posts/${slug}`} class={`group ${favorite && ""}`} aria-label={title}>
 
-      	{!favorite && <div
-				class={`shadow-2xs rounded-xl h-[180px]
-    bg-gradient-to-br ${gradientClass}
-    flex items-center justify-center`}
-			>
-			</div>}
 
-			{
-				!favorite && (
-					<div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
-						{tags &&
-							tags.map(tag => (
-								<span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
-									{tag}
-								</span>
-							))}
-					</div>
-				)
-			}
-		</div>
+<div class="rounded-2xl shadow-[inset_0_0_2px_1px_#ffffff4d] ring-1 ring-black/5">
+	<div class="rounded-2xl p-1 shadow-md shadow-black/5">
+		<div
+			class="rounded-xl shadow-lg ring-1 ring-black/5 grid grid-cols-1 gap-3 lg:shadow-2xl bg-white"
+		>
+  
+    <article class="">
+      <div class="relative">
+        {
+          favorite && (
+            <div class="absolute right-2 top-2 z-10 bg-black/50 backdrop-blur-lg text-white rounded-md px-3 py-1.5 text-sm">
+              Важно ❤
+            </div>
+          )
+        }
 
-		<h3 class="px-4 text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
-			{title}
-		</h3>
-    <p class="px-4 text-zinc-500 line-clamp-2">{description}</p>
-	{!favorite &&	
-		<hr
-			class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
-		/>
-		<div class="flex justify-between text-sm text-zinc-600 items-center">
-			<span class="text-zinc-400">Автор: <b>АИЗ</b></span>
-			{
-				pubDate && (
-					<time datetime={pubDate} class="">
-						{new Date(pubDate).toLocaleDateString("ru-RU", {
-							year: "numeric",
-							month: "short",
-							day: "numeric",
-						})}
-					</time>
-				)
-			}
-		</div>}
-	</article>
+  {img ?      
+  <Image  class="duration-150 ease-in  transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]" src={img} alt={title}/> 
+  
+  : 
+  <div class=" grid place-content-center bg-black duration-150 ease-in  transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]">
+      <span class="text-white/50">Нет изображения</span>
+
+  </div>}
+  
+        {
+          !favorite && (
+            <div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
+              {tags &&
+                tags.map(tag => (
+                  <span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
+                    {tag}
+                  </span>
+                ))}
+            </div>
+          )
+        }
+
+      </div> 
+  
+      <div class="flex flex-col gap-3 p-5">
+        <h3 class=" leading-tight text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
+          {title}
+        </h3>
+        <p class=" text-zinc-500 line-clamp-2">{description}</p>
+      {!favorite &&	
+        <hr
+          class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
+        />
+        <div class="flex justify-between text-sm text-zinc-600 items-center">
+          <span class="text-zinc-400">Автор: <b>АИЗ</b></span>
+          {
+            pubDate && (
+              <time datetime={pubDate} class="">
+                {new Date(pubDate).toLocaleDateString("ru-RU", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            )
+          }
+        </div>}
+      </div>
+
+    </article>
+  </div></div></div>
+
 </a>

@@ -13,6 +13,7 @@ export const COPYRIGHT = "Анонимные Интернет-Зависимые
 export const RKO = "https://t.me/+WMn0QssSLHsyYzcy"
 
 const collections = ["posts", "story", "groups", "speakers", "news"]
+
 const counts = await Promise.all(
 	collections.map(async collection => {
 		const data = await getCollection(collection)
@@ -50,7 +51,7 @@ export const navigation = [
 	},
 	{
 		href: "/posts",
-		label: "Архив",
+		label: "Статьи",
 		target: "",
 		icon: "mdi:archive-search",
 		style: "",

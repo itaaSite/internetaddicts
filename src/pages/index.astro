@@ -1,10 +1,10 @@
 ---
-import Title from "@/components/Title.astro"
-import Layout from "@/layout/Layout.astro"
+import Title from "@/components/Title.astro";
+import Layout from "@/layout/Layout.astro";
 
 // import NowGroup from "@/components/NowGroup"
-import { Content as AboutCommnuity } from "@/data/page/about.mdx"
-import { Icon } from "astro-icon/components"
+import { Content as AboutCommnuity } from "@/data/page/about.mdx";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout
@@ -13,26 +13,26 @@ import { Icon } from "astro-icon/components"
 	desc="Это сообщество людей, которые поддерживают друг друга в преодолении проблем, вызванных одержимым использованием интернета и технических устройств."
 >
 	<section
-		class="bg-gradient-to-br rounded-3xl from-green-50 to-sky-50 py-14 md:py-24 px-5"
+		class="bg-gradient-to-b from-zinc-50 to-zinc-50 border border-[0.5px] border-zinc-300 md:my-12 md:mx-32 rounded-3xl py-14 md:py-24 px-5"
 	>
 		<Title />
 
-		<section class="mt-10 flex gap-3 md:gap-6 flex-wrap justify-center self-center">
-			<a
-				href="/groups"
-				class="bg-gradient-to-bl from-teal-400 to-green-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-				><Icon name="mdi:account-group" /><span>Найти Собрание</span></a
-			>
+		<section class="mt-10 flex gap-3 flex-wrap justify-center self-center">
 			<a
 				href="/stories"
-				class="bg-gradient-to-bl from-fuchsia-400 to-rose-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-				><Icon name="mdi:format-list-group-plus" /><span>Истории</span></a
+				class="w-[180px] justify-center bg-gradient-to-bl from-pink-500 to-orange-500 self-center rounded-lg px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:format-list-group-plus" /><span>Личные истории</span></a
+			>
+			<a
+				href="/groups"
+				class="w-[180px] justify-center bg-gradient-to-bl from-teal-500 to-green-500 self-center rounded-lg px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:account-group" /><span>Найти Собрание</span></a
 			>
 			<a
 				href="https://t.me/aiz_resources"
 				target="_blank"
-				class="bg-gradient-to-bl from-blue-400 to-sky-500 self-center rounded-xl px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
-				><Icon name="mdi:telegram" /><span>АИЗ ресурсы</span></a
+				class="w-[180px] justify-center bg-gradient-to-bl from-blue-500 to-sky-500 self-center rounded-lg px-4 py-2 flex items-center gap-1 text-white text-center transition-all duration-75 ease-linear hover:translate-y-[1px]"
+				><Icon name="mdi:telegram" /><span>А.И.З. ресурсы</span></a
 			>
 		</section>
 	</section>
