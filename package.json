@@ -11,12 +11,12 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/markdoc": "0.15.4",
 		"@astrojs/mdx": "4.3.3",
 		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/react": "^4.3.0",
 		"@astrojs/rss": "4.0.12",
 		"@astrojs/sitemap": "3.4.2",
+		"@astrojs/svelte": "^7.2.5",
 		"@astrojs/tailwind": "^6.0.2",
 		"@astrojs/vercel": "^9.0.2",
 		"@iconify-json/mdi": "^1.2.3",
@@ -25,15 +25,13 @@
 		"@tailwindcss/vite": "^4.1.8",
 		"@types/react": "^19.1.6",
 		"@types/react-dom": "^19.1.5",
-		"astro": "5.12.9",
+		"astro": "^5.17.1",
 		"astro-icon": "^1.1.5",
-		"astro-pagefind": "^1.8.3",
 		"clsx": "^2.1.1",
-		"google-tts-api": "^2.0.2",
 		"marked": "^15.0.12",
-		"motion": "^12.23.12",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
+		"svelte": "^5.50.0",
 		"tailwind-merge": "^3.3.0"
 	},
 	"devDependencies": {

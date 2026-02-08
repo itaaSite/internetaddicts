@@ -17,6 +17,23 @@
   p {
     @apply text-pretty;
   }
+
+  :where(body :not(header):not(header *) :is(a, button, [role="button"])) {
+    color: #0071e3;
+  }
+
+  :where(body :not(header):not(header *) :is(a, button, [role="button"])):hover {
+    color: #0062c3;
+  }
+
+  :where(body :not(header):not(header *) :is(a, button, [role="button"])):focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 2px;
+  }
+
+  :where(footer :is(a, button, [role="button"])) {
+    color: inherit;
+  }
 }
 
 @layer components {
@@ -24,5 +41,3 @@
     @apply prose prose-lg prose-p:text-pretty prose-headings:text-balance xl:prose-xl leading-relaxed prose-a:no-underline prose-a:text-[#0098EA] prose-blockquote:border-[#0098EA] prose-blockquote:text-zinc-500 prose-blockquote:font-light  prose-a:hover:text-blue-500;
   }
 }
-
-

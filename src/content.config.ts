@@ -48,19 +48,10 @@ const storyCollection = defineCollection({
 	}),
 })
 
-const newsCollection = defineCollection({
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		pubDate: z.union([z.string(), z.date()]),
-	}),
-})
-
 export const collections = {
 	groups: groupsCollection,
 	posts: postsCollection,
 	story: storyCollection,
 	speakers: speakers,
 	diary: diaryCollection,
-	news: newsCollection,
 }

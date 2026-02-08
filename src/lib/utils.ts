@@ -29,7 +29,7 @@ export function slugify(input) {
 		ч: "ch",
 		ш: "sh",
 		щ: "shch",
-		ы: "y`", // y с бэктиком
+		ы: "y`",
 		э: "e`",
 		ю: "yu",
 		я: "ya",

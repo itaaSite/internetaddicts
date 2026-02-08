@@ -1,8 +1,9 @@
 ---
+import BookmarkButton from "@/components/BookmarkButton.svelte"
 import { Icon } from "astro-icon/components"
 import Layout from "./Layout.astro"
 
-const { backUrl, title, description, pubDate, post } = Astro.props
+const { backUrl, title, description, pubDate, post, slug } = Astro.props
 ---
 
 <Layout title={title} desc={description} typeSite="article" pubDate={pubDate}>
@@ -14,6 +15,9 @@ const { backUrl, title, description, pubDate, post } = Astro.props
 			><Icon name={"mdi:arrow-left"} /><span>Назад</span></a
 		>
 		<aside class="flex flex-col gap-3">
+			<div class="self-start">
+				<BookmarkButton client:load size="md" slug={slug} title={title} path={`/posts/${slug}`} />
+			</div>
 			<div id="tags" class="flex items-center gap-1">
 				{
 					post?.tags &&

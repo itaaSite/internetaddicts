@@ -12,16 +12,11 @@ export async function getStaticPaths() {
 
 const post = Astro.props;
 const { Content } = await post.render();
-
-// import fs from "fs"
-// import path from "path"
-
-// const audioPath = `public/audio/${post.slug}.mp3`
-// const hasAudio = fs.existsSync(audioPath)
 ---
 
 <Post
 	backUrl="/posts"
+	slug={post.slug}
 	post={post.data}
 	title={post.data.title}
 	description={post.data.description}

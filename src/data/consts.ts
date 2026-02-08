@@ -1,6 +1,4 @@
-import { getCollection } from "astro:content"
-
-export const SITE_URL = "https://internetaddicts.ru" // без /
+export const SITE_URL = "https://internetaddicts.ru"
 export const BANNER = "/image/banner_image.png"
 export const BASE_FILES = "https://t.me/all_12steps"
 
@@ -12,28 +10,7 @@ export const YOUTUBE = "https://www.youtube.com/channel/UC6X1MOn_So7iD2JEHkN-YHQ
 export const COPYRIGHT = "Анонимные Интернет-Зависимые"
 export const RKO = "https://t.me/+WMn0QssSLHsyYzcy"
 
-const collections = ["posts", "story", "groups", "speakers", "news"]
-
-const counts = await Promise.all(
-	collections.map(async collection => {
-		const data = await getCollection(collection)
-		return data.length
-	}),
-)
-const countsObject = {
-	posts: counts[0],
-	story: counts[1],
-	groups: counts[2],
-	news: counts[4],
-}
-const { posts, story, groups, news } = countsObject
-
 export const navigation = [
-	// 	label: "",
-	// 	href: "#",
-	// target: "",
-	// icon: "",
-	// style: "",
 	{
 		href: "/",
 		label: "Главная",
@@ -47,7 +24,6 @@ export const navigation = [
 		target: "",
 		icon: "mdi:account-group",
 		style: "",
-		// count: groups,
 	},
 	{
 		href: "/posts",
@@ -55,7 +31,6 @@ export const navigation = [
 		target: "",
 		icon: "mdi:archive-search",
 		style: "",
-		// count: posts,
 	},
 	{
 		href: "/stories",
@@ -63,16 +38,7 @@ export const navigation = [
 		target: "",
 		icon: "mdi:account-details",
 		style: "",
-		// count: story,
 	},
-	// {
-	// 	href: "/news",
-	// 	label: "Новости",
-	// 	target: "",
-	// 	icon: "mdi:access-point",
-	// 	style: "",
-	// 	// count: news,
-	// },
 	{
 		href: "/diary",
 		label: "Ежедневник",

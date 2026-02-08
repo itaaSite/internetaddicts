@@ -17,12 +17,6 @@ export const groups = collection({
 			directory: "src/assets/images/groups_logos",
 			publicPath: "../../assets/images/groups_logos/",
 		}),
-		// when: fields.text({
-		// 	label: "Время",
-		// 	defaultValue: "Пятница",
-		// 	description:
-		// 		"Когда? Понедельник, Вторник, Среда, Четверг, Пятница, Суббота или Воскресенье",
-		// }),
 		when: fields.select({
 			label: "Когда проводиться группа?",
 			description:

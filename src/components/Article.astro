@@ -1,5 +1,6 @@
 ---
-import { Image } from 'astro:assets'
+import BookmarkButton from "@/components/BookmarkButton.svelte"
+import { Image } from "astro:assets"
 
 interface Props {
 	data: {
@@ -18,79 +19,87 @@ const {
 	slug,
 	favorite,
 } = Astro.props
-
-
 ---
 
-<a href={`/posts/${slug}`} class={`group ${favorite && ""}`} aria-label={title}>
-
-
-<div class="rounded-2xl shadow-[inset_0_0_2px_1px_#ffffff4d] ring-1 ring-black/5">
-	<div class="rounded-2xl p-1 shadow-md shadow-black/5">
+<article class={`group h-full ${favorite && ""}`}>
+	<div class="rounded-2xl shadow-[inset_0_0_2px_1px_#ffffff4d] ring-1 ring-black/5 h-full">
+		<div class="rounded-2xl p-1 shadow-md shadow-black/5 h-full">
 		<div
-			class="rounded-xl shadow-lg ring-1 ring-black/5 grid grid-cols-1 gap-3 lg:shadow-2xl bg-white"
+			class="rounded-xl shadow-lg ring-1 ring-black/5 grid grid-cols-1 gap-3 lg:shadow-2xl bg-white h-full"
 		>
-  
-    <article class="">
-      <div class="relative">
-        {
-          favorite && (
-            <div class="absolute right-2 top-2 z-10 bg-black/50 backdrop-blur-lg text-white rounded-md px-3 py-1.5 text-sm">
-              Важно ❤
-            </div>
-          )
-        }
+			<div class="relative">
+				{favorite && (
+					<div class="absolute right-2 top-2 z-10 bg-black/50 backdrop-blur-lg text-white rounded-md px-3 py-1.5 text-sm">
+						Важно ❤
+					</div>
+				)}
+				<div class="absolute left-2 top-2 z-10">
+					<BookmarkButton
+						client:load
+						slug={slug}
+						title={title}
+						path={`/posts/${slug}`}
+					/>
+				</div>
+				<a href={`/posts/${slug}`} aria-label={title}>
+					{
+						img ? (
+							<Image
+								format="avif"
+								width={620}
+								height={620}
+								quality={50}
+								class="duration-150 ease-in transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]"
+								src={img}
+								alt={title}
+							/>
+						) : (
+							<div class="grid place-content-center bg-black duration-150 ease-in transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]">
+								<span class="text-white/50">Нет изображения</span>
+							</div>
+						)
+					}
+				</a>
+				{!favorite && (
+					<div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
+						{tags &&
+							tags.map(tag => (
+								<span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
+									{tag}
+								</span>
+							))}
+					</div>
+				)}
+			</div>
 
-  {img ?      
-  <Image format={'avif'} width={620} height={620} quality={50} class="duration-150 ease-in  transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]" src={img} alt={title}/> 
-  
-  : 
-  <div class=" grid place-content-center bg-black duration-150 ease-in  transition-all group-hover:opacity-100 opacity-75 rounded-lg w-full object-cover h-[200px]">
-      <span class="text-white/50">Нет изображения</span>
-
-  </div>}
-  
-        {
-          !favorite && (
-            <div class="absolute bottom-2 left-2 flex gap-1 flex-wrap">
-              {tags &&
-                tags.map(tag => (
-                  <span class="text-xs px-3 rounded-full bg-black/40 backdrop-blur text-white py-1">
-                    {tag}
-                  </span>
-                ))}
-            </div>
-          )
-        }
-
-      </div> 
-  
-      <div class="flex flex-col gap-3 p-5">
-        <h3 class=" leading-tight text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
-          {title}
-        </h3>
-        <p class=" text-zinc-500 line-clamp-2">{description}</p>
-      {!favorite &&	
-        <hr
-          class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
-        />
-        <div class="flex justify-between text-sm text-zinc-600 items-center">
-          <span class="text-zinc-400">Автор: <b>АИЗ</b></span>
-          {
-            pubDate && (
-              <time datetime={pubDate} class="">
-                {new Date(pubDate).toLocaleDateString("ru-RU", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
-            )
-          }
-        </div>}
-      </div>
-
-    </article>
-  </div></div></div>
-
-</a>
+			<div class="flex flex-1 flex-col gap-3 p-5">
+				<h3 class="leading-tight text-2xl tracking-tight line-clamp-3 font-semibold text-balance">
+					<a href={`/posts/${slug}`} class="hover:underline">{title}</a>
+				</h3>
+				<p class="text-zinc-500 line-clamp-2">{description}</p>
+				<div class="mt-auto">
+					{!favorite && (
+						<>
+							<hr
+								class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
+							/>
+							<div class="mt-3 flex justify-between text-sm text-zinc-600 items-center">
+								<span class="text-zinc-400">Автор: <b>АИЗ</b></span>
+								{pubDate && (
+									<time datetime={pubDate}>
+										{new Date(pubDate).toLocaleDateString("ru-RU", {
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+										})}
+									</time>
+								)}
+							</div>
+						</>
+					)}
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</article>

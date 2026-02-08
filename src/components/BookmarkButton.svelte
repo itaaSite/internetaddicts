@@ -1,0 +1,63 @@
+<script>
+	import { onMount } from "svelte"
+	import { isBookmarked, toggleBookmark } from "@/lib/bookmarks"
+
+	export let slug
+	export let title = ""
+	export let path = ""
+	export let size = "sm"
+
+	let active = false
+
+	const sync = () => {
+		active = isBookmarked(slug)
+	}
+
+	const onToggle = () => {
+		const result = toggleBookmark({
+			slug,
+			title: title || slug,
+			path: path || `/posts/${slug}`,
+		})
+		active = result.active
+	}
+
+	onMount(() => {
+		sync()
+		window.addEventListener("storage", sync)
+		window.addEventListener("aiz:bookmarks-changed", sync)
+		return () => {
+			window.removeEventListener("storage", sync)
+			window.removeEventListener("aiz:bookmarks-changed", sync)
+		}
+	})
+</script>
+
+<button
+	type="button"
+	on:click|preventDefault|stopPropagation={onToggle}
+	aria-pressed={active}
+	aria-label={active ? "Убрать из закладок" : "Добавить в закладки"}
+	class={`${
+		size === "md" ? "h-10 px-3 text-sm" : "h-8 px-2.5 text-xs"
+	} inline-flex items-center gap-2 rounded-lg ring-1 font-medium transition ${
+		active
+			? "bg-zinc-900 text-white ring-zinc-900"
+			: "bg-white/90 text-zinc-700 ring-zinc-300 hover:bg-zinc-100"
+	}`}
+>
+	<svg
+		viewBox="0 0 24 24"
+		aria-hidden="true"
+		class={`h-4 w-4 ${active ? "text-white" : "text-zinc-700"}`}
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
+		<path d="M12 5v14" />
+		<path d="M5 12h14" />
+	</svg>
+	<span>{active ? "В закладках" : "В закладки"}</span>
+</button>

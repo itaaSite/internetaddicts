@@ -1,6 +1,5 @@
 import { about } from "@/fileds/about"
 import { groups } from "@/fileds/groups"
-import { news } from "@/fileds/news"
 import { posts } from "@/fileds/posts"
 import { story } from "@/fileds/story"
 import { config } from "@keystatic/core"
@@ -21,9 +20,7 @@ export default config({
 	collections: {
 		posts,
 		groups,
-		news,
 		story,
 		about,
-		// speakers,
 	},
 })

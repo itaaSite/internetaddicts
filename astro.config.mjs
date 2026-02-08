@@ -1,15 +1,14 @@
-import markdoc from "@astrojs/markdoc"
-import mdx from "@astrojs/mdx"
-//import netlify from "@astrojs/netlify/functions"
-import partytown from "@astrojs/partytown"
-import react from "@astrojs/react"
-import sitemap from "@astrojs/sitemap"
-import keystatic from "@keystatic/astro"
-import tailwindcss from "@tailwindcss/vite"
-import icon from "astro-icon"
-import { defineConfig } from "astro/config"
+import mdx from "@astrojs/mdx";
+import partytown from "@astrojs/partytown";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import svelte from "@astrojs/svelte";
+import keystatic from "@keystatic/astro";
+import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
 
-import vercel from "@astrojs/vercel"
+import vercel from "@astrojs/vercel";
 
 export default defineConfig({
 	site: "https://internetaddicts.ru/",
@@ -18,7 +17,7 @@ export default defineConfig({
 	},
 	integrations: [
 		react(),
-		markdoc(),
+		svelte(),
 		keystatic(),
 		mdx(),
 		partytown({
@@ -34,4 +33,4 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	},
 	adapter: vercel(),
-})
+});

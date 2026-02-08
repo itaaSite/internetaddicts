@@ -43,7 +43,6 @@ const pages = getPages();
 			class="flex flex-wrap items-center justify-center gap-3 md:gap-6 rounded-xl ring-zinc-300/50 ring-1 bg-zinc-50 px-4 py-3"
 			aria-label="Pagination"
 		>
-			{/* Prev */}
 			{prev && (
 				<a
 					href={currentPage - 1 === 1 ? "/posts" : prev}
@@ -54,7 +53,6 @@ const pages = getPages();
 				</a>
 			)}
 
-			{/* Pages */}
 			<ul class="flex items-center gap-3 md:gap-6">
 				{pages.map((p) =>
 					p === "…" ? (
@@ -78,7 +76,6 @@ const pages = getPages();
 				)}
 			</ul>
 
-			{/* Next */}
 			{next && (
 				<a
 					href={next}
