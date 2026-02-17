@@ -1,5 +1,6 @@
 ---
 import Article from "@/components/Article.astro";
+import Authors from "@/components/Authors.astro";
 import Tags from "@/components/Tags.astro";
 import Layout from "@/layout/Layout.astro";
 import { Icon } from "astro-icon/components";
@@ -11,6 +12,7 @@ const posts = await getCollection("posts");
 	title={`Статьи`}
 	desc="Архив АИЗ. Полезная информация, методы шагов, инструменты и прочее."
 >
+	<Authors />
 	<Tags />
 
 	<h3 class="text-3xl text-gray-700 font-semibold flex gap-2 items-center">

@@ -35,19 +35,13 @@ const authorMeta = getAuthorMeta(post?.author)
 			</h1>
 			<p class="text-zinc-500 italic">{post?.description}</p>
 			<div class="inline-flex items-center gap-2 text-sm text-zinc-500">
-				{
-					authorMeta.avatar ? (
-						<img
-							src={authorMeta.avatar}
-							alt={authorMeta.name}
-							class="w-4 h-4 rounded-full object-cover bg-black"
-							loading="lazy"
-							decoding="async"
-						/>
-					) : (
-						<span class="w-4 h-4 rounded-full bg-black"></span>
-					)
-				}
+				<span
+					class="w-4 h-4 rounded-full inline-flex items-center justify-center text-[8px] font-bold text-white bg-black"
+					style={`background: ${authorMeta.gradient}`}
+					aria-hidden="true"
+				>
+					{authorMeta.initials}
+				</span>
 				<span>Автор: <b>{authorMeta.name}</b></span>
 			</div>
 		</aside>

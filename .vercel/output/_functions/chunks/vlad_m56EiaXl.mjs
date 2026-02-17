@@ -1,0 +1,54 @@
+import { f as createVNode, F as Fragment, _ as __astro_tag_component__ } from './astro/server_BrIEQ3l_.mjs';
+import 'clsx';
+
+const frontmatter = {
+  "title": "Влад",
+  "description": "Когда у меня появился сенсорный телефон в 5 классе, я активно начал играть в игры и регулярно держать голову параллельно к полу.",
+  "old": "(Запись создана 2025)"
+};
+function getHeadings() {
+  return [];
+}
+function _createMdxContent(props) {
+  const _components = {
+    p: "p",
+    ...props.components
+  };
+  return createVNode(Fragment, {
+    children: [createVNode(_components.p, {
+      children: "Друзья, всем привет! Я Влад, мне 22 года. Поделюсь своей историей жизни с интернет-зависимостью."
+    }), "\n", createVNode(_components.p, {
+      children: "Когда у меня появился сенсорный телефон в 5 классе, я активно начал играть в игры и регулярно держать голову параллельно полу. На самом деле, ничего интересного нет в том, что это продолжалось до 20 лет. Всё это время я каждый день играл в игры на телефоне и компьютере. Я просыпался с телефоном и засыпал с ним. Причем, засыпал я только тогда, когда веки становились настолько тяжёлыми, что сломалась бы спичка, держащая их."
+    }), "\n", createVNode(_components.p, {
+      children: "Конечно же, игры были не последним, чем я занимался в гаджетах. Я мог смотреть фильмы и делать домашнее задание. Точнее, когда я делал домашнее задание, я всегда смотрел фильмы. Без телефона я не мог пойти в туалет и в ванну. Это было для меня невозможным. Бывали моменты, когда я забывал телефон и приходилось возвращаться за ним, не закончив свои дела. Постоянный просмотр новостей из поп-индустрии, а также новостей со всего мира. Хорошо, что до треша доходило очень нечасто. Это мне никогда не нравилось."
+    }), "\n", createVNode(_components.p, {
+      children: "Когда в 20 лет я решил встать на путь саморазвития, я начал читать книги и постепенно отходить от некоторых форм этой зависимости. Сейчас я не играю в игры вообще, не смотрю никакие новости. Уже давно не пользуюсь инстаграмом. Не хожу с телефоном в туалет и в ванну, а также не просыпаюсь и не засыпаю с ним. Меня можно поздравить. Но есть неБОЛЬШОЕ “НО”!"
+    }), "\n", createVNode(_components.p, {
+      children: "Я всё равно сижу каждый день с утра до вечера, хоть и не с раннего утра и не до позднего вечера, с телефоном и за компьютером. Моя активность в среднем — это 6 часов в день, и 70% времени я провожу в Телеграме. Будто бы мне это нужно. Мне бы хотелось есть без телефона, смотреть фильмы, ценя их, слушать музыку и наслаждаться ею. В основном, проводить жизнь в жизни."
+    }), "\n", createVNode(_components.p, {
+      children: "Я чувствую, что могу быть более полноценным и счастливым человеком, просто сократив время в гаджетах. Сейчас буду искать информацию и принимать новые убеждения по поводу этой зависимости. Очень рад быть с вами, друзья!"
+    })]
+  });
+}
+function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? createVNode(MDXLayout, {
+    ...props,
+    children: createVNode(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
+
+const url = "src/content/story/vlad.mdx";
+const file = "/Users/samgold/Desktop/Проекты/12 шагов - сайты/internet-aiz/src/content/story/vlad.mdx";
+const Content = (props = {}) => MDXContent({
+  ...props,
+  components: { Fragment: Fragment, ...props.components, },
+});
+Content[Symbol.for('mdx-component')] = true;
+Content[Symbol.for('astro.needsHeadRendering')] = !Boolean(frontmatter.layout);
+Content.moduleId = "/Users/samgold/Desktop/Проекты/12 шагов - сайты/internet-aiz/src/content/story/vlad.mdx";
+__astro_tag_component__(Content, 'astro:jsx');
+
+export { Content, Content as default, file, frontmatter, getHeadings, url };

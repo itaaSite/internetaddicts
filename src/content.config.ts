@@ -10,7 +10,19 @@ const postTagValues = [
 	"12 шагов",
 	"12 традиций",
 ] as const
-const postAuthorValues = ["АИЗ", "SamGold"] as const
+const postAuthorValues = [
+	"АИЗ",
+	"SamGold",
+	"Олег",
+	"Настя",
+	"Сергей",
+	"Антон",
+	"Василий",
+	"Камиль",
+	"Станислав",
+	"Даниил",
+	"Салима",
+] as const
 
 const postsCollection = defineCollection({
 	schema: ({ image }) =>
