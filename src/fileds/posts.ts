@@ -37,6 +37,15 @@ export const posts = collection({
 				{ label: "12 традиций", value: "12 традиций" },
 			],
 		}),
+		author: fields.select({
+			label: "Автор",
+			description: "Выберите автора публикации",
+			options: [
+				{ label: "АИЗ", value: "АИЗ" },
+				{ label: "SamGold", value: "SamGold" },
+			],
+			defaultValue: "АИЗ",
+		}),
 		img: fields.image({
 			label: "Изображение поста",
 			directory: "src/assets/images/posts",

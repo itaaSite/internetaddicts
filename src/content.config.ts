@@ -1,5 +1,17 @@
 import { defineCollection, z } from "astro:content"
 
+const postTagValues = [
+	"Информация",
+	"Для групп",
+	"Инструменты",
+	"Идеи",
+	"Руководство",
+	"Тест",
+	"12 шагов",
+	"12 традиций",
+] as const
+const postAuthorValues = ["АИЗ", "SamGold"] as const
+
 const postsCollection = defineCollection({
 	schema: ({ image }) =>
 		z.object({
@@ -7,7 +19,8 @@ const postsCollection = defineCollection({
 			description: z.string(),
 			pubDate: z.union([z.string(), z.date()]),
 			img: image().optional(),
-			tags: z.array(z.string()).optional(),
+			tags: z.array(z.enum(postTagValues)).optional(),
+			author: z.enum(postAuthorValues).default("АИЗ"),
 			favorite: z.boolean().default(false).optional(),
 		}),
 })

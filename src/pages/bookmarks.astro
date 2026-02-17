@@ -1,5 +1,5 @@
 ---
-import BookmarksList from "@/components/BookmarksList.svelte"
+import BookmarksList from "@/components/BookmarksList"
 import Layout from "@/layout/Layout.astro"
 ---
 
@@ -13,6 +13,6 @@ import Layout from "@/layout/Layout.astro"
 			<h1 class="text-4xl font-black tracking-tight text-zinc-900">Закладки</h1>
 			<p class="mt-2 text-zinc-600">Здесь отображаются все статьи, которые вы добавили в закладки.</p>
 		</div>
-		<BookmarksList client:load />
+		<BookmarksList client:only="solid-js" />
 	</section>
 </Layout>

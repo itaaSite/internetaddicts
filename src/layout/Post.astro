@@ -1,9 +1,11 @@
 ---
-import BookmarkButton from "@/components/BookmarkButton.svelte"
+import BookmarkButton from "@/components/BookmarkButton"
+import { getAuthorMeta } from "@/data/authors"
 import { Icon } from "astro-icon/components"
 import Layout from "./Layout.astro"
 
 const { backUrl, title, description, pubDate, post, slug } = Astro.props
+const authorMeta = getAuthorMeta(post?.author)
 ---
 
 <Layout title={title} desc={description} typeSite="article" pubDate={pubDate}>
@@ -16,7 +18,7 @@ const { backUrl, title, description, pubDate, post, slug } = Astro.props
 		>
 		<aside class="flex flex-col gap-3">
 			<div class="self-start">
-				<BookmarkButton client:load size="md" slug={slug} title={title} path={`/posts/${slug}`} />
+				<BookmarkButton client:only="solid-js" size="md" slug={slug} title={title} path={`/posts/${slug}`} />
 			</div>
 			<div id="tags" class="flex items-center gap-1">
 				{
@@ -32,6 +34,22 @@ const { backUrl, title, description, pubDate, post, slug } = Astro.props
 				{post.title}
 			</h1>
 			<p class="text-zinc-500 italic">{post?.description}</p>
+			<div class="inline-flex items-center gap-2 text-sm text-zinc-500">
+				{
+					authorMeta.avatar ? (
+						<img
+							src={authorMeta.avatar}
+							alt={authorMeta.name}
+							class="w-4 h-4 rounded-full object-cover bg-black"
+							loading="lazy"
+							decoding="async"
+						/>
+					) : (
+						<span class="w-4 h-4 rounded-full bg-black"></span>
+					)
+				}
+				<span>Автор: <b>{authorMeta.name}</b></span>
+			</div>
 		</aside>
 		<hr
 			class="h-px w-full border-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent"
