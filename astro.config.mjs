@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 
-import vercel from "@astrojs/vercel";
+import node from "@astrojs/node";
 
 import react from "@astrojs/react";
 
@@ -19,6 +19,7 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
     },
-    adapter: vercel(),
+    // Astro 5: hybrid убран — static + adapter даёт те же смешанные SSR/prerender страницы
     output: "static",
+    adapter: node({ mode: "standalone" }),
 });
