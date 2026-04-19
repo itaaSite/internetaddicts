@@ -1,6 +1,5 @@
-# Сборка при публикации GitHub Release: артефакт dist + zip во вложениях релиза.
-# Зависимости ставятся в CI по package.json (bun install без frozen-lockfile — локальный bun не нужен).
-# Скачать: Releases → astro-dist-<tag>.zip, либо Actions → Artifacts.
+# Сборка при публикации GitHub Release: dist + package.json (и package-lock.json при наличии) → один astro-dist-<tag>.zip.
+# На VPS: один curl с releases/download, распаковка, npm install в каталоге сайта. Скачать: Releases или Actions → Artifacts (только dist).
 name: Release build
 
 on:
@@ -41,8 +40,13 @@ jobs:
           echo "files in dist: $n"
           test "$n" -gt 0
 
-      - name: Zip dist (Release asset)
-        run: (cd dist && zip -r "../astro-dist-${{ github.event.release.tag_name }}.zip" .)
+      - name: Bundle dist + npm manifests into release zip
+        run: |
+          cp package.json dist/package.json
+          if [ -f package-lock.json ]; then
+            cp package-lock.json dist/package-lock.json
+          fi
+          (cd dist && zip -r "../astro-dist-${{ github.event.release.tag_name }}.zip" .)
 
       - name: Attach zip to GitHub Release
         uses: softprops/action-gh-release@v2
