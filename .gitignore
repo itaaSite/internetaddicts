@@ -24,4 +24,7 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Internal usage
 Crawler/
+internal/

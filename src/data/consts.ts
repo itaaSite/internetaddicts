@@ -4,6 +4,7 @@ export const BASE_FILES = "https://t.me/all_12steps"
 
 export const TELEGRAM = "https://t.me/aiz_itta"
 export const VK = "https://vk.com/aiz_itta"
+export const VK_VIDEO_SPEAKERS = "https://vkvideo.ru/@aiz_community"
 export const TIKTOK = "https://t.me/aiz_itta"
 export const YOUTUBE = "https://www.youtube.com/channel/UC6X1MOn_So7iD2JEHkN-YHQ"
 
@@ -59,5 +60,12 @@ export const navigation = [
 		label: "Спикерские",
 		icon: "mdi:youtube",
 		style: "underline underline-offset-4 hover:text-red-600 text-red-500",
+	},
+	{
+		href: VK_VIDEO_SPEAKERS,
+		target: "_blank",
+		label: "VK Видео",
+		icon: "mdi:vk",
+		style: "underline underline-offset-4 hover:text-blue-700 text-[#4680C2]",
 	},
 ]
