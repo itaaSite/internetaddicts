@@ -11,7 +11,7 @@ import node from "@astrojs/node";
 import react from "@astrojs/react";
 
 export default defineConfig({
-    site: "https://internetaddicts.ru/",
+    site: "https://www.internetaddicts.ru/",
     prefetch: {
         defaultStrategy: "viewport",
     },

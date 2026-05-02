@@ -1,4 +1,4 @@
-export const SITE_URL = "https://internetaddicts.ru"
+export const SITE_URL = "https://www.internetaddicts.ru"
 export const BANNER = "/image/banner_image.png"
 export const BASE_FILES = "https://t.me/all_12steps"
 
