@@ -1,8 +1,11 @@
-# Сборка при публикации GitHub Release: dist + package.json (и package-lock.json при наличии) → один astro-dist-<tag>.zip.
+# Сборка при пуше тега (и при публикации Release): dist + package.json (и package-lock.json при наличии) → один astro-dist-<tag>.zip.
 # На VPS: один curl с releases/download, распаковка, npm install в каталоге сайта. Скачать: Releases или Actions → Artifacts (только dist).
 name: Release build
 
 on:
+  push:
+    tags:
+      - "v*"
   release:
     types: [published]
 
@@ -13,6 +16,7 @@ jobs:
       contents: write
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
 
     steps:
       - name: Checkout
@@ -48,18 +52,19 @@ jobs:
           if [ -f package-lock.json ]; then
             cp package-lock.json dist/package-lock.json
           fi
-          (cd dist && zip -r "../astro-dist-${{ github.event.release.tag_name }}.zip" .)
+          (cd dist && zip -r "../astro-dist-${RELEASE_TAG}.zip" .)
 
       - name: Attach zip to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: astro-dist-${{ github.event.release.tag_name }}.zip
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: astro-dist-${{ env.RELEASE_TAG }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload dist (Actions artifact)
         uses: actions/upload-artifact@v5
         with:
-          name: dist-${{ github.event.release.tag_name }}
+          name: dist-${{ env.RELEASE_TAG }}
           path: dist/
           if-no-files-found: error

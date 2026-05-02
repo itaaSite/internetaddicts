@@ -1,7 +1,7 @@
 # Деплой на Timeweb Cloud: ssh root@хост. Пароль из TimeWebCloud/.env (PASSWORD=…) — через ssh-wrap.sh + sshpass.
 # Без PASSWORD в .env — обычный ssh (ключ или ручной ввод). IPv6: make SSH_OPTS=-6 SSH_HOST='$(IPv6)' bootstrap-site
 # Переменные из TimeWebCloud/.env подключаются как в Makefile (KEY=value, без пробелов вокруг =). Переопределяют значения по умолчанию ниже.
-.PHONY: help connect bootstrap-site update-ui clean start stop nginx-proxy https diagnose
+.PHONY: help connect bootstrap-site update-ui clean start stop nginx-proxy https diagnose reset-nginx-ssl
 
 TIMEWEB_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 -include $(TIMEWEB_DIR).env
@@ -25,7 +25,7 @@ SITE_ROOT = $(REMOTE_DIR)/current
 # Распакованный dist из CI: server/entry.mjs + client/ (Astro static + @astrojs/node, SSR где prerender=false)
 
 # GitHub Release v1.0.1 (Node standalone) → astro-dist-v1.0.1.zip. SHA от файла на Releases, не от Artifacts в Actions.
-RELEASE_TAG  ?= v1.0.5
+RELEASE_TAG  ?= v1.0.6
 RELEASE_ZIP  := astro-dist-$(RELEASE_TAG).zip
 DOWNLOAD_URL := https://github.com/Pavel-second-account/internetaddicts/releases/download/$(RELEASE_TAG)/$(RELEASE_ZIP)
 # package.json (и lock при наличии) внутри astro-dist-*.zip — отдельных ассетов на релизе нет
@@ -43,7 +43,7 @@ DOMAIN ?= internetaddicts.ru
 REDIRECT_TO ?=
 # make https: email для ACME (можно задать в .env: CERTBOT_EMAIL=…)
 CERTBOT_EMAIL ?=
-CERTBOT_SECONDARY ?=
+CERTBOT_SECONDARY ?= www.$(DOMAIN)
 # 1 — тестовый ACME (staging), без лимитов продакшена
 CERTBOT_STAGING ?=
 
@@ -57,8 +57,9 @@ help:
 	@echo "start          — pm2 + node $(SITE_ROOT)/server/entry.mjs (порт $(SERVE_PORT), Astro + Node)"
 	@echo "stop           — остановить процесс $(PM2_APP_NAME)"
 	@echo "nginx-proxy    — nginx :80 → Node или 301 (DOMAIN=$(DOMAIN), REDIRECT_TO=$(REDIRECT_TO) пусто = прокси)"
-	@echo "https          — certbot --nginx (nginx-proxy, DNS→VPS; CERTBOT_EMAIL в .env или в команде)"
+	@echo "https          — certbot certonly --webroot (по умолчанию DOMAIN+www; DNS должен указывать на VPS)"
 	@echo "diagnose       — проверки nginx/pm2/портов на VPS"
+	@echo "reset-nginx-ssl— удалить vhost $(DOMAIN) и LE-серт (certbot), затем reload nginx"
 	@echo "Пример IPv6:   make SSH_OPTS=-6 SSH_HOST='$(IPv6)' bootstrap-site"
 	@echo ""
 	@echo "Домен указывает на этот IP — дальше: nginx/Caddy на :80/:443, HTTPS (см. Изначальное исследование.md)"
@@ -91,11 +92,24 @@ stop:
 nginx-proxy:
 	$(SSH) env DOMAIN='$(DOMAIN)' BACKEND_PORT='$(SERVE_PORT)' REDIRECT_TO='$(REDIRECT_TO)' bash -s < $(NGINX_PROXY_SH)
 
-# Lets Encrypt (порт 80 должен отдавать этот nginx; см. CERTBOT_* в Makefile)
+# Lets Encrypt (порт 80 должен отдавать этот nginx; после выдачи серта перегенерируем nginx-конфиг с :443)
 https:
 	@test -n "$(CERTBOT_EMAIL)" || (echo >&2 "Задайте CERTBOT_EMAIL в .env или: make https CERTBOT_EMAIL=you@example.com"; exit 1)
 	$(SSH) env DOMAIN='$(DOMAIN)' CERTBOT_EMAIL='$(CERTBOT_EMAIL)' CERTBOT_SECONDARY='$(CERTBOT_SECONDARY)' CERTBOT_STAGING='$(CERTBOT_STAGING)' bash -s < $(CERTBOT_SH)
+	$(MAKE) nginx-proxy
 
 # Почему не открывается сайт: смотреть вывод на VPS
 diagnose:
 	$(SSH) bash -s $(DOMAIN) $(SERVE_PORT) < $(DIAGNOSE_SH)
+
+
+reset-nginx-ssl:
+	$(SSH) sh -c "set -e; rm -f /etc/nginx/sites-enabled/$(DOMAIN).conf /etc/nginx/sites-available/$(DOMAIN).conf; if command -v certbot >/dev/null 2>&1; then certbot delete --cert-name $(DOMAIN) --non-interactive 2>/dev/null || true; fi; nginx -t; systemctl reload nginx || systemctl restart nginx"
+
+
+rebuild:
+	make clean
+	make bootstrap-site 
+	make start
+	make https
+	make nginx-proxy

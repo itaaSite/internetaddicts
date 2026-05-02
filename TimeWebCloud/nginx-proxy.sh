@@ -8,6 +8,15 @@ export DEBIAN_FRONTEND=noninteractive
 DOMAIN="${DOMAIN:?set DOMAIN}"
 BACKEND_PORT="${BACKEND_PORT:-4321}"
 REDIRECT_TO="${REDIRECT_TO:-}"
+# Второе имя хоста (по умолчанию www.<DOMAIN>), чтобы www не попадал в "чужой" vhost.
+SECONDARY_DOMAIN="${SECONDARY_DOMAIN:-}"
+if [[ -z "$SECONDARY_DOMAIN" && "$DOMAIN" != www.* ]]; then
+	SECONDARY_DOMAIN="www.${DOMAIN}"
+fi
+SERVER_NAMES="${DOMAIN}"
+if [[ -n "$SECONDARY_DOMAIN" ]]; then
+	SERVER_NAMES="${SERVER_NAMES} ${SECONDARY_DOMAIN}"
+fi
 
 apt-get update -qq
 apt-get install -y -qq nginx
@@ -16,8 +25,29 @@ mkdir -p /var/www/html/.well-known/acme-challenge
 
 CONF="/etc/nginx/sites-available/${DOMAIN}.conf"
 ENABLED="/etc/nginx/sites-enabled/${DOMAIN}.conf"
-LE_CHAIN="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"
-LE_KEY="/etc/letsencrypt/live/${DOMAIN}/privkey.pem"
+LE_BASE_DIR="/etc/letsencrypt/live"
+LE_CHAIN=""
+LE_KEY=""
+
+pick_cert_files() {
+	if [[ -f "${LE_BASE_DIR}/${DOMAIN}/fullchain.pem" && -f "${LE_BASE_DIR}/${DOMAIN}/privkey.pem" ]]; then
+		LE_CHAIN="${LE_BASE_DIR}/${DOMAIN}/fullchain.pem"
+		LE_KEY="${LE_BASE_DIR}/${DOMAIN}/privkey.pem"
+		return
+	fi
+
+	local chain key
+	while IFS= read -r chain; do
+		key="${chain%/fullchain.pem}/privkey.pem"
+		if [[ -f "$key" ]]; then
+			LE_CHAIN="$chain"
+			LE_KEY="$key"
+			return
+		fi
+	done < <(compgen -G "${LE_BASE_DIR}/${DOMAIN}-*/fullchain.pem" || true)
+}
+
+pick_cert_files
 
 ssl_snippet() {
 	if [[ -f "$LE_CHAIN" && -f "$LE_KEY" ]]; then
@@ -33,7 +63,7 @@ ssl_snippet() {
 }
 
 have_ssl=0
-[[ -f "$LE_CHAIN" && -f "$LE_KEY" ]] && have_ssl=1
+[[ -n "$LE_CHAIN" && -n "$LE_KEY" && -f "$LE_CHAIN" && -f "$LE_KEY" ]] && have_ssl=1
 
 write_proxy_blocks() {
 	local ssl_lines
@@ -43,7 +73,7 @@ write_proxy_blocks() {
 server {
     listen 80;
     listen [::]:80;
-    server_name ${DOMAIN};
+    server_name ${SERVER_NAMES};
 
     location /.well-known/acme-challenge/ {
         root /var/www/html;
@@ -59,7 +89,7 @@ EOF
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name ${DOMAIN};
+    server_name ${SERVER_NAMES};
 $(echo "$ssl_lines")
 
     location / {
@@ -74,7 +104,7 @@ EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    server_name ${DOMAIN} _;
+    server_name ${SERVER_NAMES} _;
 
     location /.well-known/acme-challenge/ {
         root /var/www/html;
@@ -90,7 +120,11 @@ EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    server_name ${DOMAIN} _;
+    server_name ${SERVER_NAMES} _;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
 
     location / {
         proxy_pass http://127.0.0.1:${BACKEND_PORT};
@@ -108,7 +142,7 @@ EOF
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name ${DOMAIN};
+    server_name ${SERVER_NAMES};
 $(echo "$ssl_lines")
 
     location / {
