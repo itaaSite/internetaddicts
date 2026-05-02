@@ -1,17 +1,21 @@
 ---
-import Article from "@/components/Article.astro";
-import Authors from "@/components/Authors.astro";
-import Tags from "@/components/Tags.astro";
-import Layout from "@/layout/Layout.astro";
-import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
-const posts = await getCollection("posts");
+import Article from "@/components/Article.astro"
+import Authors from "@/components/Authors.astro"
+import PostLiteratureAaBook from "@/components/PostLiteratureAaBook.astro"
+import Tags from "@/components/Tags.astro"
+import Layout from "@/layout/Layout.astro"
+import { Icon } from "astro-icon/components"
+import { getCollection } from "astro:content"
+const posts = await getCollection("posts")
 ---
 
 <Layout
 	title={`Статьи`}
 	desc="Архив АИЗ. Полезная информация, методы шагов, инструменты и прочее."
 >
+	<div class="max-w-4xl mx-auto w-full">
+		<PostLiteratureAaBook />
+	</div>
 	<Authors />
 	<Tags />
 

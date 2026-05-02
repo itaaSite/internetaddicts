@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets"
+import aaBigBookCover from "@/assets/images/literature/aa-big-book.png"
+
+const pdfHref = "https://aarus.ru/pdf/bigbook.pdf"
+const wikiHref = "http://ru.wikipedia.org/wiki/Анонимные%20алкоголики"
+const audioHref = "https://t.me/+6PZ24b7JeR81ODEy"
+---
+
+<section
+	class="not-prose rounded-2xl border border-zinc-200/90 bg-[#faf8f5] px-5 py-6 shadow-sm ring-1 ring-black/[0.03]"
+	aria-labelledby="literature-aa-heading"
+>
+	<h2
+		id="literature-aa-heading"
+		class="text-center text-xl font-bold tracking-tight text-zinc-900 underline decoration-zinc-400 decoration-1 underline-offset-8 pb-5 mb-1"
+	>
+		Книга «Анонимные Алкоголики»
+	</h2>
+	<div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-stretch">
+		<div class="flex shrink-0 justify-center sm:justify-start">
+			<Image
+				src={aaBigBookCover}
+				alt="Обложка: книга Анонимные Алкоголики"
+				width={220}
+				class="h-auto w-[min(100%,200px)] rounded-md shadow-md ring-1 ring-black/5 sm:w-[200px]"
+				formats={["webp", "png"]}
+			/>
+		</div>
+		<div class="min-w-0 flex flex-1 flex-col justify-center gap-3 text-[15px] leading-relaxed text-zinc-700">
+			<p class="font-semibold text-zinc-900">
+				Эта книга — основа программы 12 шагов. В сообществе АИЗ её читают, заменяя слово
+				<span class="whitespace-nowrap">«алкоголь»</span> на
+				<span class="whitespace-nowrap">«интернет»</span>; формулировки про полный отказ
+				адаптируют под свою программу абстиненции вместе с наставником.
+			</p>
+			<p>
+				Бумажную книгу можно взять в группах <abbr title="Анонимные Алкоголики">АА</abbr> в вашем городе.
+				<a
+					class="font-medium text-[#0071e3] underline decoration-[#0071e3]/35 underline-offset-2 hover:text-blue-700"
+					href={pdfHref}
+					target="_blank"
+					rel="noopener noreferrer">Скачать электронную версию (PDF)</a
+				>, <a
+					class="font-medium text-[#0071e3] underline decoration-[#0071e3]/35 underline-offset-2 hover:text-blue-700"
+					href={audioHref}
+					target="_blank"
+					rel="noopener noreferrer">аудиокнига в Telegram</a
+				>.
+			</p>
+		</div>
+	</div>
+</section>
