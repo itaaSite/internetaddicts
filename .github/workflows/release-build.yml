@@ -1,0 +1,70 @@
+# Сборка при пуше тега (и при публикации Release): dist + package.json (и package-lock.json при наличии) → один astro-dist-<tag>.zip.
+# На VPS: один curl с releases/download, распаковка, npm install в каталоге сайта. Скачать: Releases или Actions → Artifacts (только dist).
+name: Release build
+
+on:
+  push:
+    tags:
+      - "v*"
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+        env:
+          KEYSTATIC_GITHUB_CLIENT_ID: ${{ secrets.KEYSTATIC_GITHUB_CLIENT_ID }}
+          KEYSTATIC_GITHUB_CLIENT_SECRET: ${{ secrets.KEYSTATIC_GITHUB_CLIENT_SECRET }}
+          KEYSTATIC_SECRET: ${{ secrets.KEYSTATIC_SECRET }}
+          PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: ${{ secrets.PUBLIC_KEYSTATIC_GITHUB_APP_SLUG }}
+
+      - name: Verify dist (Node standalone)
+        run: |
+          test -d dist
+          test -f dist/server/entry.mjs
+          n="$(find dist -type f | wc -l)"
+          echo "files in dist: $n"
+          test "$n" -gt 0
+
+      - name: Bundle dist + npm manifests into release zip
+        run: |
+          cp package.json dist/package.json
+          if [ -f package-lock.json ]; then
+            cp package-lock.json dist/package-lock.json
+          fi
+          (cd dist && zip -r "../astro-dist-${RELEASE_TAG}.zip" .)
+
+      - name: Attach zip to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: astro-dist-${{ env.RELEASE_TAG }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload dist (Actions artifact)
+        uses: actions/upload-artifact@v5
+        with:
+          name: dist-${{ env.RELEASE_TAG }}
+          path: dist/
+          if-no-files-found: error
