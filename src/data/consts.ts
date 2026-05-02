@@ -55,17 +55,24 @@ export const navigation = [
 		style: "",
 	},
 	{
-		href: "https://www.youtube.com/@aiz_itaa",
-		target: "_blank",
 		label: "Спикерские",
-		icon: "mdi:youtube",
-		style: "underline underline-offset-4 hover:text-red-600 text-red-500",
-	},
-	{
-		href: VK_VIDEO_SPEAKERS,
-		target: "_blank",
-		label: "VK Видео",
-		icon: "mdi:vk",
-		style: "underline underline-offset-4 hover:text-blue-700 text-[#4680C2]",
+		href: "",
+		target: "",
+		icon: "",
+		style: "",
+		speakerLinks: [
+			{
+				href: "https://www.youtube.com/@aiz_itaa",
+				icon: "mdi:youtube",
+				title: "Спикерские на YouTube",
+				accent: "youtube",
+			},
+			{
+				href: VK_VIDEO_SPEAKERS,
+				icon: "mdi:vk",
+				title: "Спикерские во VK Видео",
+				accent: "vk",
+			},
+		],
 	},
 ]

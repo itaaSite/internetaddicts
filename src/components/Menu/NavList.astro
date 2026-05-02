@@ -6,16 +6,57 @@ import { Icon } from "astro-icon/components"
 
 {
 	navigation &&
-		navigation.map(link => (
-			<a
-				href={link.href}
-				title={link.label}
-				target={link.target}
-				class={cn(className, link.style)}
-			>
-				{link.icon && <Icon name={link.icon} />}
-				<span>{link.label}</span>
-				{link.count && <span class="">({link.count})</span>}
-			</a>
-		))
+		navigation.map((link: (typeof navigation)[number]) =>
+			"speakerLinks" in link && link.speakerLinks ? (
+				<div
+					role="group"
+					aria-label={link.label}
+					class={cn(
+						className,
+						link.style,
+						"inline-flex shrink-0 items-center gap-2 no-underline",
+					)}
+				>
+					<span class="whitespace-nowrap text-sm font-medium">{link.label}</span>
+					<span
+						class:list={[
+							"inline-flex items-center gap-0.5 rounded-lg px-1 py-0.5",
+							"bg-zinc-100/95 ring-1 ring-zinc-200/90 ring-inset",
+							"md:bg-zinc-50/95",
+						]}
+					>
+						{
+							link.speakerLinks.map(sl => (
+								<a
+									href={sl.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									title={sl.title}
+									class:list={[
+										"inline-flex rounded-md p-1 transition-colors outline-offset-2",
+										sl.accent === "youtube"
+											? "text-red-500 hover:bg-red-50 hover:text-red-600 focus-visible:bg-red-50"
+											: "text-[#4680C2] hover:bg-sky-50 hover:text-blue-700 focus-visible:bg-sky-50",
+									]}
+								>
+									<Icon name={sl.icon} class="text-[1.35rem]" aria-hidden="true" />
+									<span class="sr-only">{sl.title}</span>
+								</a>
+							))
+						}
+					</span>
+				</div>
+			) : (
+				<a
+					href={(link as { href: string }).href}
+					title={link.label}
+					target={(link as { target: string }).target}
+					class={cn(className, link.style)}
+				>
+					{link.icon && <Icon name={link.icon as string} />}
+					<span>{link.label}</span>
+					{"count" in link && link.count && <span class="">({link.count})</span>}
+				</a>
+			),
+		)
 }

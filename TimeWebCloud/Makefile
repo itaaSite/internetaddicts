@@ -25,7 +25,7 @@ SITE_ROOT = $(REMOTE_DIR)/current
 # Распакованный dist из CI: server/entry.mjs + client/ (Astro static + @astrojs/node, SSR где prerender=false)
 
 # GitHub Release v1.0.1 (Node standalone) → astro-dist-v1.0.1.zip. SHA от файла на Releases, не от Artifacts в Actions.
-RELEASE_TAG  ?= v1.0.6
+RELEASE_TAG  ?= v1.1.0
 RELEASE_ZIP  := astro-dist-$(RELEASE_TAG).zip
 DOWNLOAD_URL := https://github.com/Pavel-second-account/internetaddicts/releases/download/$(RELEASE_TAG)/$(RELEASE_ZIP)
 # package.json (и lock при наличии) внутри astro-dist-*.zip — отдельных ассетов на релизе нет

@@ -3,7 +3,7 @@ import { Image } from "astro:assets"
 import aaBigBookCover from "@/assets/images/literature/aa-big-book.png"
 
 const pdfHref = "https://aarus.ru/pdf/bigbook.pdf"
-const wikiHref = "http://ru.wikipedia.org/wiki/Анонимные%20алкоголики"
+const aaRussiaHref = "https://aarussia.ru/"
 const audioHref = "https://t.me/+6PZ24b7JeR81ODEy"
 ---
 
@@ -22,8 +22,8 @@ const audioHref = "https://t.me/+6PZ24b7JeR81ODEy"
 			<Image
 				src={aaBigBookCover}
 				alt="Обложка: книга Анонимные Алкоголики"
-				width={220}
-				class="h-auto w-[min(100%,200px)] rounded-md shadow-md ring-1 ring-black/5 sm:w-[200px]"
+				width={150}
+				class="h-auto w-[min(100%,132px)] rounded-md shadow-md ring-1 ring-black/5 sm:w-[132px]"
 				formats={["webp", "png"]}
 			/>
 		</div>
@@ -32,10 +32,17 @@ const audioHref = "https://t.me/+6PZ24b7JeR81ODEy"
 				Эта книга — основа программы 12 шагов. В сообществе АИЗ её читают, заменяя слово
 				<span class="whitespace-nowrap">«алкоголь»</span> на
 				<span class="whitespace-nowrap">«интернет»</span>; формулировки про полный отказ
-				адаптируют под свою программу абстиненции вместе с наставником.
+				адаптируют под свою программу выздоровления вместе с спонсором.
 			</p>
 			<p>
-				Бумажную книгу можно взять в группах <abbr title="Анонимные Алкоголики">АА</abbr> в вашем городе.
+				Бумажную книгу можно купить в группах{" "}
+				<a
+					class="font-medium text-[#0071e3] underline decoration-[#0071e3]/35 underline-offset-2 hover:text-blue-700"
+					href={aaRussiaHref}
+					target="_blank"
+					rel="noopener noreferrer">Анонимных Алкоголиков</a
+				>{" "}
+				в вашем городе.{" "}
 				<a
 					class="font-medium text-[#0071e3] underline decoration-[#0071e3]/35 underline-offset-2 hover:text-blue-700"
 					href={pdfHref}
